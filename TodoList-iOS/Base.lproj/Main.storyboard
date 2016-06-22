@@ -1,30 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bW0-se-pbZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="8NE-Cq-Wxh">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
-        <!--My Todo List-->
+        <!--Todo Table View Controller-->
         <scene sceneID="8T3-VT-xKh">
             <objects>
                 <tableViewController id="IiY-dc-GbL" customClass="TodoTableViewController" customModule="TodoList_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Rxv-Y7-hPI">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Rxv-Y7-hPI">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LabelCell" textLabel="Ua5-SS-fG9" style="IBUITableViewCellStyleDefault" id="bQy-Qw-hig">
-                                <rect key="frame" x="0.0" y="114" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bQy-Qw-hig" id="Z8W-fc-ZDu">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ua5-SS-fG9">
-                                            <rect key="frame" x="15" y="0.0" width="570" height="43"/>
+                                            <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -40,24 +39,99 @@
                             <outlet property="delegate" destination="IiY-dc-GbL" id="kBL-ZW-JHV"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="My Todo List" id="QTX-Yx-Ckz">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="Hfw-Wv-IkQ">
-                                <connections>
-                                    <segue destination="xZT-0Q-cJ2" kind="show" id="yl0-qL-gc1"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Edit" id="JLK-gO-MRz">
-                                <connections>
-                                    <action selector="onEditClicked:" destination="IiY-dc-GbL" id="Nlg-GQ-uT9"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                    <navigationItem key="navigationItem" id="QTX-Yx-Ckz">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="JLK-gO-MRz">
+                            <connections>
+                                <action selector="onEditClickedWithSender:" destination="IiY-dc-GbL" id="HF5-vh-DJm"/>
+                            </connections>
+                        </barButtonItem>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="LrR-rl-cTw">
+                            <rect key="frame" x="239.5" y="7" width="121" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Todo"/>
+                                <segment title="All"/>
+                            </segments>
+                            <connections>
+                                <action selector="segmentedControlActionChangedWithSender:" destination="IiY-dc-GbL" eventType="valueChanged" id="ZWw-Hs-wCI"/>
+                            </connections>
+                        </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Hfw-Wv-IkQ">
+                            <connections>
+                                <segue destination="xZT-0Q-cJ2" kind="show" id="yl0-qL-gc1"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mySegmentedControl" destination="LrR-rl-cTw" id="rXy-JS-StR"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ieR-JF-cWc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="y3e-Js-b8G">
+                    <rect key="frame" x="0.0" y="0.0" width="121" height="29"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <segments>
+                        <segment title="First"/>
+                        <segment title="Second"/>
+                    </segments>
+                </segmentedControl>
             </objects>
-            <point key="canvasLocation" x="1027" y="405"/>
+            <point key="canvasLocation" x="1095" y="405"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="J7k-aZ-dsl">
+            <objects>
+                <viewController storyboardIdentifier="loginVC" id="8NE-Cq-Wxh" customClass="LoginViewController" customModule="TodoList_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hwE-bp-arW"/>
+                        <viewControllerLayoutGuide type="bottom" id="Psc-I1-BtO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mos-uw-wcL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="bluemix.png" translatesAutoresizingMaskIntoConstraints="NO" id="FWI-C8-ERS">
+                                <rect key="frame" x="200" y="181" width="200" height="198"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IWx-yZ-7DP" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="20" y="444" width="560" height="56"/>
+                                <color key="backgroundColor" red="0.23137254901960785" green="0.34901960784313724" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="q8x-FU-mQu"/>
+                                </constraints>
+                                <state key="normal" title="SIGN IN WITH FACEBOOK">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Welcome to Todolist-iOS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="84A-om-EZ7">
+                                <rect key="frame" x="176" y="31" width="248.5" height="33.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="24"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.90491296140939592" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="FWI-C8-ERS" firstAttribute="centerY" secondItem="mos-uw-wcL" secondAttribute="centerY" constant="-20" id="QLY-1F-ClV"/>
+                            <constraint firstItem="84A-om-EZ7" firstAttribute="top" secondItem="mos-uw-wcL" secondAttribute="topMargin" constant="31" id="QWh-WS-yaA"/>
+                            <constraint firstItem="IWx-yZ-7DP" firstAttribute="leading" secondItem="mos-uw-wcL" secondAttribute="leadingMargin" id="RkK-RO-aMd"/>
+                            <constraint firstItem="Psc-I1-BtO" firstAttribute="top" secondItem="IWx-yZ-7DP" secondAttribute="bottom" constant="100" id="SJg-ZN-Fss"/>
+                            <constraint firstItem="IWx-yZ-7DP" firstAttribute="centerX" secondItem="84A-om-EZ7" secondAttribute="centerX" id="SS8-lq-8pU"/>
+                            <constraint firstItem="FWI-C8-ERS" firstAttribute="centerX" secondItem="mos-uw-wcL" secondAttribute="centerX" id="cCU-zV-GfX"/>
+                            <constraint firstItem="84A-om-EZ7" firstAttribute="centerX" secondItem="mos-uw-wcL" secondAttribute="centerX" id="wUX-lU-cQg"/>
+                            <constraint firstItem="FWI-C8-ERS" firstAttribute="top" secondItem="84A-om-EZ7" secondAttribute="bottom" constant="116.5" id="xUk-9m-BAg"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="facebookButton" destination="IWx-yZ-7DP" id="2vG-9K-0IL"/>
+                        <outlet property="welcomeLabel" destination="84A-om-EZ7" id="gct-Ob-PKO"/>
+                        <segue destination="bW0-se-pbZ" kind="presentation" identifier="todolist" modalTransitionStyle="crossDissolve" id="ECd-6E-H0R"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nJB-zZ-jVz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-435" y="359"/>
         </scene>
         <!--Add item-->
         <scene sceneID="g0g-wK-rD3">
@@ -71,7 +145,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eEg-Lx-elJ">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="What needs to be done?" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eEg-Lx-elJ">
                                 <rect key="frame" x="18" y="72" width="565" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -88,14 +162,17 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="tsP-If-QUX"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="zpW-Io-ZaJ">
                             <connections>
-                                <action selector="onDoneClicked:" destination="xZT-0Q-cJ2" id="6Oy-KM-8JA"/>
+                                <action selector="onDoneClickedWithSender:" destination="xZT-0Q-cJ2" id="Gg8-Dg-pbu"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="textField" destination="eEg-Lx-elJ" id="8xN-7m-Xec"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z8k-l1-WbW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1703" y="399"/>
+            <point key="canvasLocation" x="1895" y="399"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OrL-QE-wX4">
@@ -113,7 +190,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HnU-td-1xk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="215" y="405"/>
+            <point key="canvasLocation" x="341" y="399"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="bluemix.png" width="200" height="198"/>
+    </resources>
 </document>
