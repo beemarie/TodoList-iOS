@@ -4,7 +4,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Todo Table View Controller-->
@@ -14,7 +13,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Rxv-Y7-hPI">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LabelCell" textLabel="Ua5-SS-fG9" style="IBUITableViewCellStyleDefault" id="bQy-Qw-hig">
                                 <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
@@ -42,6 +41,11 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="QTX-Yx-Ckz">
                         <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="JLK-gO-MRz">
+                            <connections>
+                                <action selector="onEditClickedWithSender:" destination="IiY-dc-GbL" id="HF5-vh-DJm"/>
+                            </connections>
+                        </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="LrR-rl-cTw">
                             <rect key="frame" x="239.5" y="7" width="121" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -53,18 +57,11 @@
                                 <action selector="segmentedControlActionChangedWithSender:" destination="IiY-dc-GbL" eventType="valueChanged" id="ZWw-Hs-wCI"/>
                             </connections>
                         </segmentedControl>
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="Hfw-Wv-IkQ">
-                                <connections>
-                                    <segue destination="xZT-0Q-cJ2" kind="show" id="yl0-qL-gc1"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Edit" id="JLK-gO-MRz">
-                                <connections>
-                                    <action selector="onEditClickedWithSender:" destination="IiY-dc-GbL" id="HF5-vh-DJm"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Hfw-Wv-IkQ">
+                            <connections>
+                                <segue destination="xZT-0Q-cJ2" kind="show" id="yl0-qL-gc1"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="mySegmentedControl" destination="LrR-rl-cTw" id="rXy-JS-StR"/>
@@ -80,7 +77,7 @@
                     </segments>
                 </segmentedControl>
             </objects>
-            <point key="canvasLocation" x="1027" y="405"/>
+            <point key="canvasLocation" x="1095" y="405"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="J7k-aZ-dsl">
@@ -94,12 +91,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="FWI-C8-ERS">
-                                <rect key="frame" x="50" y="79" width="501" height="501"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bluemix.png" translatesAutoresizingMaskIntoConstraints="NO" id="FWI-C8-ERS">
+                                <rect key="frame" x="200" y="181" width="200" height="198"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IWx-yZ-7DP" customClass="FBSDKLoginButton">
                                 <rect key="frame" x="20" y="444" width="560" height="56"/>
-                                <color key="backgroundColor" red="0.34120232891591096" green="0.46790222205266452" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.23137254901960785" green="0.34901960784313724" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="q8x-FU-mQu"/>
                                 </constraints>
@@ -108,21 +105,22 @@
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Todolist-iOS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="84A-om-EZ7">
-                                <rect key="frame" x="176.5" y="50" width="248.5" height="29"/>
+                                <rect key="frame" x="176" y="31" width="248.5" height="33.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="24"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.90491296140939592" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="84A-om-EZ7" firstAttribute="top" secondItem="mos-uw-wcL" secondAttribute="topMargin" constant="50" id="QWh-WS-yaA"/>
+                            <constraint firstItem="FWI-C8-ERS" firstAttribute="centerY" secondItem="mos-uw-wcL" secondAttribute="centerY" constant="-20" id="QLY-1F-ClV"/>
+                            <constraint firstItem="84A-om-EZ7" firstAttribute="top" secondItem="mos-uw-wcL" secondAttribute="topMargin" constant="31" id="QWh-WS-yaA"/>
                             <constraint firstItem="IWx-yZ-7DP" firstAttribute="leading" secondItem="mos-uw-wcL" secondAttribute="leadingMargin" id="RkK-RO-aMd"/>
                             <constraint firstItem="Psc-I1-BtO" firstAttribute="top" secondItem="IWx-yZ-7DP" secondAttribute="bottom" constant="100" id="SJg-ZN-Fss"/>
                             <constraint firstItem="IWx-yZ-7DP" firstAttribute="centerX" secondItem="84A-om-EZ7" secondAttribute="centerX" id="SS8-lq-8pU"/>
-                            <constraint firstItem="FWI-C8-ERS" firstAttribute="centerX" secondItem="mos-uw-wcL" secondAttribute="centerX" id="iU9-eU-Xbd"/>
+                            <constraint firstItem="FWI-C8-ERS" firstAttribute="centerX" secondItem="mos-uw-wcL" secondAttribute="centerX" id="cCU-zV-GfX"/>
                             <constraint firstItem="84A-om-EZ7" firstAttribute="centerX" secondItem="mos-uw-wcL" secondAttribute="centerX" id="wUX-lU-cQg"/>
-                            <constraint firstItem="FWI-C8-ERS" firstAttribute="top" secondItem="84A-om-EZ7" secondAttribute="bottom" id="xUk-9m-BAg"/>
+                            <constraint firstItem="FWI-C8-ERS" firstAttribute="top" secondItem="84A-om-EZ7" secondAttribute="bottom" constant="116.5" id="xUk-9m-BAg"/>
                         </constraints>
                     </view>
                     <connections>
@@ -133,7 +131,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nJB-zZ-jVz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-399" y="399"/>
+            <point key="canvasLocation" x="-435" y="359"/>
         </scene>
         <!--Add item-->
         <scene sceneID="g0g-wK-rD3">
@@ -174,7 +172,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z8k-l1-WbW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1703" y="399"/>
+            <point key="canvasLocation" x="1895" y="399"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OrL-QE-wX4">
@@ -196,6 +194,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logo.png" width="501" height="501"/>
+        <image name="bluemix.png" width="200" height="198"/>
     </resources>
 </document>

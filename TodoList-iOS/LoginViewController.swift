@@ -20,7 +20,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     /// Label to show an error if authentication is unsuccessful
     @IBOutlet weak var welcomeLabel: UILabel!
-    
+
     override func viewWillAppear(_ animated: Bool) {
         if (FBSDKAccessToken.current() != nil) {
             
@@ -33,7 +33,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        facebookButton.layer.cornerRadius = 10
         
         configureFacebook()
     }
@@ -54,7 +55,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         FBSDKGraphRequest.init(graphPath: "me",
                                parameters: ["fields":"id, first_name, last_name, email"]).start { (connection, result, error) -> Void in
             
-                                // Check error condition or save user Data
+            // Check error condition or save user Data
             if ((error) != nil) {
                 print(error.localizedDescription)
             } else {

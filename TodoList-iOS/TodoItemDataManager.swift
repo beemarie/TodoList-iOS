@@ -11,30 +11,32 @@ import Foundation
 
 class TodoItemDataManager: NSObject {
     
+    let config = BluemixConfiguration()
+    
     let router = Router()
     
     static let sharedInstance = TodoItemDataManager()
-    
-    let localURL = "http://localhost:8090"
-    let bluemixURL = "http://todolist-unsputtering-imperialist.mybluemix.net"
-    
-    var dataTask: NSURLSessionTask?
-    let defaultSession = NSURLSession(configuration: NSURLSessionConfiguration.default())
     
     var allTodos = [TodoItem]()
     
     override init() {
         super.init()
-        getAllTodos()
+        getMyTodos(uid: User.facebookUserId)
     }
     
+}
+
+// MARK: Methods for storing, deleting, updating, and retrieving
+extension TodoItemDataManager {
+        
     
     // Store item in todolist
     func store(title: String){
         
-        let json = "{\"title\":\"\(title)\",\"completed\":\"\(false)\",\"order\":\"\(TodoItemDataManager.sharedInstance.allTodos.count + 1)\"}"
+        /*let facebookCredentials Version = "{\"title\":\"\(title)\",\"completed\":\"\(false)\",\"order\":\"\(TodoItemDataManager.sharedInstance.allTodos.count + 1)\"}"*/
+        let json = "{\"uid\":\"\(User.facebookUserId)\",\"title\":\"\(title)\",\"completed\":\"\(false)\",\"order\":\"\(TodoItemDataManager.sharedInstance.allTodos.count + 1)\"}"
         
-        router.HTTPPost(url: bluemixURL, jsonObj: json) {
+        router.HTTPPost(url: getBaseRequestURL(), jsonObj: json) {
             data, error in
             if error != nil { print(error?.localizedDescription) }
             else {
@@ -53,14 +55,14 @@ class TodoItemDataManager: NSObject {
         let id = allTodos[at.row].id
         TodoItemDataManager.sharedInstance.allTodos.remove(at: at.row)
         
-        router.HTTPDelete(url: "\(bluemixURL)/todos/\(id)") {
+        router.HTTPDelete(url: "\(getBaseRequestURL())/todos/\(id)") {
             data, error in
             if error != nil { print(error?.localizedDescription) }
         }
     }
     
     func update(item: TodoItem) {
-        router.HTTPPatch(url: "\(bluemixURL)/todos/\(item.id)", jsonObj: item.jsonRepresentation) {
+        router.HTTPPatch(url: "\(getBaseRequestURL())/todos/\(item.id)", jsonObj: item.jsonRepresentation) {
             data, error in
             if error != nil { print(error?.localizedDescription) }
         }
@@ -71,7 +73,7 @@ class TodoItemDataManager: NSObject {
         
         var item: TodoItem? = nil
         
-        router.HTTPGet(url: "\(bluemixURL)/todos/\(id)") {
+        router.HTTPGet(url: "\(getBaseRequestURL())/todos/private/\(id)") {
             data, error in
             if error != nil { print(error?.localizedDescription) }
             else {
@@ -92,7 +94,7 @@ class TodoItemDataManager: NSObject {
     
     func getAllTodos() {
         
-        router.HTTPGet(url: bluemixURL) {
+        router.HTTPGet(url: getBaseRequestURL()) {
             data, error in
             if error != nil { print(error?.localizedDescription) }
             else {
@@ -106,12 +108,32 @@ class TodoItemDataManager: NSObject {
         }
     }
     
+    func getMyTodos(uid: String) {
+        
+        router.HTTPGet(url: "\(getBaseRequestURL())/todos/private/\(uid)") {
+            data, error in
+            if error != nil { print(error?.localizedDescription) }
+            else {
+                do {
+                    let json = try NSJSONSerialization.jsonObject(with: data, options: .mutableContainers)
+                    self.parseTodoList(json: json)
+                } catch let error as NSError {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+}
+
+// MARK: Methods for Parsing Functions
+extension TodoItemDataManager {
+    
     private func parseTodoList(json: AnyObject){
         
         allTodos.removeAll()
         
         if let json = json as? [AnyObject] {
-
+            
             for item in json {
                 
                 guard let todo = parseItem(item: item) else {
@@ -119,9 +141,9 @@ class TodoItemDataManager: NSObject {
                 }
                 
                 insertSorted(seq: &allTodos, newItem: todo)
-                                        
-            }
                 
+            }
+            
         }
     }
     
@@ -134,18 +156,31 @@ class TodoItemDataManager: NSObject {
             let order     = item["order"] as? Int
             
             guard let uid = id,
-                  let titleValue = title,
-                  let completedValue = completed,
-                  let orderValue = order else {
-                
+                let titleValue = title,
+                let completedValue = completed,
+                let orderValue = order else {
+                    
                     return nil
             }
-
+            
             
             return TodoItem(id: uid, title: titleValue, completed: completedValue, order: orderValue)
         }
         
         return nil
+    }
+}
+
+// MARK: - Utility functions
+extension TodoItemDataManager {
+    
+    func getBaseRequestURL() -> String {
+        
+        if config.isLocal {
+            return config.localBaseRequestURL
+        } else {
+            return config.remoteBaseRequestURL
+        }
     }
     
     func insertSorted<T: Comparable>( seq: inout [T], newItem item: T) {
@@ -162,7 +197,7 @@ class TodoItemDataManager: NSObject {
         allTodos.remove(at: at.row)
         allTodos.insert(itemToMove, at: to.row)
         
-        // Update order on bluemix
+        // Update order on server
         TodoItemDataManager.sharedInstance.update(item: itemToMove)
     }
 }
