@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "958AAB873C4B088B7BA2F0B7F6F61C01880CB028",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "D3C16565C67396099D2853876FE421F73F279787" : 0,
+    "958AAB873C4B088B7BA2F0B7F6F61C01880CB028" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "6659D049-1E03-4CB7-A1F0-75D058AA0B85",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "D3C16565C67396099D2853876FE421F73F279787" : "Kitura-TodoList\/",
+    "958AAB873C4B088B7BA2F0B7F6F61C01880CB028" : "todolist-ios\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "TodoList-iOS",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "TodoList-iOS.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/sandmman\/todolist-ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "958AAB873C4B088B7BA2F0B7F6F61C01880CB028"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/IBM-Swift\/Kitura-TodoList",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D3C16565C67396099D2853876FE421F73F279787"
+    }
+  ]
+}

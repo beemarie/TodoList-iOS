@@ -1,12 +1,21 @@
-//
-//  AppDelegate.swift
-//  TodoList-iOS
-//
-//  Created by Robert Dickerson on 5/12/16.
-//  Copyright © 2016 Swift@IBM Engineering. All rights reserved.
-//
+/**
+ * Copyright IBM Corporation 2016
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
 import UIKit
+import FBSDKLoginKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -40,7 +49,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     @objc(applicationWillTerminate:) func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    
+    @objc(application:willFinishLaunchingWithOptions:) func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
+    {
+        // Override point for customization after application launch.
+        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+    }
+    
+    func applicationWillTerminate(application: UIApplication)
+    {
+        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        let loginManager: FBSDKLoginManager = FBSDKLoginManager()
+        loginManager.logOut()
+    }
+    
+    @objc(application:openURL:sourceApplication:annotation:) func application(_ application: UIApplication, open url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool
+    {
+        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+    }
 
 }
 
