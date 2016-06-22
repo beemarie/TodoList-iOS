@@ -1,10 +1,18 @@
-//
-//  TodoItemDataManager.swift
-//  TodoList-iOS
-//
-//  Created by Aaron Liberatore on 6/15/16.
-//  Copyright © 2016 Swift@IBM Engineering. All rights reserved.
-//
+/**
+ * Copyright IBM Corporation 2016
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
 import UIKit
 import Foundation
@@ -21,7 +29,7 @@ class TodoItemDataManager: NSObject {
     
     override init() {
         super.init()
-        getMyTodos(uid: User.facebookUserId)
+        get()
     }
     
 }
@@ -31,10 +39,9 @@ extension TodoItemDataManager {
         
     
     // Store item in todolist
-    func store(title: String){
+    func add(withTitle: String){
         
-        /*let facebookCredentials Version = "{\"title\":\"\(title)\",\"completed\":\"\(false)\",\"order\":\"\(TodoItemDataManager.sharedInstance.allTodos.count + 1)\"}"*/
-        let json = "{\"uid\":\"\(User.facebookUserId)\",\"title\":\"\(title)\",\"completed\":\"\(false)\",\"order\":\"\(TodoItemDataManager.sharedInstance.allTodos.count + 1)\"}"
+        let json = "{\"title\":\"\(withTitle)\",\"completed\":\"\(false)\",\"order\":\"\(TodoItemDataManager.sharedInstance.allTodos.count + 1)\"}"
         
         router.HTTPPost(url: getBaseRequestURL(), jsonObj: json) {
             data, error in
@@ -69,11 +76,11 @@ extension TodoItemDataManager {
         
     }
     
-    func get(id: String) -> TodoItem? {
+    func get(withId: String) -> TodoItem? {
         
         var item: TodoItem? = nil
         
-        router.HTTPGet(url: "\(getBaseRequestURL())/todos/private/\(id)") {
+        router.HTTPGet(url: "\(getBaseRequestURL())/todos/\(withId)") {
             data, error in
             if error != nil { print(error?.localizedDescription) }
             else {
@@ -92,25 +99,9 @@ extension TodoItemDataManager {
     
     // Loads todolist from url
     
-    func getAllTodos() {
+    func get() {
         
         router.HTTPGet(url: getBaseRequestURL()) {
-            data, error in
-            if error != nil { print(error?.localizedDescription) }
-            else {
-                do {
-                    let json = try NSJSONSerialization.jsonObject(with: data, options: .mutableContainers)
-                    self.parseTodoList(json: json)
-                } catch let error as NSError {
-                    print(error.localizedDescription)
-                }
-            }
-        }
-    }
-    
-    func getMyTodos(uid: String) {
-        
-        router.HTTPGet(url: "\(getBaseRequestURL())/todos/private/\(uid)") {
             data, error in
             if error != nil { print(error?.localizedDescription) }
             else {

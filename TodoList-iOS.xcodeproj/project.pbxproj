@@ -92,8 +92,8 @@
 				E3ED01C11D0F08C900E8D22D /* logo.png */,
 				E3A454DB1D131095002AAC74 /* Models */,
 				E3A8EB9B1D1AC7F4006C7034 /* Configuration */,
-				E3A4A4811D11EE43002F79E5 /* Router.swift */,
-				E3A4A4821D11EE43002F79E5 /* TodoItemDataManager.swift */,
+				E3A8EB9F1D1ADF66006C7034 /* HttpHandler */,
+				E3A8EB9E1D1ADF58006C7034 /* DataManagers */,
 			);
 			path = "TodoList-iOS";
 			sourceTree = "<group>";
@@ -144,6 +144,22 @@
 				E3A8EB981D1AC7D4006C7034 /* bluemix.plist */,
 			);
 			name = Configuration;
+			sourceTree = "<group>";
+		};
+		E3A8EB9E1D1ADF58006C7034 /* DataManagers */ = {
+			isa = PBXGroup;
+			children = (
+				E3A4A4821D11EE43002F79E5 /* TodoItemDataManager.swift */,
+			);
+			name = DataManagers;
+			sourceTree = "<group>";
+		};
+		E3A8EB9F1D1ADF66006C7034 /* HttpHandler */ = {
+			isa = PBXGroup;
+			children = (
+				E3A4A4811D11EE43002F79E5 /* Router.swift */,
+			);
+			name = HttpHandler;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
