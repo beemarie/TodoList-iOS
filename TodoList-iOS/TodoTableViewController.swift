@@ -11,13 +11,12 @@ import UIKit
 //import Credentials
 
 
-
 class TodoTableViewController: UITableViewController {
     
     @IBOutlet weak var mySegmentedControl: UISegmentedControl!
     
     override func viewDidAppear(_ animated: Bool) {
-        TodoItemDataManager.sharedInstance.getAllTodos()
+        TodoItemDataManager.sharedInstance.getMyTodos(uid: User.facebookUserId)
         updateTable(todoItems: todos())
         
     }

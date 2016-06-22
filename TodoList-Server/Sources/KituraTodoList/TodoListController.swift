@@ -38,10 +38,12 @@ final class TodoListController {
     private func _setupRoutes() {
 
         let id = "\(config.firstPathSegment)/:id"
+        let uid = "\(config.firstPathSegment)/private/:uid"
 
         router.all("/*", middleware: BodyParser())
         router.all("/*", middleware: AllRemoteOriginMiddleware())
         router.get("/", handler: self.get)
+        router.get(uid, handler: getAllByUID)
         router.get(id, handler: getByID)
         router.options("/*", handler: getOptions)
         router.post("/", handler: addItem )
@@ -62,10 +64,8 @@ final class TodoListController {
 
                 do {
                     let json = JSON(todos.toDictionary())
-
                     try response.status(HTTPStatusCode.OK).send(json: json).end()
                 } catch {
-
                 }
             }
         } catch {
@@ -74,9 +74,32 @@ final class TodoListController {
         }
 
     }
+    private func getAllByUID(request: RouterRequest, response: RouterResponse, next: ()->Void) {
+        guard let uid = request.params["uid"] else {
+            response.status(HTTPStatusCode.badRequest)
+            Log.error("Request does not contain UID")
+            return
+        }
+
+        do {
+
+            try todos.getAll(uid: uid) {
+                todos in
+
+                do {
+                    let json = JSON(todos.toDictionary())
+                    try response.status(HTTPStatusCode.OK).send(json: json).end()
+                } catch {
+                }
+            }
+        } catch {
+            response.status(.badRequest)
+
+        }
+      }
 
     private func getByID(request: RouterRequest, response: RouterResponse, next: ()->Void) {
-        
+
         guard let id = request.params["id"] else {
             response.status(HTTPStatusCode.badRequest)
             Log.error("Request does not contain ID")
@@ -135,14 +158,13 @@ final class TodoListController {
             return
         }
 
+        let uid = json["uid"].stringValue
         let title = json["title"].stringValue
         let order = json["order"].intValue
         let completed = json["completed"].boolValue
 
-        Log.info("Received \(title)")
-
         do {
-            try todos.add(title: title, order: order, completed: completed) {
+            try todos.add(uid: uid, title: title, order: order, completed: completed) {
 
                 newItem in
 
@@ -180,12 +202,13 @@ final class TodoListController {
             return
         }
 
+        let uid = json["uid"].stringValue
         let title = json["title"].stringValue
         let order = json["order"].intValue
         let completed = json["completed"].boolValue
 
         do {
-            try todos.update(id: id, title: title, order: order, completed: completed) {
+            try todos.update(id: id, uid: uid, title: title, order: order, completed: completed) {
 
                 newItem in
 
@@ -220,12 +243,13 @@ final class TodoListController {
             return
         }
 
+        let uid   = json["uid"].stringValue
         let title = json["title"].stringValue
         let order = json["order"].intValue
         let completed = json["completed"].boolValue
 
         do {
-            try todos.update(id: id, title: title, order: order, completed: completed) {
+            try todos.update(id: id, uid: uid, title: title, order: order, completed: completed) {
 
                 newItem in
 
@@ -250,8 +274,6 @@ final class TodoListController {
 
     private func deleteByID(request: RouterRequest, response: RouterResponse, next: ()->Void) {
 
-        Log.info("Requesting a delete")
-
         guard let id = request.params["id"] else {
             Log.warning("Could not parse ID")
             response.status(HTTPStatusCode.badRequest)
@@ -275,7 +297,6 @@ final class TodoListController {
     }
 
     private func deleteAll(request: RouterRequest, response: RouterResponse, next: ()->Void) {
-        Log.info("Requested clearing the entire list")
 
         do {
             try todos.clear() {
@@ -290,6 +311,4 @@ final class TodoListController {
         }
 
     }
-
-
 }

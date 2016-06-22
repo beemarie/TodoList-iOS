@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+   bluemix.pslit.plist
+   TodoList-iOS
+
+   Created by Aaron Liberatore on 6/22/16.
+   Copyright (c) 2016 Swift@IBM Engineering. All rights reserved.
+-->
+
+<plist version="1.0">
+    <dict>
+        <key>isLocal</key>
+        <true/>
+        <key>appRouteLocal</key>
+        <string>http://localhost:8090</string>
+        <key>appRouteRemote</key>
+        <string>&lt;routeURL&gt;</string>
+        <key>bluemixAppGUID</key>
+        <string>&lt;appGUID&gt;</string>
+        <key>bluemixAppRegion</key>
+        <string>&lt;appRegion&gt;</string>
+    </dict>
+</plist>
+
+<plist version="1.0">
+    <dict>
+    
+    </dict>
+</plist>

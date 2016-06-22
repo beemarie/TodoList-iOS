@@ -13,7 +13,11 @@ class User: NSObject {
     /// Grab facebook user id of user from NsUserDefaults
     class var facebookUserId: String {
         get {
-            return NSUserDefaults.standard().object(forKey: "facebook_user_id") as! String
+            if let userId = NSUserDefaults.standard().object(forKey: "facebook_user_id") as? String {
+                return userId
+            } else {
+                return "Not Set"
+            }
         }
         set(userId) {
             
@@ -25,7 +29,11 @@ class User: NSObject {
     /// grab full name of user from NSUserDefaults
     class var fullName: String {
         get {
-            return NSUserDefaults.standard().object(forKey: "user_full_name") as! String
+            if let userId = NSUserDefaults.standard().object(forKey: "user_full_name") as? String {
+                return userId
+            } else {
+                return "Not Set"
+            }
         }
         set(user_full_name) {
             
@@ -37,7 +45,12 @@ class User: NSObject {
     /// grab full name of user from NSUserDefaults
     class var email: String {
         get {
-            return NSUserDefaults.standard().object(forKey: "user_email") as! String
+            if let userId = NSUserDefaults.standard().object(forKey: "user_email") as? String {
+                return userId
+            } else {
+                return "Not Set"
+            }
+            
         }
         set(user_full_name) {
             

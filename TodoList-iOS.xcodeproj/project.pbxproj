@@ -20,6 +20,9 @@
 		E3A4A4241D0F54EA002F79E5 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A4A4211D0F54EA002F79E5 /* FBSDKMessengerShareKit.framework */; };
 		E3A4A4831D11EE43002F79E5 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A4A4811D11EE43002F79E5 /* Router.swift */; };
 		E3A4A4841D11EE43002F79E5 /* TodoItemDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A4A4821D11EE43002F79E5 /* TodoItemDataManager.swift */; };
+		E3A8EB971D19A4D6006C7034 /* bluemix.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A8EB961D19A4D6006C7034 /* bluemix.png */; };
+		E3A8EB991D1AC7D4006C7034 /* bluemix.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3A8EB981D1AC7D4006C7034 /* bluemix.plist */; };
+		E3A8EB9D1D1ACE19006C7034 /* BluemixConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A8EB9C1D1ACE19006C7034 /* BluemixConfiguration.swift */; };
 		E3ED01C01D0F08C400E8D22D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ED01BF1D0F08C400E8D22D /* LoginViewController.swift */; };
 		E3ED01C21D0F08C900E8D22D /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = E3ED01C11D0F08C900E8D22D /* logo.png */; };
 /* End PBXBuildFile section */
@@ -40,6 +43,9 @@
 		E3A4A4211D0F54EA002F79E5 /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKMessengerShareKit.framework; path = ../Frameworks/FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
 		E3A4A4811D11EE43002F79E5 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		E3A4A4821D11EE43002F79E5 /* TodoItemDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoItemDataManager.swift; sourceTree = "<group>"; };
+		E3A8EB961D19A4D6006C7034 /* bluemix.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bluemix.png; sourceTree = "<group>"; };
+		E3A8EB981D1AC7D4006C7034 /* bluemix.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bluemix.plist; sourceTree = "<group>"; };
+		E3A8EB9C1D1ACE19006C7034 /* BluemixConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluemixConfiguration.swift; sourceTree = "<group>"; };
 		E3ED01BF1D0F08C400E8D22D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E3ED01C11D0F08C900E8D22D /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,12 +85,13 @@
 			children = (
 				E3A4A4251D0F5545002F79E5 /* SDKs */,
 				E16AE35B1CE4C0FB00E20F62 /* AppDelegate.swift */,
+				E3A8EB961D19A4D6006C7034 /* bluemix.png */,
 				E3A454DD1D131544002AAC74 /* Storyboards */,
 				E3A454DC1D131329002AAC74 /* ViewControllers */,
 				E16AE3621CE4C0FB00E20F62 /* Assets.xcassets */,
 				E3ED01C11D0F08C900E8D22D /* logo.png */,
 				E3A454DB1D131095002AAC74 /* Models */,
-				E16AE3671CE4C0FB00E20F62 /* Info.plist */,
+				E3A8EB9B1D1AC7F4006C7034 /* Configuration */,
 				E3A4A4811D11EE43002F79E5 /* Router.swift */,
 				E3A4A4821D11EE43002F79E5 /* TodoItemDataManager.swift */,
 			);
@@ -96,6 +103,7 @@
 			children = (
 				E3A454D91D13108F002AAC74 /* User.swift */,
 				E16AE36F1CE4E39C00E20F62 /* TodoItem.swift */,
+				E3A8EB9C1D1ACE19006C7034 /* BluemixConfiguration.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -127,6 +135,15 @@
 				E3A4A4211D0F54EA002F79E5 /* FBSDKMessengerShareKit.framework */,
 			);
 			name = SDKs;
+			sourceTree = "<group>";
+		};
+		E3A8EB9B1D1AC7F4006C7034 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				E16AE3671CE4C0FB00E20F62 /* Info.plist */,
+				E3A8EB981D1AC7D4006C7034 /* bluemix.plist */,
+			);
+			name = Configuration;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,8 +207,10 @@
 			files = (
 				E3ED01C21D0F08C900E8D22D /* logo.png in Resources */,
 				E16AE3661CE4C0FB00E20F62 /* LaunchScreen.storyboard in Resources */,
+				E3A8EB971D19A4D6006C7034 /* bluemix.png in Resources */,
 				E16AE3631CE4C0FB00E20F62 /* Assets.xcassets in Resources */,
 				E16AE3611CE4C0FB00E20F62 /* Main.storyboard in Resources */,
+				E3A8EB991D1AC7D4006C7034 /* bluemix.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +228,7 @@
 				E3A454DA1D13108F002AAC74 /* User.swift in Sources */,
 				E3ED01C01D0F08C400E8D22D /* LoginViewController.swift in Sources */,
 				E3A4A4831D11EE43002F79E5 /* Router.swift in Sources */,
+				E3A8EB9D1D1ACE19006C7034 /* BluemixConfiguration.swift in Sources */,
 				E16AE35C1CE4C0FB00E20F62 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

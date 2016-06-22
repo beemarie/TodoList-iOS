@@ -16,7 +16,9 @@ struct TodoItem: Comparable {
     var order: Int
     
     var jsonRepresentation : String {
-        return "{\"title\":\"\(title)\",\"completed\":\"\(completed)\",\"order\":\"\(order)\"}"
+        // facebook credentials version
+        // return "{\"title\":\"\(title)\",\"completed\":\"\(completed)\",\"order\":\"\(order)\"}"
+        return "{\"uid\":\"\(User.facebookUserId)\",\"title\":\"\(title)\",\"completed\":\"\(completed)\",\"order\":\"\(order)\"}"
     }
     
 }
