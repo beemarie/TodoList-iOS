@@ -21,24 +21,23 @@ import FBSDKCoreKit
 class Router: NSObject {
 
     let session = NSURLSession.shared()
-    let request: NSMutableURLRequest = NSMutableURLRequest()
-
-    override init() {
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(FBSDKAccessToken.current().tokenString, forHTTPHeaderField: "access_token")
-        request.setValue("FacebookToken", forHTTPHeaderField: "X-token-type")
-    }
 
     /*
         Method: Constructs an HTTP GET request to the destination url
      */
 
-    func HTTPGet(url: String, callback: (NSData, NSError?) -> Void) {
+    func onGet(url: String, callback: (NSData?, NSError?) -> Void) {
+
+        let request: NSMutableURLRequest = NSMutableURLRequest()
+
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(FBSDKAccessToken.current().tokenString, forHTTPHeaderField: "access_token")
+        request.setValue("FacebookToken", forHTTPHeaderField: "X-token-type")
 
         request.url = NSURL(string: url)!
         request.httpMethod = "GET"
 
-        taskManager() { data, error in
+        taskManager(request: request) { data, error in
             callback(data, error)
         }
     }
@@ -48,15 +47,17 @@ class Router: NSObject {
         containing the given json serializable object
      */
 
-    func HTTPPost(url: String,
-                  jsonObj: AnyObject,
-                  callback: (NSData, NSError?) -> Void) {
+    func onPost(url: String,
+                  jsonString: AnyObject,
+                  callback: (NSData?, NSError?) -> Void) {
+
+        let request = buildRequest()
 
         request.url = NSURL(string: url)!
         request.httpMethod = "POST"
-        request.httpBody = jsonObj.data(using: NSUTF8StringEncoding)!
+        request.httpBody = jsonString.data(using: NSUTF8StringEncoding)!
 
-        taskManager() { data, error in
+        taskManager(request: request) { data, error in
             callback(data, error)
         }
 
@@ -67,15 +68,17 @@ class Router: NSObject {
         containing the given json serializable object
      */
 
-    func HTTPPatch(url: String,
-                   jsonObj: AnyObject,
-                   callback: (NSData, NSError?) -> Void) {
+    func onPatch(url: String,
+                   jsonString: AnyObject,
+                   callback: (NSData?, NSError?) -> Void) {
+
+        let request = buildRequest()
 
         request.url = NSURL(string: url)!
         request.httpMethod = "PATCH"
-        request.httpBody = jsonObj.data(using: NSUTF8StringEncoding)!
+        request.httpBody = jsonString.data(using: NSUTF8StringEncoding)!
 
-        taskManager() { data, error in
+        taskManager(request: request) { data, error in
             callback(data, error)
         }
 
@@ -86,12 +89,14 @@ class Router: NSObject {
         containing the given json serializable object
      */
 
-    func HTTPDelete(url: String, callback: (NSData, NSError?) -> Void) {
+    func onDelete(url: String, callback: (NSData?, NSError?) -> Void) {
+
+        let request = buildRequest()
 
         request.url = NSURL(string: url)!
         request.httpMethod = "DELETE"
 
-        taskManager() { data, error in
+        taskManager(request: request) { data, error in
             callback(data, error)
         }
     }
@@ -100,7 +105,7 @@ class Router: NSObject {
         Method: Executes the current http request asynchronously
      */
 
-    func taskManager(callback: (NSData, NSError?) -> Void) {
+    func taskManager(request: NSMutableURLRequest, callback: (NSData?, NSError?) -> Void) {
 
         let task = session.dataTask(with: request as NSURLRequest) {
             data, response, error in
@@ -113,8 +118,9 @@ class Router: NSObject {
                 print(error.localizedDescription)
 
             } else if let httpResponse = response as? NSHTTPURLResponse {
+                print(httpResponse.statusCode)
                 if httpResponse.statusCode == 200 {
-                    callback(data!, error)
+                    callback(data, error)
                 }
             }
 
@@ -122,5 +128,16 @@ class Router: NSObject {
         }
 
         task.resume()
+    }
+
+    private func buildRequest() -> NSMutableURLRequest {
+
+        let request: NSMutableURLRequest = NSMutableURLRequest()
+
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(FBSDKAccessToken.current().tokenString, forHTTPHeaderField: "access_token")
+        request.setValue("FacebookToken", forHTTPHeaderField: "X-token-type")
+
+        return request
     }
 }

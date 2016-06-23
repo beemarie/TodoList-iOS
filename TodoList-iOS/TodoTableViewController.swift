@@ -22,7 +22,6 @@ class TodoTableViewController: UITableViewController {
     @IBOutlet weak var mySegmentedControl: UISegmentedControl!
 
     override func viewDidAppear(_ animated: Bool) {
-        TodoItemDataManager.sharedInstance.get()
         updateTable(todoItems: todos())
 
     }
@@ -33,7 +32,7 @@ class TodoTableViewController: UITableViewController {
 
 
     @IBAction func segmentedControlActionChanged(sender: AnyObject) {
-        tableView.reloadData()
+        updateTable(todoItems: todos())
     }
 
     // Setup TableView

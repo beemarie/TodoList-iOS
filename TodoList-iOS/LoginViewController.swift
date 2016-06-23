@@ -31,6 +31,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         if FBSDKAccessToken.current() != nil {
+            // Currently you need to instantiate the sharedInstance earlier in order for
+            // it to populate the table the first time. As a safety net, sleep(1)
+            let _ = TodoItemDataManager.sharedInstance.allTodos
+            sleep(1)
 
             dispatch_async(dispatch_get_main_queue()) {
                 [unowned self] in
@@ -70,14 +74,14 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 print(error.localizedDescription)
             } else {
 
-                User.facebookUserId = (result.objectFor("id") as? String)!
+                User.facebookUserID = (result.objectFor("id") as? String)!
                 User.fullName = (result.objectFor("first_name") as? String)! +
                                         " " +
                                             (result.objectFor("last_name") as? String)!
                 User.email = (result.objectFor("email") as? String)!
 
                 self.welcomeLabel.text = "Welcome, \(User.fullName)"
-
+                TodoItemDataManager.sharedInstance.get()
             }
 
         }

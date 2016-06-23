@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     @objc(applicationWillResignActive:)
-    func applicationWillResignActive(_ application: UIApplication) {
+        func applicationWillResignActive(_ application: UIApplication) {
         /* Sent when the application is about to move from active to inactive state.
          This can occur for certain types of temporary interruptions (such as an incoming
          phone call or SMS message) or when the user quits the application and it begins
@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     @objc(applicationDidEnterBackground:)
-    func applicationDidEnterBackground(_ application: UIApplication) {
+        func applicationDidEnterBackground(_ application: UIApplication) {
         /* Use this method to release shared resources, save user data, invalidate
          timers, and store enough application state information to restore your
          application to its current state in case it is terminated later.
@@ -51,13 +51,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     @objc(applicationWillEnterForeground:)
-    func applicationWillEnterForeground(_ application: UIApplication) {
+        func applicationWillEnterForeground(_ application: UIApplication) {
         /* Called as part of the transition from the background to the inactive state;
          here you can undo many of the changes made on entering the background. */
     }
 
     @objc(applicationDidBecomeActive:)
-    func applicationDidBecomeActive(_ application: UIApplication) {
+        func applicationDidBecomeActive(_ application: UIApplication) {
         /* Restart any tasks that were paused (or not yet started)
          while the application was inactive. If the application was
          previously in the background, optionally refresh the user interface. */
@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     @objc(application:willFinishLaunchingWithOptions:)
-    func application(_ application: UIApplication,
+        func application(_ application: UIApplication,
                      willFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?)
         -> Bool {
             // Override point for customization after application launch.
@@ -86,7 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     @objc(application:openURL:sourceApplication:annotation:)
-    func application(_ application: UIApplication,
+        func application(_ application: UIApplication,
                      open url: NSURL,
                      sourceApplication: String?,
                      annotation: AnyObject) -> Bool {
