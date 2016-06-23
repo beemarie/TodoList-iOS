@@ -19,12 +19,12 @@ import UIKit
 class AddTodoViewController: UIViewController {
 
     @IBOutlet var textField: UITextField!
-    
+
     @IBAction func onDoneClicked(sender: UIButton) {
-        
+
         TodoItemDataManager.sharedInstance.add(withTitle: textField.text!)
 
         self.navigationController?.popViewController(animated: true)
     }
-    
+
 }
