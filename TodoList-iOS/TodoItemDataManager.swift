@@ -17,17 +17,22 @@
 import UIKit
 import Foundation
 
+enum DataMangerError: ErrorProtocol {
+    case CannotSerializeToJSON
+    case DataNotFound
+}
+
 class TodoItemDataManager: NSObject {
 
-    let config = BluemixConfiguration()
-
     let router = Router()
+
+    let config = BluemixConfiguration()
 
     static let sharedInstance = TodoItemDataManager()
 
     var allTodos = [TodoItem]()
 
-    override init() {
+    private override init() {
         super.init()
         get()
     }
@@ -37,41 +42,53 @@ class TodoItemDataManager: NSObject {
 // MARK: Methods for storing, deleting, updating, and retrieving
 extension TodoItemDataManager {
 
-
     // Store item in todolist
     func add(withTitle: String) {
+        print("adding")
+        let json = self.json(withTitle: withTitle,
+                             order: TodoItemDataManager.sharedInstance.allTodos.count + 1)
 
-        let json = "{\"title\":\"\(withTitle)\",\"completed\":\"\(false)\",\"order\":\"\(TodoItemDataManager.sharedInstance.allTodos.count + 1)\"}"
+        router.onPost(url: getBaseRequestURL(), jsonString: json) {
+            response, error in
+            print(response, error)
+            if error != nil {
+                print(error?.localizedDescription)
+            } else {
 
-        router.HTTPPost(url: getBaseRequestURL(), jsonObj: json) {
-            data, error in
-            if error != nil { print(error?.localizedDescription) } else {
+                guard let data = response else {
+                    print(DataMangerError.DataNotFound)
+                    return
+                }
+
                 do {
                     let json = try NSJSONSerialization.jsonObject(with: data,
                                                                   options: .mutableContainers)
                     self.allTodos.append(self.parseItem(item: json)!)
 
-                } catch { print("Error Storing Data") }
+                } catch {
+                    print(DataMangerError.CannotSerializeToJSON)
+                }
             }
         }
-
     }
 
     func delete(itemAt: NSIndexPath) {
 
         let id = allTodos[itemAt.row].id
-        TodoItemDataManager.sharedInstance.allTodos.remove(at: itemAt.row)
+        self.allTodos.remove(at: itemAt.row)
 
-        router.HTTPDelete(url: "\(getBaseRequestURL())/todos/\(id)") {
-            data, error in
+        router.onDelete(url: "\(getBaseRequestURL())/todos/\(id)") {
+            response, error in
+
             if error != nil { print(error?.localizedDescription) }
         }
     }
 
     func update(item: TodoItem) {
-        router.HTTPPatch(url: "\(getBaseRequestURL())/todos/\(item.id)",
-                         jsonObj: item.jsonRepresentation) {
-            data, error in
+
+        router.onPatch(url: "\(getBaseRequestURL())/todos/\(item.id)",
+                       jsonString: item.jsonRepresentation) {
+            response, error in
 
             if error != nil { print(error?.localizedDescription) }
         }
@@ -82,9 +99,16 @@ extension TodoItemDataManager {
 
         var item: TodoItem? = nil
 
-        router.HTTPGet(url: "\(getBaseRequestURL())/todos/\(withId)") {
-            data, error in
+        router.onGet(url: "\(getBaseRequestURL())/todos/\(withId)") {
+            response, error in
+
             if error != nil { print(error?.localizedDescription) } else {
+
+                guard let data = response else {
+                    print(DataMangerError.DataNotFound)
+                    return
+                }
+
                 do {
                     let json = try NSJSONSerialization.jsonObject(with: data,
                                                                   options: .mutableContainers)
@@ -99,17 +123,25 @@ extension TodoItemDataManager {
 
     }
 
-    // Loads todolist from url
+    // Loads all TodoItems from designated base url
 
     func get() {
 
-        router.HTTPGet(url: getBaseRequestURL()) {
-            data, error in
+        router.onGet(url: getBaseRequestURL()) {
+            response, error in
+
             if error != nil { print(error?.localizedDescription) } else {
+
+                guard let data = response else {
+                    print(DataMangerError.DataNotFound)
+                    return
+                }
+
                 do {
                     let json = try NSJSONSerialization.jsonObject(with: data,
                                                                   options: .mutableContainers)
                     self.parseTodoList(json: json)
+
                 } catch let error as NSError {
                     print(error.localizedDescription)
                 }
@@ -118,7 +150,7 @@ extension TodoItemDataManager {
     }
 }
 
-// MARK: Methods for Parsing Functions
+// Methods for Parsing Functions
 extension TodoItemDataManager {
 
     private func parseTodoList(json: AnyObject) {
@@ -133,7 +165,7 @@ extension TodoItemDataManager {
                     continue
                 }
 
-                insertSorted(seq: &allTodos, newItem: todo)
+                insertInOrder(seq: &allTodos, newItem: todo)
 
             }
 
@@ -141,6 +173,7 @@ extension TodoItemDataManager {
     }
 
     private func parseItem(item: AnyObject) -> TodoItem? {
+
         if let item = item as? [String: AnyObject] {
 
             let id        = item["id"] as? String
@@ -155,7 +188,6 @@ extension TodoItemDataManager {
 
                     return nil
             }
-
 
             return TodoItem(id: uid, title: titleValue, completed: completedValue, order: orderValue)
         }
@@ -176,7 +208,8 @@ extension TodoItemDataManager {
         }
     }
 
-    func insertSorted<T: Comparable>( seq: inout [T], newItem item: T) {
+    func insertInOrder<T: Comparable>( seq: inout [T], newItem item: T) {
+
         let index = seq.reduce(0) { $1 < item ? $0 + 1 : $0 }
         seq.insert(item, at: index)
     }
@@ -190,7 +223,10 @@ extension TodoItemDataManager {
         allTodos.remove(at: itemAt.row)
         allTodos.insert(itemToMove, at: to.row)
 
-        // Update order on server
-        TodoItemDataManager.sharedInstance.update(item: itemToMove)
+        self.update(item: itemToMove)
+    }
+
+    func json(withTitle: String, order: Int) -> String {
+        return "{\"title\":\"\(withTitle)\",\"completed\":\"\(false)\",\"order\":\"\(order)\"}"
     }
 }

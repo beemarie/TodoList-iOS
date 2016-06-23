@@ -19,7 +19,7 @@ import UIKit
 class User: NSObject {
 
     /// Grab facebook user id of user from NsUserDefaults
-    class var facebookUserId: String {
+    class var facebookUserID: String {
         get {
             if let userId = NSUserDefaults.standard()
                                             .object(forKey: "facebook_user_id") as? String {
