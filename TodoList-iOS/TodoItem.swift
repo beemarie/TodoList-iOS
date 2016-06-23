@@ -17,18 +17,16 @@
 import Foundation
 
 struct TodoItem: Comparable {
-    
+
     let id: String
     let title: String
     var completed: Bool
     var order: Int
-    
-    var jsonRepresentation : String {
-        // facebook credentials version
-        // return "{\"title\":\"\(title)\",\"completed\":\"\(completed)\",\"order\":\"\(order)\"}"
-        return "{\"uid\":\"\(User.facebookUserId)\",\"title\":\"\(title)\",\"completed\":\"\(completed)\",\"order\":\"\(order)\"}"
+
+    var jsonRepresentation: String {
+        return "{\"title\":\"\(title)\",\"completed\":\"\(completed)\",\"order\":\"\(order)\"}"
     }
-    
+
 }
 
 func < (lhs: TodoItem, rhs: TodoItem) -> Bool {

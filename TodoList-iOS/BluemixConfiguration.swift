@@ -17,7 +17,7 @@
 import UIKit
 
 class BluemixConfiguration: NSObject {
-    
+
     //Plist Keys
     private let kBluemixKeysPlistName = "bluemix"
     private let kIsLocalKey = "isLocal"
@@ -26,24 +26,22 @@ class BluemixConfiguration: NSObject {
     private let kBluemixAppGUIDKey = "bluemixAppGUID"
     private let kBluemixAppRegionKey = "bluemixAppRegion"
 
-    
+
     var isLocal: Bool = true
     let appGUID: String
     let appRegion: String
     let localBaseRequestURL: String
     let remoteBaseRequestURL: String
-    
+
     override init() {
-        
+
         if let path = NSBundle.main().pathForResource(kBluemixKeysPlistName, ofType: "plist"),
                plist = NSDictionary(contentsOfFile: path),
                isLocal              = plist[kIsLocalKey] as? Bool,
                appGUID              = plist[kBluemixAppGUIDKey] as? String,
                appRegion            = plist[kBluemixAppRegionKey] as? String,
                localBaseRequestURL  = plist[kAppRouteLocal] as? String,
-               remoteBaseRequestURL = plist[kAppRouteRemote] as? String
-            
-        {
+               remoteBaseRequestURL = plist[kAppRouteRemote] as? String {
 
             self.isLocal = isLocal
             self.appGUID = appGUID
@@ -52,11 +50,10 @@ class BluemixConfiguration: NSObject {
             self.remoteBaseRequestURL = remoteBaseRequestURL
 
             super.init()
-            
-        }
-        else {
+
+        } else {
             fatalError("Could not load bluemix plist into object properties")
         }
     }
-    
+
 }

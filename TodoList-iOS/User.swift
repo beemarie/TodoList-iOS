@@ -17,23 +17,24 @@
 import UIKit
 
 class User: NSObject {
-    
+
     /// Grab facebook user id of user from NsUserDefaults
     class var facebookUserId: String {
         get {
-            if let userId = NSUserDefaults.standard().object(forKey: "facebook_user_id") as? String {
+            if let userId = NSUserDefaults.standard()
+                                            .object(forKey: "facebook_user_id") as? String {
                 return userId
             } else {
                 return "Not Set"
             }
         }
         set(userId) {
-            
+
             NSUserDefaults.standard().set(userId, forKey: "facebook_user_id")
             NSUserDefaults.standard().synchronize()
         }
     }
-    
+
     /// grab full name of user from NSUserDefaults
     class var fullName: String {
         get {
@@ -43,12 +44,12 @@ class User: NSObject {
                 return "Not Set"
             }
         }
-        set(user_full_name) {
-            
-            NSUserDefaults.standard().set(user_full_name, forKey: "user_full_name")
+        set(userFullName) {
+
+            NSUserDefaults.standard().set(userFullName, forKey: "user_full_name")
             NSUserDefaults.standard().synchronize()
         }
-        
+
     }
     /// grab full name of user from NSUserDefaults
     class var email: String {
@@ -58,13 +59,13 @@ class User: NSObject {
             } else {
                 return "Not Set"
             }
-            
+
         }
-        set(user_full_name) {
-            
-            NSUserDefaults.standard().set(user_full_name, forKey: "user_email")
+        set(userEmail) {
+
+            NSUserDefaults.standard().set(userEmail, forKey: "user_email")
             NSUserDefaults.standard().synchronize()
         }
-        
+
     }
 }
