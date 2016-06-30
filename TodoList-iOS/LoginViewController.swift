@@ -18,23 +18,18 @@ import UIKit
 import FBSDKLoginKit
 import FBSDKCoreKit
 
-class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
+class LoginViewController: UIViewController {
 
     /// Loading indicator when connecting to Facebook
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
 
-    /// Button to allow user to sign in with Facebook
-    @IBOutlet weak var facebookButton: FBSDKLoginButton!
-
-    /// Label to show an error if authentication is unsuccessful
-    @IBOutlet weak var welcomeLabel: UILabel!
+    /// UILabels
+    @IBOutlet weak var kituraLabel: UILabel!
+    @IBOutlet weak var todoLabel: UILabel!
 
     override func viewWillAppear(_ animated: Bool) {
         if FBSDKAccessToken.current() != nil {
-            // Currently you need to instantiate the sharedInstance earlier in order for
-            // it to populate the table the first time. As a safety net, sleep(1)
             let _ = TodoItemDataManager.sharedInstance.allTodos
-            sleep(1)
 
             dispatch_async(dispatch_get_main_queue()) {
                 [unowned self] in
@@ -46,9 +41,18 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        facebookButton.layer.cornerRadius = 10
+        // Set Background Theme
+        let gradientLayer = CAGradientLayer()
 
-        configureFacebook()
+        gradientLayer.frame = self.view.bounds
+        gradientLayer.locations = [0.0, 1]
+        gradientLayer.colors = [ Theme.Dark.mainColor.cgColor, Theme.Dark.secondaryColor.cgColor]
+
+        view.backgroundColor = UIColor.clear()
+        let backgroundLayer = gradientLayer
+        backgroundLayer.frame = view.frame
+        view.layer.insertSublayer(backgroundLayer, at: 0)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,56 +60,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         // Dispose of any resources that can be recreated.
     }
 
-    func configureFacebook() {
-        facebookButton.readPermissions = ["public_profile", "email"]
-        facebookButton.delegate = self
+    @IBAction func loginButton(sender: UIButton) {
+        LoginDataManager.sharedInstance.login()
     }
-
-    func loginButton(_ loginButton: FBSDKLoginButton!,
-                     didCompleteWith result: FBSDKLoginManagerLoginResult!,
-                     error: NSError!) {
-
-        FBSDKGraphRequest.init(graphPath: "me",
-                               parameters: ["fields":"id, first_name, last_name, email"])
-            .start { (connection, result, error) -> Void in
-
-            // Check error condition or save user Data
-            if (error) != nil {
-                print(error.localizedDescription)
-            } else {
-
-                User.facebookUserID = (result.objectFor("id") as? String)!
-                User.fullName = (result.objectFor("first_name") as? String)! +
-                                        " " +
-                                            (result.objectFor("last_name") as? String)!
-                User.email = (result.objectFor("email") as? String)!
-
-                self.welcomeLabel.text = "Welcome, \(User.fullName)"
-                TodoItemDataManager.sharedInstance.get()
-            }
-
-        }
-
-
-
-    }
-
-    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        for key in Array(NSUserDefaults.standard().dictionaryRepresentation().keys) {
-            NSUserDefaults.standard().removeObject(forKey: key)
-        }
-
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want
-    //to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
