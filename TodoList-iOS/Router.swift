@@ -118,7 +118,6 @@ class Router: NSObject {
                 print(error.localizedDescription)
 
             } else if let httpResponse = response as? NSHTTPURLResponse {
-                print(httpResponse.statusCode)
                 if httpResponse.statusCode == 200 {
                     callback(data, error)
                 }

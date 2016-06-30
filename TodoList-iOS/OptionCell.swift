@@ -8,15 +8,7 @@
 import UIKit
 
 class OptionCell: UITableViewCell {
+    
+    @IBOutlet var label: UILabel!
     @IBOutlet var showButton: UIButton!
-
-    @IBAction func onShowCompleted(sender: UIButton) {
-        print(showButton.titleLabel?.text!)
-        if showButton.titleLabel?.text! == "Show Completed" {
-            showButton.titleLabel?.text! = "Hide Completed"
-        } else {
-            showButton.titleLabel?.text! = "Show Completed"
-        }
-        print(showButton.titleLabel?.text!)
-    }
 }

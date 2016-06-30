@@ -17,7 +17,7 @@
 import Foundation
 import UIKit
 
-class TodoTableViewController: UITableViewController, HeaderCellDelegate {
+class TodoTableViewController: UITableViewController, TodoItemsDelegate {
 
     var showCompleted = true
 
@@ -25,22 +25,21 @@ class TodoTableViewController: UITableViewController, HeaderCellDelegate {
 
     @IBAction func showCompleted(sender: UIButton) {
         showCompleted = !showCompleted
-        tableView.reloadData()
+        updateTable(todoItems: todos())
     }
 
     override func viewWillAppear(_ animated: Bool) {
         layer = ThemeManager.gradientLayer(layer: layer, view: tableView)
-        tableView.backgroundColor = UIColor.clear()
-        //self.tableView.contentInset =
-        //    UIEdgeInsetsMake(0, 0, self.tableView.frame.size.height - 88, 0)
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
+        ThemeManager.applyTheme(theme: ThemeManager.currentTheme())
+        //tableView.backgroundColor = UIColor.clear()
         updateTable(todoItems: todos())
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        TodoItemDataManager.sharedInstance.delegate = self
+        self.tableView.contentInset =
+            UIEdgeInsetsMake(0, 0, self.tableView.frame.size.height - 88, 0)
     }
 
     override func tableView(_ tableView: UITableView,
@@ -58,6 +57,7 @@ class TodoTableViewController: UITableViewController, HeaderCellDelegate {
                             heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }
+
     override func tableView(_ tableView: UITableView,
                             viewForHeaderInSection section: Int) -> UIView? {
 
@@ -67,7 +67,6 @@ class TodoTableViewController: UITableViewController, HeaderCellDelegate {
 
             headerCell.backgroundColor = UIColor.clear()
             headerCell.editField = UITextField()
-            headerCell.delegate = self
 
             let containerView = UIView(frame:headerCell.frame)
             headerCell.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -81,7 +80,8 @@ class TodoTableViewController: UITableViewController, HeaderCellDelegate {
 
             optionCell.backgroundColor = UIColor.clear()
             optionCell.showButton.layer.cornerRadius = 10
-            optionCell.showButton.setTitle("Show Completed", for: [])
+            if showCompleted { optionCell.label.text = "Hide Completed" }
+            else { optionCell.label.text = "Show Completed" }
 
             let containerView = UIView(frame:optionCell.frame)
             optionCell.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -118,12 +118,11 @@ class TodoTableViewController: UITableViewController, HeaderCellDelegate {
 
         let onEdit = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
             tableView.isEditing = true
-            // Scroll Cell to the top
             tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             // Make Edits
             //let cell = tableView.cellForRow(at: indexPath)
-            let header = tableView.headerView(forSection: 1)
-            print(header)
+            //let _ = tableView.headerView(forSection: 1)
+            tableView.isEditing = false
         }
         let editAction = UITableViewRowAction(style: .normal, title: "Edit", handler: onEdit)
         editAction.backgroundColor = ThemeManager.currentTheme().accessoryColor
@@ -185,7 +184,7 @@ class TodoTableViewController: UITableViewController, HeaderCellDelegate {
 
     @IBAction func onEditClicked(sender: UIBarButtonItem) {
         self.isEditing = !self.isEditing
-        self.tableView.reloadData()
+        updateTable(todoItems: todos())
     }
 
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: NSIndexPath) -> Bool {
@@ -197,7 +196,7 @@ class TodoTableViewController: UITableViewController, HeaderCellDelegate {
                             to destinationIndexPath: NSIndexPath) {
 
         TodoItemDataManager.sharedInstance.move(itemAt: sourceIndexPath, to: destinationIndexPath)
-        self.tableView.reloadData()
+        updateTable(todoItems: todos())
 
     }
 
@@ -242,16 +241,9 @@ class TodoTableViewController: UITableViewController, HeaderCellDelegate {
         return TodoItemDataManager.sharedInstance.allTodos
     }
 
-
-    // Handle Text Field Methods
-
-    func addItem(withTitle: String) {
-        if withTitle != "" {
-            TodoItemDataManager.sharedInstance.add(withTitle: withTitle)
-            updateTable(todoItems: todos())
-        }
+    func onItemsAddedToList() {
+        updateTable(todoItems: todos())
     }
-
     // Handle Scrolling Functions
 
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {

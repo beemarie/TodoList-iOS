@@ -26,16 +26,14 @@ class LoginViewController: UIViewController {
     /// UILabels
     @IBOutlet weak var kituraLabel: UILabel!
     @IBOutlet weak var todoLabel: UILabel!
-
+    
     override func viewWillAppear(_ animated: Bool) {
         if FBSDKAccessToken.current() != nil {
             let _ = TodoItemDataManager.sharedInstance.allTodos
-
             dispatch_async(dispatch_get_main_queue()) {
                 [unowned self] in
                 self.performSegue(withIdentifier: "todolist", sender: self)
             }
-
         }
     }
     override func viewDidLoad() {
@@ -61,6 +59,6 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginButton(sender: UIButton) {
-        LoginDataManager.sharedInstance.login()
+        LoginDataManager.sharedInstance.login(viewController: self)
     }
 }

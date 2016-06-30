@@ -51,7 +51,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
 
     func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: NSIndexPath) -> UITableViewCell {
-        
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell",
                                                 for: indexPath) as UITableViewCell
 
@@ -65,7 +65,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.detailTextLabel?.text = ThemeManager.currentTheme().rawValue
         cell.detailTextLabel?.textColor =  ThemeManager.currentTheme().fontColor
         cell.accessoryType = .disclosureIndicator
-        cell.imageView?.image = UIImage(named: "plus")
+        cell.imageView?.image = UIImage(named: "theme_logo")
 
         return cell
     }
