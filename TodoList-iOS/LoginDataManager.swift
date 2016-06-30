@@ -13,9 +13,9 @@ class LoginDataManager: NSObject {
 
     static let sharedInstance = LoginDataManager()
 
-    func login() {
+    func login(viewController: UIViewController) {
         let login = FBSDKLoginManager()
-        login.logIn(withReadPermissions: ["email"]) {
+        login.logIn(withReadPermissions: ["email"], from: viewController){
             (result: FBSDKLoginManagerLoginResult!, error: NSError!) in
             if error != nil {
                 print(error.localizedDescription)
@@ -42,21 +42,20 @@ class LoginDataManager: NSObject {
         FBSDKGraphRequest.init(graphPath: "me",
                                parameters: ["fields":"id, first_name, last_name, email"])
             .start { (connection, result, error) -> Void in
-                
+
                 // Check error condition or save user Data
                 if (error) != nil {
                     print(error.localizedDescription)
                 } else {
-                    
+
                     User.facebookUserID = (result.objectFor("id") as? String)!
                     User.fullName = (result.objectFor("first_name") as? String)! +
                         " " +
                         (result.objectFor("last_name") as? String)!
                     User.email = (result.objectFor("email") as? String)!
-                    
-                    TodoItemDataManager.sharedInstance.get()
+
+                    let _ = TodoItemDataManager.sharedInstance.allTodos
                 }
         }
     }
-    
 }

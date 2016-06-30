@@ -17,6 +17,10 @@
 import UIKit
 import Foundation
 
+protocol TodoItemsDelegate {
+    func onItemsAddedToList()
+}
+
 enum DataMangerError: ErrorProtocol {
     case CannotSerializeToJSON
     case DataNotFound
@@ -30,6 +34,7 @@ class TodoItemDataManager: NSObject {
 
     static let sharedInstance = TodoItemDataManager()
 
+    var delegate: TodoItemsDelegate?
     var allTodos: [[TodoItem]] = [[], []]
 
     private override init() {
@@ -64,6 +69,8 @@ extension TodoItemDataManager {
                     let json = try NSJSONSerialization.jsonObject(with: data,
                                                                   options: .mutableContainers)
                     self.allTodos[0].append(self.parseItem(item: json)!)
+
+                    self.delegate?.onItemsAddedToList()
 
                 } catch {
                     print(DataMangerError.CannotSerializeToJSON)
@@ -114,6 +121,7 @@ extension TodoItemDataManager {
                     let json = try NSJSONSerialization.jsonObject(with: data,
                                                                   options: .mutableContainers)
                     item = self.parseItem(item: json)
+                    self.delegate?.onItemsAddedToList()
                 } catch let error as NSError {
                     print(error.localizedDescription)
                 }
@@ -142,7 +150,7 @@ extension TodoItemDataManager {
                     let json = try NSJSONSerialization.jsonObject(with: data,
                                                                   options: .mutableContainers)
                     self.parseTodoList(json: json)
-
+                    self.delegate?.onItemsAddedToList()
                 } catch let error as NSError {
                     print(error.localizedDescription)
                 }

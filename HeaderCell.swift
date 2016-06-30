@@ -16,14 +16,9 @@
 
 import UIKit
 
-protocol HeaderCellDelegate {
-    func addItem(withTitle: String)
-}
-
 class HeaderCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet var editField: UITextField!
 
-    var delegate: HeaderCellDelegate?
     var indexPath: NSIndexPath?
 
     override func awakeFromNib() {
@@ -37,7 +32,7 @@ class HeaderCell: UITableViewCell, UITextFieldDelegate {
 
     @IBAction func onAddItem(sender: UIButton) {
         if let title = editField.text {
-            delegate?.addItem(withTitle: title)
+            TodoItemDataManager.sharedInstance.add(withTitle: title)
             editField.text = ""
         }
     }
@@ -45,7 +40,7 @@ class HeaderCell: UITableViewCell, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         if let title = textField.text {
-            delegate?.addItem(withTitle: title)
+            TodoItemDataManager.sharedInstance.add(withTitle: title)
             editField.text = ""
             return true
         }
