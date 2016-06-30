@@ -19,7 +19,7 @@ import Foundation
 struct TodoItem: Comparable {
 
     let id: String
-    let title: String
+    var title: String
     var completed: Bool
     var order: Int
 

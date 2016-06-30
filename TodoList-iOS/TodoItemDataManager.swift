@@ -30,10 +30,11 @@ class TodoItemDataManager: NSObject {
 
     static let sharedInstance = TodoItemDataManager()
 
-    var allTodos = [TodoItem]()
+    var allTodos: [[TodoItem]] = [[], []]
 
     private override init() {
         super.init()
+
         get()
     }
 
@@ -44,13 +45,12 @@ extension TodoItemDataManager {
 
     // Store item in todolist
     func add(withTitle: String) {
-        print("adding")
         let json = self.json(withTitle: withTitle,
-                             order: TodoItemDataManager.sharedInstance.allTodos.count + 1)
+                             order: TodoItemDataManager.sharedInstance.allTodos[0].count + 1)
 
         router.onPost(url: getBaseRequestURL(), jsonString: json) {
             response, error in
-            print(response, error)
+
             if error != nil {
                 print(error?.localizedDescription)
             } else {
@@ -63,10 +63,11 @@ extension TodoItemDataManager {
                 do {
                     let json = try NSJSONSerialization.jsonObject(with: data,
                                                                   options: .mutableContainers)
-                    self.allTodos.append(self.parseItem(item: json)!)
+                    self.allTodos[0].append(self.parseItem(item: json)!)
 
                 } catch {
                     print(DataMangerError.CannotSerializeToJSON)
+
                 }
             }
         }
@@ -74,8 +75,8 @@ extension TodoItemDataManager {
 
     func delete(itemAt: NSIndexPath) {
 
-        let id = allTodos[itemAt.row].id
-        self.allTodos.remove(at: itemAt.row)
+        let id = allTodos[itemAt.section][itemAt.row].id
+        self.allTodos[itemAt.section].remove(at: itemAt.row)
 
         router.onDelete(url: "\(getBaseRequestURL())/todos/\(id)") {
             response, error in
@@ -155,7 +156,8 @@ extension TodoItemDataManager {
 
     private func parseTodoList(json: AnyObject) {
 
-        allTodos.removeAll()
+        allTodos[0].removeAll()
+        allTodos[1].removeAll()
 
         if let json = json as? [AnyObject] {
 
@@ -164,11 +166,12 @@ extension TodoItemDataManager {
                 guard let todo = parseItem(item: item) else {
                     continue
                 }
-
-                insertInOrder(seq: &allTodos, newItem: todo)
-
+                if todo.completed == false {
+                    insertInOrder(seq: &allTodos[0], newItem: todo)
+                } else {
+                    insertInOrder(seq: &allTodos[1], newItem: todo)
+                }
             }
-
         }
     }
 
@@ -189,7 +192,8 @@ extension TodoItemDataManager {
                     return nil
             }
 
-            return TodoItem(id: uid, title: titleValue, completed: completedValue, order: orderValue)
+            return TodoItem(id: uid, title: titleValue,
+                            completed: completedValue, order: orderValue)
         }
 
         return nil
@@ -209,24 +213,37 @@ extension TodoItemDataManager {
     }
 
     func insertInOrder<T: Comparable>( seq: inout [T], newItem item: T) {
-
         let index = seq.reduce(0) { $1 < item ? $0 + 1 : $0 }
         seq.insert(item, at: index)
     }
 
     func move(itemAt: NSIndexPath, to: NSIndexPath) {
 
-        var itemToMove = allTodos[itemAt.row]
+        var itemToMove = allTodos[itemAt.section][itemAt.row]
 
-        itemToMove.order = allTodos[to.row].order
+        itemToMove.order = allTodos[to.section][to.row].order
 
-        allTodos.remove(at: itemAt.row)
-        allTodos.insert(itemToMove, at: to.row)
+        allTodos[itemAt.section].remove(at: itemAt.row)
+        allTodos[itemAt.section].insert(itemToMove, at: to.row)
 
         self.update(item: itemToMove)
     }
 
     func json(withTitle: String, order: Int) -> String {
         return "{\"title\":\"\(withTitle)\",\"completed\":\"\(false)\",\"order\":\"\(order)\"}"
+    }
+
+    func updateCompletion(indexPath: NSIndexPath) {
+        var item = allTodos[indexPath.section].remove(at: indexPath.row)
+
+        item.completed = !item.completed
+
+        if item.completed == false {
+            allTodos[0].append(item)
+        } else {
+            allTodos[1].append(item)
+        }
+
+        TodoItemDataManager.sharedInstance.update(item: item)
     }
 }
