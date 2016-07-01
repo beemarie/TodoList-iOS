@@ -29,17 +29,15 @@ enum DataMangerError: ErrorProtocol {
 class TodoItemDataManager: NSObject {
 
     let router = Router()
-
     let config = BluemixConfiguration()
-
-    static let sharedInstance = TodoItemDataManager()
-
+    
     var delegate: TodoItemsDelegate?
     var allTodos: [[TodoItem]] = [[], []]
 
+    static let sharedInstance = TodoItemDataManager()
+
     private override init() {
         super.init()
-
         get()
     }
 
@@ -151,6 +149,7 @@ extension TodoItemDataManager {
                                                                   options: .mutableContainers)
                     self.parseTodoList(json: json)
                     self.delegate?.onItemsAddedToList()
+
                 } catch let error as NSError {
                     print(error.localizedDescription)
                 }
@@ -168,7 +167,6 @@ extension TodoItemDataManager {
         allTodos[1].removeAll()
 
         if let json = json as? [AnyObject] {
-
             for item in json {
 
                 guard let todo = parseItem(item: item) else {
@@ -246,12 +244,8 @@ extension TodoItemDataManager {
 
         item.completed = !item.completed
 
-        if item.completed == false {
-            allTodos[0].append(item)
-        } else {
-            allTodos[1].append(item)
-        }
-
+        item.completed ? allTodos[1].append(item) : allTodos[0].append(item)
+            
         TodoItemDataManager.sharedInstance.update(item: item)
     }
 }

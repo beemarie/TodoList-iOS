@@ -8,7 +8,6 @@
 import UIKit
 
 class OptionCell: UITableViewCell {
-    
     @IBOutlet var label: UILabel!
     @IBOutlet var showButton: UIButton!
 }

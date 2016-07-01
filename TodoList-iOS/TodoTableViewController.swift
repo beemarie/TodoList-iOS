@@ -17,6 +17,9 @@
 import Foundation
 import UIKit
 
+protocol editFieldDelegate {
+    func isEditing(todo: TodoItem)
+}
 class TodoTableViewController: UITableViewController, TodoItemsDelegate {
 
     var showCompleted = true
@@ -31,15 +34,14 @@ class TodoTableViewController: UITableViewController, TodoItemsDelegate {
     override func viewWillAppear(_ animated: Bool) {
         layer = ThemeManager.gradientLayer(layer: layer, view: tableView)
         ThemeManager.applyTheme(theme: ThemeManager.currentTheme())
-        //tableView.backgroundColor = UIColor.clear()
         updateTable(todoItems: todos())
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         TodoItemDataManager.sharedInstance.delegate = self
-        self.tableView.contentInset =
-            UIEdgeInsetsMake(0, 0, self.tableView.frame.size.height - 88, 0)
+        /*self.tableView.contentInset =
+           UIEdgeInsetsMake(0, 0, self.tableView.frame.size.height - 88, 0)*/
     }
 
     override func tableView(_ tableView: UITableView,
@@ -80,8 +82,7 @@ class TodoTableViewController: UITableViewController, TodoItemsDelegate {
 
             optionCell.backgroundColor = UIColor.clear()
             optionCell.showButton.layer.cornerRadius = 10
-            if showCompleted { optionCell.label.text = "Hide Completed" }
-            else { optionCell.label.text = "Show Completed" }
+            optionCell.label.text = showCompleted ? "Hide Completed" : "Show Completed"
 
             let containerView = UIView(frame:optionCell.frame)
             optionCell.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -117,16 +118,14 @@ class TodoTableViewController: UITableViewController, TodoItemsDelegate {
         }
 
         let onEdit = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
-            tableView.isEditing = true
-            tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-            // Make Edits
-            //let cell = tableView.cellForRow(at: indexPath)
-            //let _ = tableView.headerView(forSection: 1)
+            // TODO: MAKE EDIT WORK
             tableView.isEditing = false
+            tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         }
         let editAction = UITableViewRowAction(style: .normal, title: "Edit", handler: onEdit)
-        editAction.backgroundColor = ThemeManager.currentTheme().accessoryColor
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: onDelete)
+
+        editAction.backgroundColor = ThemeManager.currentTheme().accessoryColor
 
         return [deleteAction, editAction]
     }
@@ -250,11 +249,9 @@ class TodoTableViewController: UITableViewController, TodoItemsDelegate {
         for cell in tableView.visibleCells {
             let hiddenFrameHeight = scrollView.contentOffset.y +
                 (self.navigationController?.navigationBar.frame.size.height)! - cell.frame.origin.y
-            if hiddenFrameHeight >= -50 {
-                cell.maskCellFromTop(margin: hiddenFrameHeight)
-            } else {
-                cell.layer.mask = nil
-            }
+
+            hiddenFrameHeight >= -50 ? cell.maskCellFromTop(margin: hiddenFrameHeight) :
+                                      (cell.layer.mask = nil)
         }
     }
 }

@@ -20,16 +20,12 @@ import FBSDKCoreKit
 
 class LoginViewController: UIViewController {
 
-    /// Loading indicator when connecting to Facebook
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBAction func loginButton(sender: UIButton) {
+        LoginDataManager.sharedInstance.login(viewController: self)
+    }
 
-    /// UILabels
-    @IBOutlet weak var kituraLabel: UILabel!
-    @IBOutlet weak var todoLabel: UILabel!
-    
     override func viewWillAppear(_ animated: Bool) {
         if FBSDKAccessToken.current() != nil {
-            let _ = TodoItemDataManager.sharedInstance.allTodos
             dispatch_async(dispatch_get_main_queue()) {
                 [unowned self] in
                 self.performSegue(withIdentifier: "todolist", sender: self)
@@ -56,9 +52,5 @@ class LoginViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    @IBAction func loginButton(sender: UIButton) {
-        LoginDataManager.sharedInstance.login(viewController: self)
     }
 }

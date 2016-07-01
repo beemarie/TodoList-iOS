@@ -16,7 +16,7 @@
 
 import UIKit
 
-class HeaderCell: UITableViewCell, UITextFieldDelegate {
+class HeaderCell: UITableViewCell, UITextFieldDelegate, editFieldDelegate {
     @IBOutlet var editField: UITextField!
 
     var indexPath: NSIndexPath?
@@ -33,7 +33,7 @@ class HeaderCell: UITableViewCell, UITextFieldDelegate {
     @IBAction func onAddItem(sender: UIButton) {
         if let title = editField.text {
             TodoItemDataManager.sharedInstance.add(withTitle: title)
-            editField.text = ""
+            editField.text = nil
         }
     }
 
@@ -41,7 +41,7 @@ class HeaderCell: UITableViewCell, UITextFieldDelegate {
         textField.resignFirstResponder()
         if let title = textField.text {
             TodoItemDataManager.sharedInstance.add(withTitle: title)
-            editField.text = ""
+            editField.text = nil
             return true
         }
         return false
@@ -52,6 +52,10 @@ class HeaderCell: UITableViewCell, UITextFieldDelegate {
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.placeholder = "What Needs To Be Done"
+        textField.placeholder = "What Needs To Be Done?"
+    }
+
+    func isEditing(todo: TodoItem) {
+
     }
 }
