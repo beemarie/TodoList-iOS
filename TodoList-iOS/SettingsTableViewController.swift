@@ -29,10 +29,6 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         self.present(add!, animated: true, completion: nil)
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         updateTheme()
     }

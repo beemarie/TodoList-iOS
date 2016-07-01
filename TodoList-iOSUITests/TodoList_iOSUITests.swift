@@ -1,10 +1,18 @@
-//
-//  TodoList_iOSUITests.swift
-//  TodoList-iOSUITests
-//
-//  Created by Aaron Liberatore on 6/23/16.
-//  Copyright © 2016 Swift@IBM Engineering. All rights reserved.
-//
+/**
+ * Copyright IBM Corporation 2016
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
 import XCTest
 
@@ -34,7 +42,14 @@ class TodoListUITests: XCTestCase {
 
     func addElement() {
 
+        
         let app = XCUIApplication()
+        app.buttons["SIGN IN WITH FACEBOOK"].tap()
+        app.webViews.textFields["Email or Phone"]
+
+        
+        
+        /*let app = XCUIApplication()
         // Add Element
         app.navigationBars["TodoList_iOS.TodoTableView"].buttons["Add"].tap()
         let field = app.textFields["What needs to be done?"]
@@ -57,7 +72,7 @@ class TodoListUITests: XCTestCase {
         let item2 = table.cells.element(boundBy: 2)
         XCTAssert(item1.exists && item2.exists, "Could not add cells to the table")
         XCTAssert(item1.label == "Test 1" && item2.label == "Test 2", "Added Cells Incorrectly")
-        /*table.staticTexts["Test 1"].tap()
+        table.staticTexts["Test 1"].tap()
 
         let todolistIosTodotableviewNavigationBar = app.navigationBars["TodoList_iOS.TodoTableView"]
         let allButton = todolistIosTodotableviewNavigationBar.buttons["All"]

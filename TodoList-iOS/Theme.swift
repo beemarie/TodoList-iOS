@@ -107,13 +107,9 @@ struct ThemeManager {
     }
 
     static func switchTheme() {
-        if currentTheme().rawValue == "Dark" {
-            applyTheme(theme: .Light)
-        } else {
-            applyTheme(theme: .Dark)
-        }
-
+        currentTheme().rawValue == "Dark" ? applyTheme(theme: .Light) : applyTheme(theme: .Dark)
     }
+
     static func applyTheme(theme: Theme) {
         NSUserDefaults.standard().set(theme.rawValue, forKey: selectedTheme)
         NSUserDefaults.standard().synchronize()
