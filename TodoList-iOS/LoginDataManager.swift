@@ -17,13 +17,11 @@ class LoginDataManager: NSObject {
         let login = FBSDKLoginManager()
         login.logIn(withReadPermissions: ["email"], from: viewController) {
             (result: FBSDKLoginManagerLoginResult!, error: NSError!) in
-            
+
             if error != nil {
                 print(error.localizedDescription)
-
             } else if result.isCancelled {
                 return
-
             } else {
                 if result.grantedPermissions.contains("id") {
                     self.fetchUserInfo()

@@ -25,10 +25,7 @@ enum Theme: String {
         case .Light:
             return UIColor.white()
         case .Dark:
-            let red: CGFloat = 47.0 / 255.0
-            let green: CGFloat = 73.0 / 255.0
-            let blue: CGFloat = 98.0 / 255.0
-            return UIColor(red: red, green: green, blue: blue, alpha: 1.0)
+            return UIColor(red: 47, green: 73, blue: 98, opacity: 1)
         }
     }
 
@@ -37,10 +34,7 @@ enum Theme: String {
         case .Light:
             return UIColor.white()
         case .Dark:
-            let red: CGFloat = 21.0 / 255.0
-            let green: CGFloat = 35.0 / 255.0
-            let blue: CGFloat = 51.0 / 255.0
-            return UIColor(red: red, green: green, blue: blue, alpha: 1.0)
+            return UIColor(red: 21, green: 35, blue: 51, opacity: 1)
         }
     }
 
@@ -53,43 +47,12 @@ enum Theme: String {
         }
     }
 
-    var accessoryColor: UIColor {
-        switch self {
-        case .Light:
-            let red: CGFloat = 15.0 / 255.0
-            let green: CGFloat = 155.0 / 255.0
-            let blue: CGFloat = 228.0 / 255.0
-            return UIColor(red: red, green: green, blue: blue, alpha: 1.0)
-        case .Dark:
-            let red: CGFloat = 15.0 / 255.0
-            let green: CGFloat = 155.0 / 255.0
-            let blue: CGFloat = 228.0 / 255.0
-            return UIColor(red: red, green: green, blue: blue, alpha: 1.0)
-        }
-    }
-
     var navBarColor: UIColor {
         switch self {
         case .Light:
-            let red: CGFloat = 247.0 / 255.0
-            let green: CGFloat = 247.0 / 255.0
-            let blue: CGFloat = 247.0 / 255.0
-            let alpha: CGFloat = 0.82
-            return UIColor(red: red, green: green, blue: blue, alpha: alpha)
+            return UIColor(red: 247, green: 247, blue: 247, opacity: 0.82)
         case .Dark:
-            let red: CGFloat = 18.0 / 255.0
-            let green: CGFloat = 38.0 / 255.0
-            let blue: CGFloat = 57.0 / 255.0
-            return UIColor(red: red, green: green, blue: blue, alpha: 1.0)
-        }
-    }
-
-    var checkmarkColor: String {
-        switch self {
-        case .Light:
-            return "blue_checkmark"
-        case .Dark:
-            return "clear_checkmark"
+            return UIColor(red: 18, green: 38, blue: 57, opacity: 1)
         }
     }
 }
@@ -97,6 +60,10 @@ enum Theme: String {
 let selectedTheme = "Selected Theme"
 
 struct ThemeManager {
+
+    static let accessoryColor = UIColor(red: 15, green: 155, blue: 228, opacity: 1)
+
+    static let placeHolderColor = UIColor(red: 189, green: 189, blue: 189, opacity: 0.5)
 
     static func currentTheme() -> Theme {
         if let storedTheme = NSUserDefaults.standard().object(forKey: selectedTheme) as? String {
@@ -116,10 +83,10 @@ struct ThemeManager {
 
         // Setup Navigation Bar
         UINavigationBar.appearance().barTintColor = theme.navBarColor
-        UINavigationBar.appearance().tintColor = theme.accessoryColor
+        UINavigationBar.appearance().tintColor = accessoryColor
         UINavigationBar.appearance().titleTextAttributes =
             [ NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 17)!,
-              NSForegroundColorAttributeName: theme.accessoryColor]
+              NSForegroundColorAttributeName: accessoryColor]
     }
 
     static func gradientLayer(layer: CAGradientLayer?, view: UITableView)
@@ -145,5 +112,35 @@ struct ThemeManager {
         view.backgroundView = backgroundView
 
         return gradientLayer
+    }
+
+    static func gradientLayer(layer: CAGradientLayer?, view: UIView)
+        -> CAGradientLayer {
+
+            var gradientLayer: CAGradientLayer
+
+            if layer != nil {
+                layer!.removeFromSuperlayer()
+                gradientLayer = layer!
+            } else {
+                gradientLayer = CAGradientLayer()
+            }
+            gradientLayer.frame = view.frame
+            gradientLayer.locations = [0.0, 1]
+            gradientLayer.colors = [ ThemeManager.currentTheme().mainColor.cgColor,
+                                     ThemeManager.currentTheme().secondaryColor.cgColor]
+
+            view.layer.insertSublayer(gradientLayer, at: 0)
+
+            return gradientLayer
+    }
+}
+
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int, opacity: Double) {
+        self.init(red  : CGFloat(red)/255,
+                  green: CGFloat(green)/255,
+                  blue : CGFloat(blue)/255,
+                  alpha: CGFloat(opacity))
     }
 }

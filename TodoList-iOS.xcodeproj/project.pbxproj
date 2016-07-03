@@ -11,12 +11,11 @@
 		E16AE3611CE4C0FB00E20F62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E16AE35F1CE4C0FB00E20F62 /* Main.storyboard */; };
 		E16AE3631CE4C0FB00E20F62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E16AE3621CE4C0FB00E20F62 /* Assets.xcassets */; };
 		E16AE3661CE4C0FB00E20F62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E16AE3641CE4C0FB00E20F62 /* LaunchScreen.storyboard */; };
-		E16AE36E1CE4CA2800E20F62 /* TodoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16AE36D1CE4CA2800E20F62 /* TodoTableViewController.swift */; };
 		E16AE3701CE4E39C00E20F62 /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16AE36F1CE4E39C00E20F62 /* TodoItem.swift */; };
-		E33F7F471D2444D200C27479 /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F7F461D2444D200C27479 /* HeaderCell.swift */; };
 		E33F7F4C1D246A6800C27479 /* OptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F7F4B1D246A6800C27479 /* OptionCell.swift */; };
 		E33F7F501D24C4A800C27479 /* LoginDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F7F4F1D24C4A800C27479 /* LoginDataManager.swift */; };
 		E3437B091D234A8900EEB295 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3437B081D234A8900EEB295 /* Theme.swift */; };
+		E343F85D1D274E350059187B /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E343F85C1D274E350059187B /* TodoViewController.swift */; };
 		E3A454DA1D13108F002AAC74 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A454D91D13108F002AAC74 /* User.swift */; };
 		E3A4A4221D0F54EA002F79E5 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A4A41F1D0F54EA002F79E5 /* FBSDKCoreKit.framework */; };
 		E3A4A4231D0F54EA002F79E5 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A4A4201D0F54EA002F79E5 /* FBSDKLoginKit.framework */; };
@@ -47,12 +46,11 @@
 		E16AE3621CE4C0FB00E20F62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E16AE3651CE4C0FB00E20F62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E16AE3671CE4C0FB00E20F62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E16AE36D1CE4CA2800E20F62 /* TodoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoTableViewController.swift; sourceTree = "<group>"; };
 		E16AE36F1CE4E39C00E20F62 /* TodoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
-		E33F7F461D2444D200C27479 /* HeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
 		E33F7F4B1D246A6800C27479 /* OptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionCell.swift; sourceTree = "<group>"; };
 		E33F7F4F1D24C4A800C27479 /* LoginDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginDataManager.swift; sourceTree = "<group>"; };
 		E3437B081D234A8900EEB295 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		E343F85C1D274E350059187B /* TodoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
 		E3A454D91D13108F002AAC74 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E3A4A41F1D0F54EA002F79E5 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../Frameworks/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		E3A4A4201D0F54EA002F79E5 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../Frameworks/FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -127,7 +125,6 @@
 		E33F7F4A1D24669700C27479 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				E33F7F461D2444D200C27479 /* HeaderCell.swift */,
 				E33F7F4B1D246A6800C27479 /* OptionCell.swift */,
 			);
 			name = Cells;
@@ -148,8 +145,8 @@
 			isa = PBXGroup;
 			children = (
 				E3ED01BF1D0F08C400E8D22D /* LoginViewController.swift */,
-				E16AE36D1CE4CA2800E20F62 /* TodoTableViewController.swift */,
 				E3D9D4911D2314B60047C098 /* SettingsTableViewController.swift */,
+				E343F85C1D274E350059187B /* TodoViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -333,8 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3A4A4841D11EE43002F79E5 /* TodoItemDataManager.swift in Sources */,
-				E16AE36E1CE4CA2800E20F62 /* TodoTableViewController.swift in Sources */,
-				E33F7F471D2444D200C27479 /* HeaderCell.swift in Sources */,
+				E343F85D1D274E350059187B /* TodoViewController.swift in Sources */,
 				E16AE3701CE4E39C00E20F62 /* TodoItem.swift in Sources */,
 				E3A454DA1D13108F002AAC74 /* User.swift in Sources */,
 				E3ED01C01D0F08C400E8D22D /* LoginViewController.swift in Sources */,

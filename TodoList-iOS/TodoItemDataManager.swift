@@ -30,7 +30,7 @@ class TodoItemDataManager: NSObject {
 
     let router = Router()
     let config = BluemixConfiguration()
-    
+
     var delegate: TodoItemsDelegate?
     var allTodos: [[TodoItem]] = [[], []]
 
@@ -119,6 +119,7 @@ extension TodoItemDataManager {
                     let json = try NSJSONSerialization.jsonObject(with: data,
                                                                   options: .mutableContainers)
                     item = self.parseItem(item: json)
+
                     self.delegate?.onItemsAddedToList()
                 } catch let error as NSError {
                     print(error.localizedDescription)
@@ -172,11 +173,8 @@ extension TodoItemDataManager {
                 guard let todo = parseItem(item: item) else {
                     continue
                 }
-                if todo.completed == false {
-                    insertInOrder(seq: &allTodos[0], newItem: todo)
-                } else {
-                    insertInOrder(seq: &allTodos[1], newItem: todo)
-                }
+                todo.completed ? insertInOrder(seq: &allTodos[1], newItem: todo) :
+                                 insertInOrder(seq: &allTodos[0], newItem: todo)
             }
         }
     }
@@ -245,7 +243,17 @@ extension TodoItemDataManager {
         item.completed = !item.completed
 
         item.completed ? allTodos[1].append(item) : allTodos[0].append(item)
-            
+
+        TodoItemDataManager.sharedInstance.update(item: item)
+    }
+
+    func updateItem(withTitle: String, atIndexPath: NSIndexPath) {
+        var item = allTodos[atIndexPath.section].remove(at: atIndexPath.row)
+
+        item.title = withTitle
+
+        item.completed ? allTodos[1].append(item) : allTodos[0].append(item)
+
         TodoItemDataManager.sharedInstance.update(item: item)
     }
 }
