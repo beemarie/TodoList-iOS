@@ -42,13 +42,13 @@ class TodoListUITests: XCTestCase {
 
     func addElement() {
 
-        
+
         let app = XCUIApplication()
         app.buttons["SIGN IN WITH FACEBOOK"].tap()
         app.webViews.textFields["Email or Phone"]
 
-        
-        
+
+
         /*let app = XCUIApplication()
         // Add Element
         app.navigationBars["TodoList_iOS.TodoTableView"].buttons["Add"].tap()

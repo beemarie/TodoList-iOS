@@ -79,10 +79,10 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
 
         // Setup Navigation Bar
         navigationController?.navigationBar.barTintColor = ThemeManager.currentTheme().navBarColor
-        navigationController?.navigationBar.tintColor = ThemeManager.currentTheme().accessoryColor
+        navigationController?.navigationBar.tintColor = ThemeManager.accessoryColor
         navigationController?.navigationBar.titleTextAttributes =
             [ NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 17)!,
-              NSForegroundColorAttributeName: ThemeManager.currentTheme().accessoryColor]
+              NSForegroundColorAttributeName: ThemeManager.accessoryColor]
 
         var gradientLayer: CAGradientLayer
 
