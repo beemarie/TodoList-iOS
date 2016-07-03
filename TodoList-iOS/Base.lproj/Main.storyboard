@@ -76,7 +76,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nAe-cb-rhG" id="HKg-iz-01y">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mz2-sA-1ws">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mz2-sA-1ws" customClass="CustomButton" customModule="TodoList_iOS" customModuleProvider="target">
                                                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                                     <color key="backgroundColor" red="0.058823529409999999" green="0.60784313729999995" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
@@ -276,7 +276,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYG-5Y-DL1">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYG-5Y-DL1" customClass="CustomButton" customModule="TodoList_iOS" customModuleProvider="target">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <color key="backgroundColor" red="0.058823529409999999" green="0.60784313729999995" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -459,7 +459,7 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IWx-yZ-7DP">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IWx-yZ-7DP" customClass="CustomButton" customModule="TodoList_iOS" customModuleProvider="target">
                                 <rect key="frame" x="5" y="544" width="595" height="56"/>
                                 <color key="backgroundColor" red="0.058823529409999999" green="0.60784313729999995" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -546,69 +546,11 @@
             </objects>
             <point key="canvasLocation" x="-378" y="405"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="aa2-Ce-XuI">
-            <objects>
-                <viewController id="Mip-tl-cr8" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="x1f-uq-21L"/>
-                        <viewControllerLayoutGuide type="bottom" id="DGh-Gz-VAr"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ehz-X7-itY">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="GZM-Ac-N0p">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="0.90491296139999999" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="GZM-Ac-N0p" secondAttribute="trailing" constant="-15" id="BM3-z9-bDS">
-                                <variation key="heightClass=regular-widthClass=compact" constant="-20"/>
-                            </constraint>
-                            <constraint firstItem="GZM-Ac-N0p" firstAttribute="leading" secondItem="Ehz-X7-itY" secondAttribute="leadingMargin" constant="-15" id="QxK-Tg-5Vk">
-                                <variation key="heightClass=regular-widthClass=compact" constant="-20"/>
-                            </constraint>
-                            <constraint firstItem="DGh-Gz-VAr" firstAttribute="top" secondItem="GZM-Ac-N0p" secondAttribute="bottom" constant="-10" id="ZoY-jB-Tl9"/>
-                            <constraint firstItem="GZM-Ac-N0p" firstAttribute="top" secondItem="x1f-uq-21L" secondAttribute="bottom" constant="-10" id="fod-2k-hfX">
-                                <variation key="heightClass=regular-widthClass=compact" constant="-20"/>
-                            </constraint>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="GZM-Ac-N0p"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="ZoY-jB-Tl9"/>
-                                <exclude reference="BM3-z9-bDS"/>
-                                <exclude reference="QxK-Tg-5Vk"/>
-                                <exclude reference="fod-2k-hfX"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="GZM-Ac-N0p"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="ZoY-jB-Tl9"/>
-                                <include reference="BM3-z9-bDS"/>
-                                <include reference="QxK-Tg-5Vk"/>
-                                <include reference="fod-2k-hfX"/>
-                            </mask>
-                        </variation>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fph-Ja-U71" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-973.5" y="405"/>
-        </scene>
     </scenes>
     <resources>
         <image name="kitura_logo" width="20" height="14"/>
         <image name="plus" width="16" height="16"/>
         <image name="settings" width="17" height="17"/>
-        <image name="splash" width="188" height="335"/>
         <image name="todo_logo" width="74" height="78"/>
     </resources>
 </document>

@@ -26,7 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
-        // Set Theme
+        // Set Themes and Styling
+        ThemeManager.setupStyling()
         let theme = ThemeManager.currentTheme()
         ThemeManager.applyTheme(theme: theme)
 

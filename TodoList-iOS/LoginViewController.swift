@@ -34,19 +34,7 @@ class LoginViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Set Background Theme
-        let gradientLayer = CAGradientLayer()
-
-        gradientLayer.frame = self.view.bounds
-        gradientLayer.locations = [0.0, 1]
-        gradientLayer.colors = [ Theme.Dark.mainColor.cgColor, Theme.Dark.secondaryColor.cgColor]
-
-        view.backgroundColor = UIColor.clear()
-        let backgroundLayer = gradientLayer
-        backgroundLayer.frame = view.frame
-        view.layer.insertSublayer(backgroundLayer, at: 0)
-
+        ThemeManager.replaceGradient(inView: self.view)
     }
 
     override func didReceiveMemoryWarning() {
