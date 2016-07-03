@@ -208,12 +208,7 @@ extension TodoItemDataManager {
 extension TodoItemDataManager {
 
     func getBaseRequestURL() -> String {
-
-        if config.isLocal {
-            return config.localBaseRequestURL
-        } else {
-            return config.remoteBaseRequestURL
-        }
+        return config.isLocal ? config.localBaseRequestURL : config.remoteBaseRequestURL
     }
 
     func insertInOrder<T: Comparable>( seq: inout [T], newItem item: T) {
@@ -242,7 +237,8 @@ extension TodoItemDataManager {
 
         item.completed = !item.completed
 
-        item.completed ? allTodos[1].append(item) : allTodos[0].append(item)
+        item.completed ? insertInOrder(seq: &allTodos[1], newItem: item) :
+                         insertInOrder(seq: &allTodos[0], newItem: item)
 
         TodoItemDataManager.sharedInstance.update(item: item)
     }
@@ -252,7 +248,8 @@ extension TodoItemDataManager {
 
         item.title = withTitle
 
-        item.completed ? allTodos[1].append(item) : allTodos[0].append(item)
+        item.completed ? insertInOrder(seq: &allTodos[1], newItem: item) :
+                         insertInOrder(seq: &allTodos[0], newItem: item)
 
         TodoItemDataManager.sharedInstance.update(item: item)
     }

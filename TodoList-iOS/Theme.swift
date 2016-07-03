@@ -55,6 +55,15 @@ enum Theme: String {
             return UIColor(red: 18, green: 38, blue: 57, opacity: 1)
         }
     }
+
+    var navBarTitleColor: UIColor {
+        switch self {
+        case .Light:
+            return UIColor.black()
+        case .Dark:
+            return UIColor(red: 15, green: 155, blue: 228, opacity: 1)
+        }
+    }
 }
 
 let selectedTheme = "Selected Theme"
@@ -77,6 +86,12 @@ struct ThemeManager {
         currentTheme().rawValue == "Dark" ? applyTheme(theme: .Light) : applyTheme(theme: .Dark)
     }
 
+    static func setupStyling() {
+        UIView.appearance().backgroundColor = UIColor.clear()
+        UITableView.appearance().backgroundColor = UIColor.clear()
+        UITableViewCell.appearance().backgroundColor = UIColor.clear()
+        CustomButton.appearance().backgroundColor = accessoryColor
+    }
     static func applyTheme(theme: Theme) {
         NSUserDefaults.standard().set(theme.rawValue, forKey: selectedTheme)
         NSUserDefaults.standard().synchronize()
@@ -86,53 +101,44 @@ struct ThemeManager {
         UINavigationBar.appearance().tintColor = accessoryColor
         UINavigationBar.appearance().titleTextAttributes =
             [ NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 17)!,
-              NSForegroundColorAttributeName: accessoryColor]
+              NSForegroundColorAttributeName: ThemeManager.currentTheme().navBarTitleColor]
+
+        UITableViewCell.appearance().textLabel?.textColor = ThemeManager.currentTheme().fontColor
+
+        resetViews()
     }
 
-    static func gradientLayer(layer: CAGradientLayer?, view: UITableView)
-        -> CAGradientLayer {
+    static func replaceGradient(inView: UIView) {
 
-        var gradientLayer: CAGradientLayer
-
-        if layer != nil {
-            layer!.removeFromSuperlayer()
-            gradientLayer = layer!
-        } else {
-            gradientLayer = CAGradientLayer()
+        for layer in inView.layer.sublayers! {
+            if layer is CAGradientLayer {
+                (layer as? CAGradientLayer)!.removeFromSuperlayer()
+                break
+            }
         }
-        gradientLayer.frame = view.frame
+        // Set Background Theme
+        let gradientLayer = CAGradientLayer()
+
+        gradientLayer.frame = inView.bounds
         gradientLayer.locations = [0.0, 1]
         gradientLayer.colors = [ ThemeManager.currentTheme().mainColor.cgColor,
-                                 ThemeManager.currentTheme().secondaryColor.cgColor]
+                                 ThemeManager.currentTheme().mainColor.cgColor]
 
-        view.layer.insertSublayer(gradientLayer, at: 0)
-
-        let backgroundView = UIView(frame: view.bounds)
-        backgroundView.layer.insertSublayer(gradientLayer, at: 0)
-        view.backgroundView = backgroundView
-
-        return gradientLayer
+        inView.backgroundColor = UIColor.clear()
+        let backgroundLayer = gradientLayer
+        backgroundLayer.frame = inView.frame
+        inView.layer.insertSublayer(backgroundLayer, at: 0)
     }
 
-    static func gradientLayer(layer: CAGradientLayer?, view: UIView)
-        -> CAGradientLayer {
-
-            var gradientLayer: CAGradientLayer
-
-            if layer != nil {
-                layer!.removeFromSuperlayer()
-                gradientLayer = layer!
-            } else {
-                gradientLayer = CAGradientLayer()
+    static func resetViews() {
+        let windows = UIApplication.shared().windows as [UIWindow]
+        for window in windows {
+            let subviews = window.subviews as [UIView]
+            for v in subviews {
+                v.removeFromSuperview()
+                window.addSubview(v)
             }
-            gradientLayer.frame = view.frame
-            gradientLayer.locations = [0.0, 1]
-            gradientLayer.colors = [ ThemeManager.currentTheme().mainColor.cgColor,
-                                     ThemeManager.currentTheme().secondaryColor.cgColor]
-
-            view.layer.insertSublayer(gradientLayer, at: 0)
-
-            return gradientLayer
+        }
     }
 }
 
@@ -144,3 +150,5 @@ extension UIColor {
                   alpha: CGFloat(opacity))
     }
 }
+
+class CustomButton: UIButton {}

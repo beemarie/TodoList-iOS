@@ -21,7 +21,6 @@ class TodoViewController: UIViewController, UITableViewDelegate,
                           UITextFieldDelegate {
 
     var showCompleted = true
-    var layer: CAGradientLayer? = nil
     var isUpdatingTitle: NSIndexPath? = nil
 
     @IBOutlet var textField: UITextField!
@@ -48,7 +47,7 @@ class TodoViewController: UIViewController, UITableViewDelegate,
 
     @IBAction func onAddItem(sender: UIButton?) {
         textField.resignFirstResponder()
-        tableView.contentInset = UIEdgeInsets(top: 0,left: 0, bottom: 0,right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
         guard let title = textField.text else {
             return
@@ -60,6 +59,7 @@ class TodoViewController: UIViewController, UITableViewDelegate,
             TodoItemDataManager.sharedInstance.updateItem(withTitle: title,
                                                           atIndexPath: index)
             isUpdatingTitle = nil
+
         } else {
             TodoItemDataManager.sharedInstance.add(withTitle: title)
         }
@@ -76,7 +76,7 @@ class TodoViewController: UIViewController, UITableViewDelegate,
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        layer = ThemeManager.gradientLayer(layer: layer, view: view)
+        ThemeManager.replaceGradient(inView: view)
         updateTable(todoItems: todos())
         textField.textColor = ThemeManager.currentTheme().fontColor
         textField.attributedPlaceholder =
@@ -100,11 +100,10 @@ class TodoViewController: UIViewController, UITableViewDelegate,
             let optionCell = (tableView
                 .dequeueReusableCell(withIdentifier: "OptionCell") as? OptionCell)!
 
-            optionCell.backgroundColor = UIColor.clear()
             optionCell.showButton.layer.cornerRadius = 10
             optionCell.label.text = showCompleted ? "Hide Completed" : "Show Completed"
 
-            let containerView = UIView(frame:optionCell.frame)
+            let containerView = UIView(frame: optionCell.frame)
             optionCell.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             containerView.addSubview(optionCell)
 
@@ -114,10 +113,9 @@ class TodoViewController: UIViewController, UITableViewDelegate,
 
     func tableView(_ tableView: UITableView,
                      heightForRowAt indexPath: NSIndexPath) -> CGFloat {
-        if !showCompleted && todos()[indexPath.section][indexPath.row].completed {
-            return 0
-        }
-        return 50
+
+        return !showCompleted && todos()[indexPath.section][indexPath.row].completed ? 0 : 50
+
     }
 
     // Setup TableView and TableViewCells
@@ -139,10 +137,10 @@ class TodoViewController: UIViewController, UITableViewDelegate,
                               NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 16.0)!,
                               NSForegroundColorAttributeName: ThemeManager.currentTheme().fontColor
         ]
+
         cell.textLabel?.attributedText = NSAttributedString(
                                 string: todos()[indexPath.section][indexPath.row].title,
                                 attributes: textAttributes)
-        cell.backgroundColor = UIColor.clear()
 
         if tableView.isEditing {
             cell.imageView?.image = UIImage(named: "trash")

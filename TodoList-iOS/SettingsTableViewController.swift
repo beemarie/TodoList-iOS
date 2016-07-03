@@ -19,8 +19,6 @@ import FBSDKLoginKit
 
 class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    var layer: CAGradientLayer? = nil
-
     @IBAction func logOutButton(sender: UIButton) {
         LoginDataManager.sharedInstance.logout()
 
@@ -30,7 +28,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        updateTheme()
+        ThemeManager.replaceGradient(inView: view)
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,7 +53,6 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
                             y: 0,
                             width: tableView.frame.size.width,
                             height: cell.frame.size.height)
-        cell.backgroundColor = UIColor.clear()
         cell.textLabel?.text = "Color Theme"
         cell.textLabel?.textColor =  ThemeManager.currentTheme().fontColor
         cell.detailTextLabel?.text = ThemeManager.currentTheme().rawValue
@@ -70,37 +67,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: NSIndexPath) {
         ThemeManager.switchTheme()
-        updateTheme()
+        ThemeManager.replaceGradient(inView: view)
         tableView.deselectRow(at: indexPath, animated: true)
         tableView.reloadData()
-    }
-
-    func updateTheme() {
-
-        // Setup Navigation Bar
-        navigationController?.navigationBar.barTintColor = ThemeManager.currentTheme().navBarColor
-        navigationController?.navigationBar.tintColor = ThemeManager.accessoryColor
-        navigationController?.navigationBar.titleTextAttributes =
-            [ NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 17)!,
-              NSForegroundColorAttributeName: ThemeManager.accessoryColor]
-
-        var gradientLayer: CAGradientLayer
-
-        if layer != nil {
-            layer!.removeFromSuperlayer()
-            gradientLayer = layer!
-        } else {
-            gradientLayer = CAGradientLayer()
-        }
-
-        // Set Background Theme
-        gradientLayer.frame = view.frame
-        gradientLayer.locations = [0.0, 1]
-        gradientLayer.colors = [ ThemeManager.currentTheme().mainColor.cgColor,
-                                 ThemeManager.currentTheme().secondaryColor.cgColor]
-
-        view.backgroundColor = UIColor.clear()
-        view.layer.insertSublayer(gradientLayer, at: 0)
-        layer = gradientLayer
     }
 }
