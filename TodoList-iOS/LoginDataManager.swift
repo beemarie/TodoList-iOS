@@ -24,15 +24,18 @@ class LoginDataManager: NSObject {
     func login(viewController: UIViewController) {
         let login = FBSDKLoginManager()
         login.logIn(withReadPermissions: ["email"], from: viewController) {
-            (result: FBSDKLoginManagerLoginResult!, error: NSError!) in
+            (result: FBSDKLoginManagerLoginResult?, error: NSError?) in
 
-            if error != nil {
+            if let error = error {
                 print(error.localizedDescription)
-            } else if result.isCancelled {
-                return
-            } else {
-                if result.grantedPermissions.contains("id") {
-                    self.fetchUserInfo()
+            }
+            if let result = result {
+                if result.isCancelled {
+                    return
+                } else {
+                    if result.grantedPermissions.contains("id") {
+                        self.fetchUserInfo()
+                    }
                 }
             }
         }
@@ -54,14 +57,14 @@ class LoginDataManager: NSObject {
             .start { (connection, result, error) -> Void in
 
             // Check error condition or save user Data
-            if (error) != nil {
+            if let error = error {
                 print(error.localizedDescription)
 
             } else {
-                User.facebookUserID = (result.objectFor("id") as? String)!
-                User.fullName = (result.objectFor("first_name") as? String)! + " " +
-                                (result.objectFor("last_name") as? String)!
-                User.email = (result.objectFor("email") as? String)!
+                User.facebookUserID = (result?.objectFor("id") as? String)!
+                User.fullName = (result?.objectFor("first_name") as? String)! + " " +
+                                (result?.objectFor("last_name") as? String)!
+                User.email = (result?.objectFor("email") as? String)!
             }
         }
     }
