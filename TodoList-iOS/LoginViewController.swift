@@ -34,6 +34,7 @@ class LoginViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        ThemeManager.applyTheme(theme: ThemeManager.currentTheme())
         ThemeManager.replaceGradient(inView: self.view)
     }
 
