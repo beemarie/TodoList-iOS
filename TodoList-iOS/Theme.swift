@@ -20,6 +20,8 @@ import UIKit
 enum Theme: String {
     case Light, Dark
 
+    static let allValues = [Light, Dark]
+
     var mainColor: UIColor {
         switch self {
         case .Light:
@@ -122,7 +124,7 @@ struct ThemeManager {
         gradientLayer.frame = inView.bounds
         gradientLayer.locations = [0.0, 1]
         gradientLayer.colors = [ ThemeManager.currentTheme().mainColor.cgColor,
-                                 ThemeManager.currentTheme().mainColor.cgColor]
+                                 ThemeManager.currentTheme().secondaryColor.cgColor]
 
         inView.backgroundColor = UIColor.clear()
         let backgroundLayer = gradientLayer

@@ -19,6 +19,8 @@ import FBSDKLoginKit
 
 class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet var tableView: UITableView!
+
     @IBAction func logOutButton(sender: UIButton) {
         LoginDataManager.sharedInstance.logout()
 
@@ -29,6 +31,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
 
     override func viewWillAppear(_ animated: Bool) {
         ThemeManager.replaceGradient(inView: view)
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,8 +69,6 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     // Allows Completion Marking
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: NSIndexPath) {
-        ThemeManager.switchTheme()
-        ThemeManager.replaceGradient(inView: view)
         tableView.deselectRow(at: indexPath, animated: true)
         tableView.reloadData()
     }
