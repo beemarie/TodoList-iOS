@@ -46,12 +46,14 @@ class TodoViewController: UIViewController, UITableViewDelegate,
     }
 
     @IBAction func onAddItem(sender: UIButton?) {
-        textField.resignFirstResponder()
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
         guard let title = textField.text else {
+            print(textField.text)
             return
         }
+
+        textField.resignFirstResponder()
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
         textField.text = nil
 
@@ -258,7 +260,10 @@ class TodoViewController: UIViewController, UITableViewDelegate,
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.placeholder = "What Needs To Be Done?"
+        textField.text = nil
+        textField.attributedPlaceholder =
+            NSAttributedString(string:"What Needs To Be Done?",
+                               attributes:[NSForegroundColorAttributeName: UIColor.lightGray()])
     }
 
     func updateTable(todoItems: [[TodoItem]]) {
@@ -280,10 +285,8 @@ class TodoViewController: UIViewController, UITableViewDelegate,
         textField.becomeFirstResponder()
         isUpdatingTitle = indexPath
         tableView.isEditing = false
-        textField.attributedPlaceholder =
-            NSAttributedString(string:"Update Title To:",
-                               attributes:[NSForegroundColorAttributeName: ThemeManager
-                                                                                .accessoryColor])
+
+        textField.text = todos()[indexPath.section][indexPath.row].title
         tableView.contentInset = UIEdgeInsets(top:  0,
                                               left: 0,
                                               bottom: view.frame.size.height - 88,
