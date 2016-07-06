@@ -83,7 +83,7 @@ extension TodoItemDataManager {
         let id = allTodos[itemAt.section][itemAt.row].id
         self.allTodos[itemAt.section].remove(at: itemAt.row)
 
-        router.onDelete(url: "\(getBaseRequestURL())/todos/\(id)") {
+        router.onDelete(url: "\(getBaseRequestURL())/api/todos/\(id)") {
             response, error in
 
             if error != nil { print(error?.localizedDescription) }
@@ -91,12 +91,13 @@ extension TodoItemDataManager {
     }
 
     func update(item: TodoItem) {
-
-        router.onPatch(url: "\(getBaseRequestURL())/todos/\(item.id)",
+        print("updating")
+        router.onPatch(url: "\(getBaseRequestURL())/api/todos/\(item.id)",
                        jsonString: item.jsonRepresentation) {
             response, error in
 
             if error != nil { print(error?.localizedDescription) }
+                        print(response)
         }
 
     }
@@ -105,7 +106,7 @@ extension TodoItemDataManager {
 
         var item: TodoItem? = nil
 
-        router.onGet(url: "\(getBaseRequestURL())/todos/\(withId)") {
+        router.onGet(url: "\(getBaseRequestURL())/api/todos/\(withId)") {
             response, error in
 
             if error != nil { print(error?.localizedDescription) } else {
@@ -240,7 +241,7 @@ extension TodoItemDataManager {
         item.completed ? insertInOrder(seq: &allTodos[1], newItem: item) :
                          insertInOrder(seq: &allTodos[0], newItem: item)
 
-        TodoItemDataManager.sharedInstance.update(item: item)
+        self.update(item: item)
     }
 
     func updateItem(withTitle: String, atIndexPath: NSIndexPath) {
@@ -251,6 +252,6 @@ extension TodoItemDataManager {
         item.completed ? insertInOrder(seq: &allTodos[1], newItem: item) :
                          insertInOrder(seq: &allTodos[0], newItem: item)
 
-        TodoItemDataManager.sharedInstance.update(item: item)
+        self.update(item: item)
     }
 }
