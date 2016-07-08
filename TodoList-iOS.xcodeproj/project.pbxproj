@@ -484,7 +484,7 @@
 				FRAMEWORK_SEARCH_PATHS = ./Frameworks/;
 				INFOPLIST_FILE = "TodoList-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.rfdickerson.TodoList-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.swift.TodoList-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -499,7 +499,7 @@
 				FRAMEWORK_SEARCH_PATHS = ./Frameworks/;
 				INFOPLIST_FILE = "TodoList-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.rfdickerson.TodoList-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.swift.TodoList-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
