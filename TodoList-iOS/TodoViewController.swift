@@ -58,7 +58,7 @@ class TodoViewController: UIViewController, UITableViewDelegate,
         textField.text = nil
 
         if let index = isUpdatingTitle {
-            TodoItemDataManager.sharedInstance.updateItem(withTitle: title,
+            TodoItemDataManager.sharedInstance.update(withTitle: title,
                                                           atIndexPath: index)
             isUpdatingTitle = nil
 
@@ -242,7 +242,7 @@ class TodoViewController: UIViewController, UITableViewDelegate,
             tableView.deleteRows(at: [indexPath], with: .fade)
 
         } else {
-            TodoItemDataManager.sharedInstance.updateCompletion(indexPath: indexPath)
+            TodoItemDataManager.sharedInstance.update(indexPath: indexPath)
             updateTable(todoItems: TodoItemDataManager.sharedInstance.allTodos)
 
         }

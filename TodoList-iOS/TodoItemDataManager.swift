@@ -91,7 +91,6 @@ extension TodoItemDataManager {
     }
 
     func update(item: TodoItem) {
-        print("updating")
         router.onPatch(url: "\(getBaseRequestURL())/api/todos/\(item.id)",
                        jsonString: item.jsonRepresentation) {
             response, error in
@@ -100,6 +99,28 @@ extension TodoItemDataManager {
                         print(response)
         }
 
+    }
+
+    func update(indexPath: NSIndexPath) {
+        var item = allTodos[indexPath.section].remove(at: indexPath.row)
+
+        item.completed = !item.completed
+
+        item.completed ? insertInOrder(seq: &allTodos[1], newItem: item) :
+            insertInOrder(seq: &allTodos[0], newItem: item)
+
+        self.update(item: item)
+    }
+
+    func update(withTitle: String, atIndexPath: NSIndexPath) {
+        var item = allTodos[atIndexPath.section].remove(at: atIndexPath.row)
+
+        item.title = withTitle
+
+        item.completed ? insertInOrder(seq: &allTodos[1], newItem: item) :
+            insertInOrder(seq: &allTodos[0], newItem: item)
+
+        self.update(item: item)
     }
 
     func get(withId: String) -> TodoItem? {
@@ -231,27 +252,5 @@ extension TodoItemDataManager {
 
     func json(withTitle: String, order: Int) -> String {
         return "{\"title\":\"\(withTitle)\",\"completed\":\"\(false)\",\"order\":\"\(order)\"}"
-    }
-
-    func updateCompletion(indexPath: NSIndexPath) {
-        var item = allTodos[indexPath.section].remove(at: indexPath.row)
-
-        item.completed = !item.completed
-
-        item.completed ? insertInOrder(seq: &allTodos[1], newItem: item) :
-                         insertInOrder(seq: &allTodos[0], newItem: item)
-
-        self.update(item: item)
-    }
-
-    func updateItem(withTitle: String, atIndexPath: NSIndexPath) {
-        var item = allTodos[atIndexPath.section].remove(at: atIndexPath.row)
-
-        item.title = withTitle
-
-        item.completed ? insertInOrder(seq: &allTodos[1], newItem: item) :
-                         insertInOrder(seq: &allTodos[0], newItem: item)
-
-        self.update(item: item)
     }
 }
