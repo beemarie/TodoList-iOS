@@ -20,21 +20,20 @@ import FBSDKCoreKit
 
 class Router: NSObject {
 
-    let session = NSURLSession.shared()
+    let session = URLSession.shared
 
     /*
         Method: Constructs an HTTP GET request to the destination url
      */
 
-    func onGet(url: String, callback: (NSData?, NSError?) -> Void) {
+    func onGet(url: String, callback: @escaping (Data?, Error?) -> Void) {
 
-        let request: NSMutableURLRequest = NSMutableURLRequest()
+        var request: URLRequest = URLRequest(url: URL(string: url)!)
 
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(FBSDKAccessToken.current().tokenString, forHTTPHeaderField: "access_token")
         request.setValue("FacebookToken", forHTTPHeaderField: "X-token-type")
 
-        request.url = NSURL(string: url)!
         request.httpMethod = "GET"
 
         taskManager(request: request) { data, error in
@@ -48,14 +47,13 @@ class Router: NSObject {
      */
 
     func onPost(url: String,
-                  jsonString: AnyObject,
-                  callback: (NSData?, NSError?) -> Void) {
+                  jsonString: String,
+                  callback: @escaping (Data?, Error?) -> Void) {
 
-        let request = buildRequest()
+        var request = buildRequest(url)
 
-        request.url = NSURL(string: url)!
         request.httpMethod = "POST"
-        request.httpBody = jsonString.data(using: NSUTF8StringEncoding)!
+        request.httpBody = jsonString.data(using: String.Encoding.utf8)
 
         taskManager(request: request) { data, error in
             callback(data, error)
@@ -69,14 +67,13 @@ class Router: NSObject {
      */
 
     func onPatch(url: String,
-                   jsonString: AnyObject,
-                   callback: (NSData?, NSError?) -> Void) {
+                   jsonString: String,
+                   callback: @escaping (Data?, Error?) -> Void) {
 
-        let request = buildRequest()
+        var request = buildRequest(url)
 
-        request.url = NSURL(string: url)!
         request.httpMethod = "PATCH"
-        request.httpBody = jsonString.data(using: NSUTF8StringEncoding)!
+        request.httpBody = jsonString.data(using: String.Encoding.utf8)
 
         taskManager(request: request) { data, error in
             callback(data, error)
@@ -89,11 +86,10 @@ class Router: NSObject {
         containing the given json serializable object
      */
 
-    func onDelete(url: String, callback: (NSData?, NSError?) -> Void) {
+    func onDelete(url: String, callback: @escaping (Data?, Error?) -> Void) {
 
-        let request = buildRequest()
+        var request = buildRequest(url)
 
-        request.url = NSURL(string: url)!
         request.httpMethod = "DELETE"
 
         taskManager(request: request) { data, error in
@@ -105,19 +101,19 @@ class Router: NSObject {
         Method: Executes the current http request asynchronously
      */
 
-    func taskManager(request: NSMutableURLRequest, callback: (NSData?, NSError?) -> Void) {
+    func taskManager(request: URLRequest, callback: @escaping (Data?, Error?) -> Void) {
 
-        let task = session.dataTask(with: request as NSURLRequest) {
+        let task = session.dataTask(with: request) {
             data, response, error in
 
-            dispatch_async(dispatch_get_main_queue()) {
-                UIApplication.shared().isNetworkActivityIndicatorVisible = false
+            DispatchQueue.main.async {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
             }
 
             if let error = error {
                 print(error.localizedDescription)
 
-            } else if let httpResponse = response as? NSHTTPURLResponse {
+            } else if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode == 200 {
                     callback(data, error)
                 }
@@ -129,9 +125,9 @@ class Router: NSObject {
         task.resume()
     }
 
-    private func buildRequest() -> NSMutableURLRequest {
+    private func buildRequest(_ url: String) -> URLRequest {
 
-        let request: NSMutableURLRequest = NSMutableURLRequest()
+        var request: URLRequest = URLRequest(url: URL(string: url)!)
 
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(FBSDKAccessToken.current().tokenString, forHTTPHeaderField: "access_token")

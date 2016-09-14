@@ -21,7 +21,7 @@ class User: NSObject {
     /// Grab facebook user id of user from NsUserDefaults
     class var facebookUserID: String {
         get {
-            if let userId = NSUserDefaults.standard()
+            if let userId = UserDefaults.standard
                                             .object(forKey: "facebook_user_id") as? String {
                 return userId
             } else {
@@ -30,15 +30,15 @@ class User: NSObject {
         }
         set(userId) {
 
-            NSUserDefaults.standard().set(userId, forKey: "facebook_user_id")
-            NSUserDefaults.standard().synchronize()
+            UserDefaults.standard.set(userId, forKey: "facebook_user_id")
+            UserDefaults.standard.synchronize()
         }
     }
 
     /// grab full name of user from NSUserDefaults
     class var fullName: String {
         get {
-            if let userId = NSUserDefaults.standard().object(forKey: "user_full_name") as? String {
+            if let userId = UserDefaults.standard.object(forKey: "user_full_name") as? String {
                 return userId
             } else {
                 return "Not Set"
@@ -46,15 +46,15 @@ class User: NSObject {
         }
         set(userFullName) {
 
-            NSUserDefaults.standard().set(userFullName, forKey: "user_full_name")
-            NSUserDefaults.standard().synchronize()
+            UserDefaults.standard.set(userFullName, forKey: "user_full_name")
+            UserDefaults.standard.synchronize()
         }
 
     }
     /// grab full name of user from NSUserDefaults
     class var email: String {
         get {
-            if let userId = NSUserDefaults.standard().object(forKey: "user_email") as? String {
+            if let userId = UserDefaults.standard.object(forKey: "user_email") as? String {
                 return userId
             } else {
                 return "Not Set"
@@ -63,8 +63,8 @@ class User: NSObject {
         }
         set(userEmail) {
 
-            NSUserDefaults.standard().set(userEmail, forKey: "user_email")
-            NSUserDefaults.standard().synchronize()
+            UserDefaults.standard.set(userEmail, forKey: "user_email")
+            UserDefaults.standard.synchronize()
         }
 
     }

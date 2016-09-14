@@ -24,13 +24,18 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBAction func logOutButton(sender: UIButton) {
         LoginDataManager.sharedInstance.logout()
 
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let add = storyboard.instantiateInitialViewController()
+        let add = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+
         self.present(add!, animated: true, completion: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        // In case child view controller adjusted orientation
+        view.frame = UIScreen.main.bounds
+        view.bounds = UIScreen.main.bounds
+
         ThemeManager.replaceGradient(inView: view)
+
         tableView.reloadData()
     }
 
@@ -47,7 +52,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     func tableView(_ tableView: UITableView,
-                            cellForRowAt indexPath: NSIndexPath) -> UITableViewCell {
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell",
                                                 for: indexPath) as UITableViewCell
@@ -68,8 +73,12 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
 
     // Allows Completion Marking
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         tableView.reloadData()
+    }
+
+    override func willAnimateRotation(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
+        view.layer.sublayers?.first?.frame = self.view.bounds
     }
 }

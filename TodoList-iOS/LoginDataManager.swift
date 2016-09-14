@@ -24,16 +24,16 @@ class LoginDataManager: NSObject {
     func login(viewController: UIViewController) {
         let login = FBSDKLoginManager()
         login.logIn(withReadPermissions: ["email"], from: viewController) {
-            (result: FBSDKLoginManagerLoginResult?, error: NSError?) in
+            result in
 
-            if let error = error {
+            if let error = result.1 {
                 print(error.localizedDescription)
             }
-            if let result = result {
+            else if let result = result.0 {
                 if result.isCancelled {
                     return
                 } else {
-                    if result.grantedPermissions.contains("id") {
+                    if result.grantedPermissions.contains("email") {
                         self.fetchUserInfo()
                     }
                 }
@@ -42,8 +42,8 @@ class LoginDataManager: NSObject {
     }
 
     func logout() {
-        for key in Array(NSUserDefaults.standard().dictionaryRepresentation().keys) {
-            NSUserDefaults.standard().removeObject(forKey: key)
+        for key in Array(UserDefaults.standard.dictionaryRepresentation().keys) {
+            UserDefaults.standard.removeObject(forKey: key)
         }
 
         let login = FBSDKLoginManager()
@@ -52,6 +52,7 @@ class LoginDataManager: NSObject {
     }
 
     func fetchUserInfo() {
+print("13")
         FBSDKGraphRequest.init(graphPath: "me",
                                parameters: ["fields":"id, first_name, last_name, email"])
             .start { (connection, result, error) -> Void in
@@ -61,10 +62,12 @@ class LoginDataManager: NSObject {
                 print(error.localizedDescription)
 
             } else {
-                User.facebookUserID = (result?.objectFor("id") as? String)!
-                User.fullName = (result?.objectFor("first_name") as? String)! + " " +
-                                (result?.objectFor("last_name") as? String)!
-                User.email = (result?.objectFor("email") as? String)!
+
+                let res: [String: String] = result as! [String: String]
+
+                User.facebookUserID = res["id"]!
+                User.fullName = res["first_name"]! + " " + res["last_name"]!
+                User.email = res["email"]!
             }
         }
     }
