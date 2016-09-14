@@ -22,15 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    @objc(application:didFinishLaunchingWithOptions:)
-        func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        
         // Set Themes and Styling
         ThemeManager.setupStyling()
         let theme = ThemeManager.currentTheme()
         ThemeManager.applyTheme(theme: theme)
-
+        
         return true
     }
 
@@ -72,14 +70,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          Save data if appropriate. See also applicationDidEnterBackground:. */
     }
 
-    @objc(application:willFinishLaunchingWithOptions:)
-        func application(_ application: UIApplication,
-                     willFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?)
-        -> Bool {
-            // Override point for customization after application launch.
-            return FBSDKApplicationDelegate.sharedInstance()
-                .application(application,
-                             didFinishLaunchingWithOptions: launchOptions)
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        
+        return FBSDKApplicationDelegate.sharedInstance()
+            .application(application,
+                         didFinishLaunchingWithOptions: launchOptions)
     }
 
     func applicationWillTerminate(application: UIApplication) {
@@ -89,11 +84,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         loginManager.logOut()
     }
 
-    @objc(application:openURL:sourceApplication:annotation:)
-        func application(_ application: UIApplication,
-                     open url: NSURL,
-                     sourceApplication: String?,
-                     annotation: AnyObject) -> Bool {
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        
         return FBSDKApplicationDelegate.sharedInstance()
             .application(application,
                          open: url,
