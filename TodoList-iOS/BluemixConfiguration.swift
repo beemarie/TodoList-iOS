@@ -35,13 +35,13 @@ class BluemixConfiguration: NSObject {
 
     override init() {
 
-        if let path = Bundle.main.path(forResource: kBluemixKeysPlistName, ofType: "plist"),
-               let plist = NSDictionary(contentsOfFile: path),
-               let isLocal              = plist[kIsLocalKey] as? Bool,
-               let appGUID              = plist[kBluemixAppGUIDKey] as? String,
-               let appRegion            = plist[kBluemixAppRegionKey] as? String,
-               let localBaseRequestURL  = plist[kAppRouteLocal] as? String,
-               let remoteBaseRequestURL = plist[kAppRouteRemote] as? String {
+        if let path = NSBundle.main().pathForResource(kBluemixKeysPlistName, ofType: "plist"),
+               plist = NSDictionary(contentsOfFile: path),
+               isLocal              = plist[kIsLocalKey] as? Bool,
+               appGUID              = plist[kBluemixAppGUIDKey] as? String,
+               appRegion            = plist[kBluemixAppRegionKey] as? String,
+               localBaseRequestURL  = plist[kAppRouteLocal] as? String,
+               remoteBaseRequestURL = plist[kAppRouteRemote] as? String {
 
             self.isLocal = isLocal
             self.appGUID = appGUID

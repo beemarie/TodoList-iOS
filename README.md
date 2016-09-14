@@ -1,10 +1,8 @@
-[![Swift 3 9-12](https://img.shields.io/badge/Swift%203-9/07 SNAPSHOT-blue.svg)](https://swift.org/download/#snapshots)
-
 # TodoList-iOS
 
 An example using the Kitura web framework and HTTP Server to develop a backend for a iOS todo list organizer
 
-> Supports the 09-12 SNAPSHOT.
+> Supports the 06-06 SNAPSHOT.
 
 ## Deploying the TodoList Database ##
 

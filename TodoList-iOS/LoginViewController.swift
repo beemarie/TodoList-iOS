@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         if FBSDKAccessToken.current() != nil {
-            DispatchQueue.main.async {
+            dispatch_async(dispatch_get_main_queue()) {
                 [unowned self] in
                 self.performSegue(withIdentifier: "todolist", sender: self)
             }
@@ -41,9 +41,5 @@ class LoginViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    override func willAnimateRotation(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
-        view.layer.sublayers?.first?.frame = self.view.bounds
     }
 }

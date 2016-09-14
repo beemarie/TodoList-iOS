@@ -21,7 +21,7 @@ class TodoViewController: UIViewController, UITableViewDelegate,
                           UITextFieldDelegate {
 
     var showCompleted = true
-    var isUpdatingTitle: IndexPath? = nil
+    var isUpdatingTitle: NSIndexPath? = nil
 
     @IBOutlet var textField: UITextField!
     @IBOutlet var tableView: UITableView!
@@ -42,12 +42,13 @@ class TodoViewController: UIViewController, UITableViewDelegate,
         isUpdatingTitle = nil
         textField.attributedPlaceholder =
             NSAttributedString(string:"What Needs To Be Done?",
-                               attributes:[NSForegroundColorAttributeName: UIColor.lightGray])
+                               attributes:[NSForegroundColorAttributeName: UIColor.lightGray()])
     }
 
     @IBAction func onAddItem(sender: UIButton?) {
 
         guard let title = textField.text else {
+            print(textField.text)
             return
         }
 
@@ -74,19 +75,11 @@ class TodoViewController: UIViewController, UITableViewDelegate,
         textField.delegate = self
         gesture.cancelsTouchesInView = false
         TodoItemDataManager.sharedInstance.delegate = self
-        
     }
 
     override func viewWillAppear(_ animated: Bool) {
-
-        // In case child view controller adjusted orientation
-        view.frame = UIScreen.main.bounds
-        view.bounds = UIScreen.main.bounds
-
         ThemeManager.replaceGradient(inView: view)
-
         updateTable(todoItems: todos())
-
         textField.textColor = ThemeManager.currentTheme().fontColor
         textField.attributedPlaceholder =
             NSAttributedString(string:"What Needs To Be Done?",
@@ -121,7 +114,7 @@ class TodoViewController: UIViewController, UITableViewDelegate,
     }
 
     func tableView(_ tableView: UITableView,
-                     heightForRowAt indexPath: IndexPath) -> CGFloat {
+                     heightForRowAt indexPath: NSIndexPath) -> CGFloat {
 
         return !showCompleted && todos()[indexPath.section][indexPath.row].completed ? 0 : 50
 
@@ -138,7 +131,7 @@ class TodoViewController: UIViewController, UITableViewDelegate,
     }
 
     func tableView(_ tableView: UITableView,
-                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+                            cellForRowAt indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView
             .dequeueReusableCell(withIdentifier: "TodoItemCell", for: indexPath) as UITableViewCell
 
@@ -175,12 +168,12 @@ class TodoViewController: UIViewController, UITableViewDelegate,
     // Setup Editing Styles
 
     func tableView(_ tableView: UITableView,
-                     shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+                     shouldIndentWhileEditingRowAt indexPath: NSIndexPath) -> Bool {
         return false
     }
 
     func tableView(_ tableView: UITableView,
-                     editingStyleForRowAt indexPath: IndexPath)
+                     editingStyleForRowAt indexPath: NSIndexPath)
         -> UITableViewCellEditingStyle {
 
             return tableView.isEditing ? .none : .delete
@@ -189,9 +182,9 @@ class TodoViewController: UIViewController, UITableViewDelegate,
     // Handle Pull Out Edit Bar
 
     func tableView(_ tableView: UITableView,
-                   editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+                   editActionsForRowAt indexPath: NSIndexPath) -> [UITableViewRowAction]? {
 
-        let onDelete = { (action: UITableViewRowAction!, indexPath: IndexPath!) -> Void in
+        let onDelete = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
             TodoItemDataManager.sharedInstance.delete(itemAt: indexPath)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
@@ -210,13 +203,13 @@ class TodoViewController: UIViewController, UITableViewDelegate,
 
     // Setup Movable Rows
 
-    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: NSIndexPath) -> Bool {
         return true
     }
 
     func tableView(_ tableView: UITableView,
-                     moveRowAt sourceIndexPath: IndexPath,
-                       to destinationIndexPath: IndexPath) {
+                     moveRowAt sourceIndexPath: NSIndexPath,
+                       to destinationIndexPath: NSIndexPath) {
 
         TodoItemDataManager.sharedInstance.move(itemAt: sourceIndexPath,
                                                     to: destinationIndexPath)
@@ -225,9 +218,9 @@ class TodoViewController: UIViewController, UITableViewDelegate,
     }
 
     func tableView(_ tableView: UITableView,
-                     targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath,
-                     toProposedIndexPath proposedDestinationIndexPath: IndexPath)
-        -> IndexPath {
+                     targetIndexPathForMoveFromRowAt sourceIndexPath: NSIndexPath,
+                     toProposedIndexPath proposedDestinationIndexPath: NSIndexPath)
+        -> NSIndexPath {
 
             // Prevent moving rows to different sections
             if sourceIndexPath.section != proposedDestinationIndexPath.section {
@@ -235,14 +228,14 @@ class TodoViewController: UIViewController, UITableViewDelegate,
                 if sourceIndexPath.section < proposedDestinationIndexPath.section {
                     row = tableView.numberOfRows(inSection: sourceIndexPath.section) - 1
                 }
-                return IndexPath(row: row, section: sourceIndexPath.section)
+                return NSIndexPath(forRow: row, inSection: sourceIndexPath.section)
             }
             return proposedDestinationIndexPath
     }
 
     // Allows Trash and Completion Marking
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: NSIndexPath) {
 
         if tableView.isEditing {
             TodoItemDataManager.sharedInstance.delete(itemAt: indexPath)
@@ -270,13 +263,13 @@ class TodoViewController: UIViewController, UITableViewDelegate,
         textField.text = nil
         textField.attributedPlaceholder =
             NSAttributedString(string:"What Needs To Be Done?",
-                               attributes:[NSForegroundColorAttributeName: UIColor.lightGray])
+                               attributes:[NSForegroundColorAttributeName: UIColor.lightGray()])
     }
 
     func updateTable(todoItems: [[TodoItem]]) {
-        DispatchQueue.main.async { () -> Void in
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
             self.tableView.reloadData()
-        }
+        })
 
     }
 
@@ -288,7 +281,7 @@ class TodoViewController: UIViewController, UITableViewDelegate,
         updateTable(todoItems: todos())
     }
 
-    func onTodoEditHandler(action: UITableViewRowAction!, indexPath: IndexPath!) {
+    func onTodoEditHandler(action: UITableViewRowAction!, indexPath: NSIndexPath!) {
         textField.becomeFirstResponder()
         isUpdatingTitle = indexPath
         tableView.isEditing = false
@@ -299,9 +292,5 @@ class TodoViewController: UIViewController, UITableViewDelegate,
                                               bottom: view.frame.size.height - 88,
                                               right: 0)
         tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-    }
-
-    override func willAnimateRotation(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
-        view.layer.sublayers?.first?.frame = self.view.bounds
     }
 }

@@ -21,9 +21,6 @@ class ThemeTableViewController: UITableViewController {
     // Setup TableView and TableViewCells
 
     override func viewWillAppear(_ animated: Bool) {
-
-        view.layer.sublayers?.first?.frame = self.view.bounds
-
         ThemeManager.replaceGradient(inView: tableView)
     }
 
@@ -36,20 +33,23 @@ class ThemeTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView,
-                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+                   cellForRowAt indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView
             .dequeueReusableCell(withIdentifier: "ThemeCell", for: indexPath) as UITableViewCell
 
         cell.textLabel?.text = Theme.allValues[indexPath.row].rawValue
         cell.textLabel?.textColor = ThemeManager.currentTheme().fontColor
 
-        cell.accessoryType =  Theme.allValues[indexPath.row] == ThemeManager.currentTheme() ?
-            .checkmark : .none
+        if Theme.allValues[indexPath.row] == ThemeManager.currentTheme() {
+            cell.accessoryType = UITableViewCellAccessoryType.checkmark
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryType.none
+        }
 
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: NSIndexPath) {
 
         if ThemeManager.currentTheme() != Theme.allValues[indexPath.row] {
             ThemeManager.switchTheme()
@@ -59,9 +59,5 @@ class ThemeTableViewController: UITableViewController {
 
         tableView.deselectRow(at: indexPath, animated: true)
         
-    }
-
-    override func willAnimateRotation(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
-        view.layer.sublayers?.first?.frame = self.view.bounds
     }
 }

@@ -11,6 +11,6 @@
 	<key>isLocal</key>
 	<false/>
 	<key>appRouteRemote</key>
-	<string>http://todolist-couchdb.mybluemix.net</string>
+	<string>http://todolist-mongodb.mybluemix.net</string>
 </dict>
 </plist>

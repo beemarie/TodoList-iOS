@@ -21,7 +21,7 @@ protocol TodoItemsDelegate {
     func onItemsAddedToList()
 }
 
-enum DataMangerError: Error {
+enum DataMangerError: ErrorProtocol {
     case CannotSerializeToJSON
     case DataNotFound
 }
@@ -64,7 +64,7 @@ extension TodoItemDataManager {
                 }
 
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data,
+                    let json = try NSJSONSerialization.jsonObject(with: data,
                                                                   options: .mutableContainers)
                     self.allTodos[0].append(self.parseItem(item: json)!)
 
@@ -78,7 +78,7 @@ extension TodoItemDataManager {
         }
     }
 
-    func delete(itemAt: IndexPath) {
+    func delete(itemAt: NSIndexPath) {
 
         let id = allTodos[itemAt.section][itemAt.row].id
         self.allTodos[itemAt.section].remove(at: itemAt.row)
@@ -96,11 +96,12 @@ extension TodoItemDataManager {
             response, error in
 
             if error != nil { print(error?.localizedDescription) }
+                        print(response)
         }
 
     }
 
-    func update(indexPath: IndexPath) {
+    func update(indexPath: NSIndexPath) {
         var item = allTodos[indexPath.section].remove(at: indexPath.row)
 
         item.completed = !item.completed
@@ -111,7 +112,7 @@ extension TodoItemDataManager {
         self.update(item: item)
     }
 
-    func update(withTitle: String, atIndexPath: IndexPath) {
+    func update(withTitle: String, atIndexPath: NSIndexPath) {
         var item = allTodos[atIndexPath.section].remove(at: atIndexPath.row)
 
         item.title = withTitle
@@ -137,7 +138,7 @@ extension TodoItemDataManager {
                 }
 
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data,
+                    let json = try NSJSONSerialization.jsonObject(with: data,
                                                                   options: .mutableContainers)
                     item = self.parseItem(item: json)
 
@@ -167,7 +168,7 @@ extension TodoItemDataManager {
                 }
 
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data,
+                    let json = try NSJSONSerialization.jsonObject(with: data,
                                                                   options: .mutableContainers)
                     self.parseTodoList(json: json)
                     self.delegate?.onItemsAddedToList()
@@ -183,12 +184,12 @@ extension TodoItemDataManager {
 // Methods for Parsing Functions
 extension TodoItemDataManager {
 
-    internal func parseTodoList(json: Any) {
+    private func parseTodoList(json: AnyObject) {
 
         allTodos[0].removeAll()
         allTodos[1].removeAll()
 
-        if let json = json as? [Any] {
+        if let json = json as? [AnyObject] {
             for item in json {
 
                 guard let todo = parseItem(item: item) else {
@@ -200,9 +201,9 @@ extension TodoItemDataManager {
         }
     }
 
-    internal func parseItem(item: Any) -> TodoItem? {
+    private func parseItem(item: AnyObject) -> TodoItem? {
 
-        if let item = item as? [String: Any] {
+        if let item = item as? [String: AnyObject] {
 
             let id        = item["id"] as? String
             let title     = item["title"] as? String
@@ -210,9 +211,9 @@ extension TodoItemDataManager {
             let order     = item["order"] as? Int
 
             guard let uid = id,
-                  let titleValue = title,
-                  let completedValue = completed,
-                  let orderValue = order else {
+                      titleValue = title,
+                      completedValue = completed,
+                      orderValue = order else {
 
                     return nil
             }
@@ -237,7 +238,7 @@ extension TodoItemDataManager {
         seq.insert(item, at: index)
     }
 
-    func move(itemAt: IndexPath, to: IndexPath) {
+    func move(itemAt: NSIndexPath, to: NSIndexPath) {
 
         var itemToMove = allTodos[itemAt.section][itemAt.row]
 

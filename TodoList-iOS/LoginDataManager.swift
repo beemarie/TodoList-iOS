@@ -24,16 +24,16 @@ class LoginDataManager: NSObject {
     func login(viewController: UIViewController) {
         let login = FBSDKLoginManager()
         login.logIn(withReadPermissions: ["email"], from: viewController) {
-            result in
+            (result: FBSDKLoginManagerLoginResult?, error: NSError?) in
 
-            if let error = result.1 {
+            if let error = error {
                 print(error.localizedDescription)
             }
-            else if let result = result.0 {
+            if let result = result {
                 if result.isCancelled {
                     return
                 } else {
-                    if result.grantedPermissions.contains("email") {
+                    if result.grantedPermissions.contains("id") {
                         self.fetchUserInfo()
                     }
                 }
@@ -42,8 +42,8 @@ class LoginDataManager: NSObject {
     }
 
     func logout() {
-        for key in Array(UserDefaults.standard.dictionaryRepresentation().keys) {
-            UserDefaults.standard.removeObject(forKey: key)
+        for key in Array(NSUserDefaults.standard().dictionaryRepresentation().keys) {
+            NSUserDefaults.standard().removeObject(forKey: key)
         }
 
         let login = FBSDKLoginManager()
@@ -52,7 +52,6 @@ class LoginDataManager: NSObject {
     }
 
     func fetchUserInfo() {
-print("13")
         FBSDKGraphRequest.init(graphPath: "me",
                                parameters: ["fields":"id, first_name, last_name, email"])
             .start { (connection, result, error) -> Void in
@@ -62,12 +61,10 @@ print("13")
                 print(error.localizedDescription)
 
             } else {
-
-                let res: [String: String] = result as! [String: String]
-
-                User.facebookUserID = res["id"]!
-                User.fullName = res["first_name"]! + " " + res["last_name"]!
-                User.email = res["email"]!
+                User.facebookUserID = (result?.objectFor("id") as? String)!
+                User.fullName = (result?.objectFor("first_name") as? String)! + " " +
+                                (result?.objectFor("last_name") as? String)!
+                User.email = (result?.objectFor("email") as? String)!
             }
         }
     }
