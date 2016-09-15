@@ -4,7 +4,7 @@
 
 An example using the Kitura web framework and HTTP Server to develop a backend for a iOS todo list organizer
 
-> Supports the 09-12 SNAPSHOT.
+> Supports Swift 3.
 
 ## Deploying the TodoList Database ##
 
