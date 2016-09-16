@@ -1,10 +1,9 @@
 language: objective-c
-osx_image: xcode7.2
+osx_image: xcode8
 
 install:
 - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
 
 script:
-- xcodebuild test -sdk iphonesimulator -scheme ToDoListUITests -destination "OS=9.2,name=iPhone 6" | xcpretty -c && exit ${PIPESTATUS[0]}
-Status API Training Shop Blog About
+- xcodebuild test -sdk iphonesimulator -scheme ToDoListUITests -destination "OS=9.3,name=iPhone 7" | xcpretty -c && exit ${PIPESTATUS[0]}
 
