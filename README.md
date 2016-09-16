@@ -1,8 +1,18 @@
-# TodoList-iOS
+# ToDo iOS Mobile App
 
-An example using the Kitura web framework and HTTP Server to develop a backend for a iOS todo list organizer
+An example front end for a iOS task list organizer designed to communicate with [Kitura web framework](https://github.com/IBM-Swift/Kitura) backend.
 
-Requires Swift 3.
+[![Build Status](https://travis-ci.org/IBM-Swift/TodoList-iOS.svg?branch=master)](https://travis-ci.org/IBM-Swift/TodoList-iOS)
+
+- Requires Swift 3.
+- Facebook Developer Account
+
+## Getting Started
+
+- Add a new Facebook Application to your account at developer.facebook.com.
+- Add the Facebook Login service to your application
+- Replace inside of Configuration/Info.plist your `FacebookDisplayName`, `FacebookAppID`, and `URL Schemes` with the values you got from developer.facebook.com.
+- Replace inside of Configuration/bluemix.plist the `appRouteRemote` for your deployed application.
 
 ## Deploying the TodoList Database ##
 
@@ -17,4 +27,10 @@ Select one of the below databases and follow the attached instructions to run lo
 
 ## License
 
-This library is licensed under Apache 2.0. Full license text is available in [LICENSE](LICENSE).
+Copyright 2016 IBM
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
