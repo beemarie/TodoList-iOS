@@ -2,15 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>bluemixAppGUID</key>
-	<string>&lt;appGUID&gt;</string>
+	<key>isLocal</key>
+	<true/>
 	<key>appRouteLocal</key>
 	<string>http://localhost:8090</string>
-	<key>bluemixAppRegion</key>
-	<string>&lt;appRegion&gt;</string>
-	<key>isLocal</key>
-	<false/>
 	<key>appRouteRemote</key>
 	<string>http://todolist-couchdb.mybluemix.net</string>
+	<key>bluemixAppGUID</key>
+	<string>&lt;appGUID&gt;</string>
+	<key>bluemixAppRegion</key>
+	<string>&lt;appRegion&gt;</string>
+	<key>pushAppGUID</key>
+	<string></string>
 </dict>
 </plist>

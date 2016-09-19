@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A2F602411D8C96750061A2BB /* bluemix.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2F6023F1D8C96750061A2BB /* bluemix.plist */; };
+		A2F602421D8C96750061A2BB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2F602401D8C96750061A2BB /* Info.plist */; };
 		E16AE35C1CE4C0FB00E20F62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16AE35B1CE4C0FB00E20F62 /* AppDelegate.swift */; };
 		E16AE3611CE4C0FB00E20F62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E16AE35F1CE4C0FB00E20F62 /* Main.storyboard */; };
 		E16AE3631CE4C0FB00E20F62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E16AE3621CE4C0FB00E20F62 /* Assets.xcassets */; };
@@ -24,7 +26,6 @@
 		E3A4A4831D11EE43002F79E5 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A4A4811D11EE43002F79E5 /* Router.swift */; };
 		E3A4A4841D11EE43002F79E5 /* TodoItemDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A4A4821D11EE43002F79E5 /* TodoItemDataManager.swift */; };
 		E3A8D4181D1C497F00F6F206 /* TodoList_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A8D4171D1C497F00F6F206 /* TodoList_iOSUITests.swift */; };
-		E3A8EB991D1AC7D4006C7034 /* bluemix.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3A8EB981D1AC7D4006C7034 /* bluemix.plist */; };
 		E3A8EB9D1D1ACE19006C7034 /* BluemixConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A8EB9C1D1ACE19006C7034 /* BluemixConfiguration.swift */; };
 		E3D9D4921D2314B60047C098 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D9D4911D2314B60047C098 /* SettingsTableViewController.swift */; };
 		E3ED01C01D0F08C400E8D22D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ED01BF1D0F08C400E8D22D /* LoginViewController.swift */; };
@@ -42,12 +43,13 @@
 
 /* Begin PBXFileReference section */
 		4CF30B3F1D8B135E00583920 /* TodoList-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TodoList-iOS.entitlements"; sourceTree = "<group>"; };
+		A2F6023F1D8C96750061A2BB /* bluemix.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = bluemix.plist; path = Configuration/bluemix.plist; sourceTree = "<group>"; };
+		A2F602401D8C96750061A2BB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Configuration/Info.plist; sourceTree = "<group>"; };
 		E16AE3581CE4C0FA00E20F62 /* TodoList-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TodoList-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E16AE35B1CE4C0FB00E20F62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E16AE3601CE4C0FB00E20F62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E16AE3621CE4C0FB00E20F62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E16AE3651CE4C0FB00E20F62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		E16AE3671CE4C0FB00E20F62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E16AE36F1CE4E39C00E20F62 /* TodoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
 		E33F7F4B1D246A6800C27479 /* OptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionCell.swift; sourceTree = "<group>"; };
 		E33F7F4F1D24C4A800C27479 /* LoginDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginDataManager.swift; sourceTree = "<group>"; };
@@ -63,7 +65,6 @@
 		E3A8D4151D1C497F00F6F206 /* TodoList-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TodoList-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3A8D4171D1C497F00F6F206 /* TodoList_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoList_iOSUITests.swift; sourceTree = "<group>"; };
 		E3A8D4191D1C497F00F6F206 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E3A8EB981D1AC7D4006C7034 /* bluemix.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bluemix.plist; sourceTree = "<group>"; };
 		E3A8EB9C1D1ACE19006C7034 /* BluemixConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluemixConfiguration.swift; sourceTree = "<group>"; };
 		E3D9D4911D2314B60047C098 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		E3ED01BF1D0F08C400E8D22D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -187,8 +188,8 @@
 		E3A8EB9B1D1AC7F4006C7034 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				E16AE3671CE4C0FB00E20F62 /* Info.plist */,
-				E3A8EB981D1AC7D4006C7034 /* bluemix.plist */,
+				A2F6023F1D8C96750061A2BB /* bluemix.plist */,
+				A2F602401D8C96750061A2BB /* Info.plist */,
 			);
 			name = Configuration;
 			sourceTree = "<group>";
@@ -302,9 +303,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E16AE3661CE4C0FB00E20F62 /* LaunchScreen.storyboard in Resources */,
+				A2F602411D8C96750061A2BB /* bluemix.plist in Resources */,
 				E16AE3631CE4C0FB00E20F62 /* Assets.xcassets in Resources */,
+				A2F602421D8C96750061A2BB /* Info.plist in Resources */,
 				E16AE3611CE4C0FB00E20F62 /* Main.storyboard in Resources */,
-				E3A8EB991D1AC7D4006C7034 /* bluemix.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,7 +476,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = PP64RT7P8Z;
 				FRAMEWORK_SEARCH_PATHS = ./Frameworks/;
-				INFOPLIST_FILE = "TodoList-iOS/Info.plist";
+				INFOPLIST_FILE = "TodoList-iOS/Configuration/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.swift.TodoList-iOS";
@@ -493,7 +495,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = PP64RT7P8Z;
 				FRAMEWORK_SEARCH_PATHS = ./Frameworks/;
-				INFOPLIST_FILE = "TodoList-iOS/Info.plist";
+				INFOPLIST_FILE = "TodoList-iOS/Configuration/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.swift.TodoList-iOS";
