@@ -207,7 +207,7 @@ extension TodoItemDataManager {
             let id        = item["id"] as? String
             let title     = item["title"] as? String
             let completed = item["completed"] as? Bool
-            let order     = item["order"] as? Int
+            let order     = (item["order"] as? Int) ?? (item["rank"] as? Int)
 
             guard let uid = id,
                   let titleValue = title,
@@ -250,6 +250,6 @@ extension TodoItemDataManager {
     }
 
     func json(withTitle: String, order: Int) -> String {
-        return "{\"title\":\"\(withTitle)\",\"completed\":\"\(false)\",\"order\":\"\(order)\"}"
+        return "{\"title\":\"\(withTitle)\",\"completed\":\"\(false)\",\"rank\":\"\(order)\"}"
     }
 }

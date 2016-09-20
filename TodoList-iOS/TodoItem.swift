@@ -24,7 +24,7 @@ struct TodoItem: Comparable {
     var order: Int
 
     var jsonRepresentation: String {
-        return "{\"title\":\"\(title)\",\"completed\":\"\(completed)\",\"order\":\"\(order)\"}"
+        return "{\"title\":\"\(title)\",\"completed\":\"\(completed)\",\"rank\":\"\(order)\"}"
     }
 
 }
