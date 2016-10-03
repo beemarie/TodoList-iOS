@@ -67,12 +67,10 @@ extension TodoItemDataManager {
                     let json = try JSONSerialization.jsonObject(with: data,
                                                                   options: .mutableContainers)
                     self.allTodos[0].append(self.parseItem(item: json)!)
-
                     self.delegate?.onItemsAddedToList()
 
                 } catch {
                     print(DataMangerError.CannotSerializeToJSON)
-
                 }
             }
         }

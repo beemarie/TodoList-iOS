@@ -15,15 +15,12 @@
  **/
 
 import UIKit
-import FBSDKLoginKit
 
 class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet var tableView: UITableView!
 
     @IBAction func logOutButton(sender: UIButton) {
-        LoginDataManager.sharedInstance.logout()
-
         let add = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
 
         self.present(add!, animated: true, completion: nil)

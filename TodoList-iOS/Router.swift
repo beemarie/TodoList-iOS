@@ -15,8 +15,6 @@
  **/
 
 import UIKit
-import FBSDKLoginKit
-import FBSDKCoreKit
 
 class Router: NSObject {
 
@@ -31,9 +29,6 @@ class Router: NSObject {
         var request: URLRequest = URLRequest(url: URL(string: url)!)
 
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(FBSDKAccessToken.current().tokenString, forHTTPHeaderField: "access_token")
-        request.setValue("FacebookToken", forHTTPHeaderField: "X-token-type")
-
         request.httpMethod = "GET"
 
         taskManager(request: request) { data, error in
@@ -130,9 +125,6 @@ class Router: NSObject {
         var request: URLRequest = URLRequest(url: URL(string: url)!)
 
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(FBSDKAccessToken.current().tokenString, forHTTPHeaderField: "access_token")
-        request.setValue("FacebookToken", forHTTPHeaderField: "X-token-type")
-
         return request
     }
 }

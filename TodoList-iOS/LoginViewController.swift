@@ -15,23 +15,17 @@
  **/
 
 import UIKit
-import FBSDKLoginKit
-import FBSDKCoreKit
 
 class LoginViewController: UIViewController {
 
     @IBAction func loginButton(sender: UIButton) {
-        LoginDataManager.sharedInstance.login(viewController: self)
+        self.performSegue(withIdentifier: "todolist", sender: self)
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        if FBSDKAccessToken.current() != nil {
-            DispatchQueue.main.async {
-                [unowned self] in
-                self.performSegue(withIdentifier: "todolist", sender: self)
-            }
-        }
+        
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ThemeManager.applyTheme(theme: ThemeManager.currentTheme())

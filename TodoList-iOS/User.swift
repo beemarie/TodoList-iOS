@@ -19,18 +19,16 @@ import UIKit
 class User: NSObject {
 
     /// Grab facebook user id of user from NsUserDefaults
-    class var facebookUserID: String {
+    class var userID: String {
         get {
-            if let userId = UserDefaults.standard
-                                            .object(forKey: "facebook_user_id") as? String {
+            if let userId = UserDefaults.standard.object(forKey: "userid") as? String {
                 return userId
             } else {
                 return "Not Set"
             }
         }
         set(userId) {
-
-            UserDefaults.standard.set(userId, forKey: "facebook_user_id")
+            UserDefaults.standard.set(userId, forKey: "userid")
             UserDefaults.standard.synchronize()
         }
     }
@@ -38,15 +36,14 @@ class User: NSObject {
     /// grab full name of user from NSUserDefaults
     class var fullName: String {
         get {
-            if let userId = UserDefaults.standard.object(forKey: "user_full_name") as? String {
+            if let userId = UserDefaults.standard.object(forKey: "user_name") as? String {
                 return userId
             } else {
-                return "Not Set"
+                return "Joan Fakename Smith"
             }
         }
         set(userFullName) {
-
-            UserDefaults.standard.set(userFullName, forKey: "user_full_name")
+            UserDefaults.standard.set(userFullName, forKey: "user_name")
             UserDefaults.standard.synchronize()
         }
 
@@ -57,12 +54,10 @@ class User: NSObject {
             if let userId = UserDefaults.standard.object(forKey: "user_email") as? String {
                 return userId
             } else {
-                return "Not Set"
+                return "this.is.a.fake.email@example.com"
             }
-
         }
         set(userEmail) {
-
             UserDefaults.standard.set(userEmail, forKey: "user_email")
             UserDefaults.standard.synchronize()
         }
