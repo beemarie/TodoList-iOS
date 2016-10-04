@@ -4,14 +4,8 @@ An example front end for a iOS task list organizer designed to communicate with 
 
 [![Build Status](https://travis-ci.org/IBM-Swift/TodoList-iOS.svg?branch=master)](https://travis-ci.org/IBM-Swift/TodoList-iOS)
 
-- Requires Swift 3.
-- Facebook Developer Account
-
 ## Getting Started
 
-- Add a new Facebook Application to your account at developer.facebook.com.
-- Add the Facebook Login service to your application
-- Replace inside of Configuration/Info.plist your `FacebookDisplayName`, `FacebookAppID`, and `URL Schemes` with the values you got from developer.facebook.com.
 - Replace inside of Configuration/bluemix.plist the `appRouteRemote` for your deployed application.
 
 ## Deploying the TodoList Database ##
