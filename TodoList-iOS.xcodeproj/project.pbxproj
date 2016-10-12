@@ -17,6 +17,7 @@
 		E34309A41D2C3BC80057CF5E /* ThemeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34309A31D2C3BC80057CF5E /* ThemeTableViewController.swift */; };
 		E3437B091D234A8900EEB295 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3437B081D234A8900EEB295 /* Theme.swift */; };
 		E343F85D1D274E350059187B /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E343F85C1D274E350059187B /* TodoViewController.swift */; };
+		E38E4C5F1DAE9C87005696F5 /* TodoNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38E4C5E1DAE9C87005696F5 /* TodoNavigationController.swift */; };
 		E3A454DA1D13108F002AAC74 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A454D91D13108F002AAC74 /* User.swift */; };
 		E3A4A4831D11EE43002F79E5 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A4A4811D11EE43002F79E5 /* Router.swift */; };
 		E3A4A4841D11EE43002F79E5 /* TodoItemDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A4A4821D11EE43002F79E5 /* TodoItemDataManager.swift */; };
@@ -50,6 +51,7 @@
 		E34309A31D2C3BC80057CF5E /* ThemeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeTableViewController.swift; sourceTree = "<group>"; };
 		E3437B081D234A8900EEB295 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		E343F85C1D274E350059187B /* TodoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
+		E38E4C5E1DAE9C87005696F5 /* TodoNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoNavigationController.swift; sourceTree = "<group>"; };
 		E3A454D91D13108F002AAC74 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E3A4A4811D11EE43002F79E5 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		E3A4A4821D11EE43002F79E5 /* TodoItemDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoItemDataManager.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				E3D9D4911D2314B60047C098 /* SettingsTableViewController.swift */,
 				E343F85C1D274E350059187B /* TodoViewController.swift */,
 				E34309A31D2C3BC80057CF5E /* ThemeTableViewController.swift */,
+				E38E4C5E1DAE9C87005696F5 /* TodoNavigationController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3A4A4841D11EE43002F79E5 /* TodoItemDataManager.swift in Sources */,
+				E38E4C5F1DAE9C87005696F5 /* TodoNavigationController.swift in Sources */,
 				E343F85D1D274E350059187B /* TodoViewController.swift in Sources */,
 				E34309A41D2C3BC80057CF5E /* ThemeTableViewController.swift in Sources */,
 				E16AE3701CE4E39C00E20F62 /* TodoItem.swift in Sources */,

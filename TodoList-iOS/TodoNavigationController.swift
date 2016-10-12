@@ -7,3 +7,12 @@
 //
 
 import Foundation
+import UIKit
+
+class TodoNavigationController: UINavigationController {
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+}

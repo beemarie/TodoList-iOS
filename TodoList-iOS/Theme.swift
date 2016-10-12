@@ -85,6 +85,7 @@ struct ThemeManager {
         UITableViewCell.appearance().backgroundColor = UIColor.clear
         CustomButton.appearance().backgroundColor = accessoryColor
     }
+    
     static func applyTheme(theme: Theme) {
         UserDefaults.standard.set(theme.rawValue, forKey: selectedTheme)
         UserDefaults.standard.synchronize()
