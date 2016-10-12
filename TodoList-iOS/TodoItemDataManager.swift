@@ -21,25 +21,25 @@ protocol TodoItemsDelegate {
     func onItemsAddedToList()
 }
 
-enum DataMangerError: Error {
-    case CannotSerializeToJSON
-    case DataNotFound
+enum DataManagerError: Error {
+    case cannotSerializeToJSON
+    case dataNotFound
 }
 
-class TodoItemDataManager: NSObject {
+class TodoItemDataManager {
 
     let router = Router()
     let config = BluemixConfiguration()
 
-    var delegate: TodoItemsDelegate?
+    var delegate: TodoItemsDelegate!
     var allTodos: [[TodoItem]] = [[], []]
 
     static let sharedInstance = TodoItemDataManager()
 
-    private override init() {
-        super.init()
-        get()
-    }
+//    private override init() {
+//        super.init()
+//        get()
+//    }
 
 }
 
@@ -59,7 +59,7 @@ extension TodoItemDataManager {
             } else {
 
                 guard let data = response else {
-                    print(DataMangerError.DataNotFound)
+                    print(DataManagerError.dataNotFound)
                     return
                 }
 
@@ -70,7 +70,7 @@ extension TodoItemDataManager {
                     self.delegate?.onItemsAddedToList()
 
                 } catch {
-                    print(DataMangerError.CannotSerializeToJSON)
+                    print(DataManagerError.cannotSerializeToJSON)
                 }
             }
         }
@@ -130,7 +130,7 @@ extension TodoItemDataManager {
             if error != nil { print(error?.localizedDescription ?? "Other error") } else {
 
                 guard let data = response else {
-                    print(DataMangerError.DataNotFound)
+                    print(DataManagerError.dataNotFound)
                     return
                 }
 
@@ -160,7 +160,7 @@ extension TodoItemDataManager {
             if error != nil { print(error?.localizedDescription ?? "Other error") } else {
 
                 guard let data = response else {
-                    print(DataMangerError.DataNotFound)
+                    print(DataManagerError.dataNotFound)
                     return
                 }
 
