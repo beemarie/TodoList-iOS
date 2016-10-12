@@ -22,7 +22,12 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var statusLabel: UILabel!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        
+        let currentTheme = ThemeManager.currentTheme()
+        switch currentTheme {
+        case .dark: return .lightContent
+        default:    return .default
+        }
     }
     
     @IBAction func loginButton(sender: UIButton) {
