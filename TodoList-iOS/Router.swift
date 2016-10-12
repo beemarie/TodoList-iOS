@@ -42,8 +42,8 @@ class Router: NSObject {
      */
 
     func onPost(url: String,
-                  jsonString: String,
-                  callback: @escaping (Data?, Error?) -> Void) {
+                jsonString: String,
+                callback: @escaping (Data?, Error?) -> Void) {
 
         var request = buildRequest(url)
 
@@ -62,8 +62,8 @@ class Router: NSObject {
      */
 
     func onPatch(url: String,
-                   jsonString: String,
-                   callback: @escaping (Data?, Error?) -> Void) {
+                jsonString: String,
+                callback: @escaping (Data?, Error?) -> Void) {
 
         var request = buildRequest(url)
 
@@ -98,6 +98,11 @@ class Router: NSObject {
 
     func taskManager(request: URLRequest, callback: @escaping (Data?, Error?) -> Void) {
 
+        
+        DispatchQueue.main.async {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        }
+        
         let task = session.dataTask(with: request) {
             data, response, error in
 
@@ -107,7 +112,7 @@ class Router: NSObject {
 
             if let error = error {
                 print(error.localizedDescription)
-
+                callback(nil, error)
             } else if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode == 200 {
                     callback(data, error)
@@ -122,9 +127,15 @@ class Router: NSObject {
 
     private func buildRequest(_ url: String) -> URLRequest {
 
-        var request: URLRequest = URLRequest(url: URL(string: url)!)
+        guard let url = URL(string: url) else {
+            fatalError("Could not resolve URL")
+        }
+        
+        var request: URLRequest = URLRequest(url: url)
 
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        
         return request
     }
 }
