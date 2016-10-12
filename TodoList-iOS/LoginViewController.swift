@@ -18,6 +18,10 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     @IBAction func loginButton(sender: UIButton) {
         self.performSegue(withIdentifier: "todolist", sender: self)
     }
