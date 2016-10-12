@@ -26,6 +26,15 @@ enum DataManagerError: Error {
     case dataNotFound
 }
 
+extension DataManagerError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .cannotSerializeToJSON: return "Cannot serialize to JSON"
+        case .dataNotFound: return "Data was not found"
+        }
+    }
+}
+
 class TodoItemDataManager {
 
     let router = Router()
@@ -150,6 +159,20 @@ extension TodoItemDataManager {
 
     }
 
+    // check connectivity to the server
+    func hasConnection( oncompletion: @escaping (Bool) -> Void) {
+        router.onGet(url: getBaseRequestURL()) {
+            response, error in
+            
+            if error != nil {
+                oncompletion(false)
+            } else {
+                oncompletion(true)
+            }
+            
+        }
+    }
+    
     // Loads all TodoItems from designated base url
 
     func get() {
