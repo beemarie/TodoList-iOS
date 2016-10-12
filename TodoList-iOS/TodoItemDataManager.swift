@@ -55,7 +55,7 @@ extension TodoItemDataManager {
             response, error in
 
             if error != nil {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription ?? "Other error")
             } else {
 
                 guard let data = response else {
@@ -84,7 +84,7 @@ extension TodoItemDataManager {
         router.onDelete(url: "\(getBaseRequestURL())/api/todos/\(id)") {
             response, error in
 
-            if error != nil { print(error?.localizedDescription) }
+            if error != nil { print(error?.localizedDescription ?? "Other error") }
         }
     }
 
@@ -93,7 +93,7 @@ extension TodoItemDataManager {
                        jsonString: item.jsonRepresentation) {
             response, error in
 
-            if error != nil { print(error?.localizedDescription) }
+            if error != nil { print(error?.localizedDescription ?? "Other error") }
         }
 
     }
@@ -127,7 +127,7 @@ extension TodoItemDataManager {
         router.onGet(url: "\(getBaseRequestURL())/api/todos/\(withId)") {
             response, error in
 
-            if error != nil { print(error?.localizedDescription) } else {
+            if error != nil { print(error?.localizedDescription ?? "Other error") } else {
 
                 guard let data = response else {
                     print(DataMangerError.DataNotFound)
@@ -157,7 +157,7 @@ extension TodoItemDataManager {
         router.onGet(url: getBaseRequestURL()) {
             response, error in
 
-            if error != nil { print(error?.localizedDescription) } else {
+            if error != nil { print(error?.localizedDescription ?? "Other error") } else {
 
                 guard let data = response else {
                     print(DataMangerError.DataNotFound)
