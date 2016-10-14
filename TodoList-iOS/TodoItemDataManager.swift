@@ -21,25 +21,34 @@ protocol TodoItemsDelegate {
     func onItemsAddedToList()
 }
 
-enum DataMangerError: Error {
-    case CannotSerializeToJSON
-    case DataNotFound
+enum DataManagerError: Error {
+    case cannotSerializeToJSON
+    case dataNotFound
 }
 
-class TodoItemDataManager: NSObject {
+extension DataManagerError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .cannotSerializeToJSON: return "Cannot serialize to JSON"
+        case .dataNotFound: return "Data was not found"
+        }
+    }
+}
+
+class TodoItemDataManager {
 
     let router = Router()
     let config = BluemixConfiguration()
 
-    var delegate: TodoItemsDelegate?
+    var delegate: TodoItemsDelegate!
     var allTodos: [[TodoItem]] = [[], []]
 
     static let sharedInstance = TodoItemDataManager()
 
-    private override init() {
-        super.init()
-        get()
-    }
+//    private override init() {
+//        super.init()
+//        get()
+//    }
 
 }
 
@@ -55,11 +64,11 @@ extension TodoItemDataManager {
             response, error in
 
             if error != nil {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription ?? "Other error")
             } else {
 
                 guard let data = response else {
-                    print(DataMangerError.DataNotFound)
+                    print(DataManagerError.dataNotFound)
                     return
                 }
 
@@ -70,7 +79,7 @@ extension TodoItemDataManager {
                     self.delegate?.onItemsAddedToList()
 
                 } catch {
-                    print(DataMangerError.CannotSerializeToJSON)
+                    print(DataManagerError.cannotSerializeToJSON)
                 }
             }
         }
@@ -84,7 +93,7 @@ extension TodoItemDataManager {
         router.onDelete(url: "\(getBaseRequestURL())/api/todos/\(id)") {
             response, error in
 
-            if error != nil { print(error?.localizedDescription) }
+            if error != nil { print(error?.localizedDescription ?? "Other error") }
         }
     }
 
@@ -93,7 +102,7 @@ extension TodoItemDataManager {
                        jsonString: item.jsonRepresentation) {
             response, error in
 
-            if error != nil { print(error?.localizedDescription) }
+            if error != nil { print(error?.localizedDescription ?? "Other error") }
         }
 
     }
@@ -127,10 +136,10 @@ extension TodoItemDataManager {
         router.onGet(url: "\(getBaseRequestURL())/api/todos/\(withId)") {
             response, error in
 
-            if error != nil { print(error?.localizedDescription) } else {
+            if error != nil { print(error?.localizedDescription ?? "Other error") } else {
 
                 guard let data = response else {
-                    print(DataMangerError.DataNotFound)
+                    print(DataManagerError.dataNotFound)
                     return
                 }
 
@@ -150,6 +159,20 @@ extension TodoItemDataManager {
 
     }
 
+    // check connectivity to the server
+    func hasConnection( oncompletion: @escaping (Bool) -> Void) {
+        router.onGet(url: getBaseRequestURL()) {
+            response, error in
+            
+            if error != nil {
+                oncompletion(false)
+            } else {
+                oncompletion(true)
+            }
+            
+        }
+    }
+    
     // Loads all TodoItems from designated base url
 
     func get() {
@@ -157,10 +180,10 @@ extension TodoItemDataManager {
         router.onGet(url: getBaseRequestURL()) {
             response, error in
 
-            if error != nil { print(error?.localizedDescription) } else {
+            if error != nil { print(error?.localizedDescription ?? "Other error") } else {
 
                 guard let data = response else {
-                    print(DataMangerError.DataNotFound)
+                    print(DataManagerError.dataNotFound)
                     return
                 }
 

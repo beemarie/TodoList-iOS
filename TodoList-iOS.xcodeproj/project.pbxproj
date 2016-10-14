@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A2F602411D8C96750061A2BB /* bluemix.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2F6023F1D8C96750061A2BB /* bluemix.plist */; };
-		A2F602421D8C96750061A2BB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2F602401D8C96750061A2BB /* Info.plist */; };
 		E16AE35C1CE4C0FB00E20F62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16AE35B1CE4C0FB00E20F62 /* AppDelegate.swift */; };
 		E16AE3611CE4C0FB00E20F62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E16AE35F1CE4C0FB00E20F62 /* Main.storyboard */; };
 		E16AE3631CE4C0FB00E20F62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E16AE3621CE4C0FB00E20F62 /* Assets.xcassets */; };
@@ -18,6 +17,7 @@
 		E34309A41D2C3BC80057CF5E /* ThemeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34309A31D2C3BC80057CF5E /* ThemeTableViewController.swift */; };
 		E3437B091D234A8900EEB295 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3437B081D234A8900EEB295 /* Theme.swift */; };
 		E343F85D1D274E350059187B /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E343F85C1D274E350059187B /* TodoViewController.swift */; };
+		E38E4C5F1DAE9C87005696F5 /* TodoNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38E4C5E1DAE9C87005696F5 /* TodoNavigationController.swift */; };
 		E3A454DA1D13108F002AAC74 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A454D91D13108F002AAC74 /* User.swift */; };
 		E3A4A4831D11EE43002F79E5 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A4A4811D11EE43002F79E5 /* Router.swift */; };
 		E3A4A4841D11EE43002F79E5 /* TodoItemDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A4A4821D11EE43002F79E5 /* TodoItemDataManager.swift */; };
@@ -51,6 +51,7 @@
 		E34309A31D2C3BC80057CF5E /* ThemeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeTableViewController.swift; sourceTree = "<group>"; };
 		E3437B081D234A8900EEB295 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		E343F85C1D274E350059187B /* TodoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
+		E38E4C5E1DAE9C87005696F5 /* TodoNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoNavigationController.swift; sourceTree = "<group>"; };
 		E3A454D91D13108F002AAC74 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E3A4A4811D11EE43002F79E5 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		E3A4A4821D11EE43002F79E5 /* TodoItemDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoItemDataManager.swift; sourceTree = "<group>"; };
@@ -141,6 +142,7 @@
 				E3D9D4911D2314B60047C098 /* SettingsTableViewController.swift */,
 				E343F85C1D274E350059187B /* TodoViewController.swift */,
 				E34309A31D2C3BC80057CF5E /* ThemeTableViewController.swift */,
+				E38E4C5E1DAE9C87005696F5 /* TodoNavigationController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -237,7 +239,7 @@
 					todo_logo,
 				);
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Swift@IBM Engineering";
 				TargetAttributes = {
 					E16AE3571CE4C0FA00E20F62 = {
@@ -251,6 +253,7 @@
 					};
 					E3A8D4141D1C497F00F6F206 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = PP64RT7P8Z;
 						TestTargetID = E16AE3571CE4C0FA00E20F62;
 					};
 				};
@@ -282,7 +285,6 @@
 				E16AE3661CE4C0FB00E20F62 /* LaunchScreen.storyboard in Resources */,
 				A2F602411D8C96750061A2BB /* bluemix.plist in Resources */,
 				E16AE3631CE4C0FB00E20F62 /* Assets.xcassets in Resources */,
-				A2F602421D8C96750061A2BB /* Info.plist in Resources */,
 				E16AE3611CE4C0FB00E20F62 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -302,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3A4A4841D11EE43002F79E5 /* TodoItemDataManager.swift in Sources */,
+				E38E4C5F1DAE9C87005696F5 /* TodoNavigationController.swift in Sources */,
 				E343F85D1D274E350059187B /* TodoViewController.swift in Sources */,
 				E34309A41D2C3BC80057CF5E /* ThemeTableViewController.swift in Sources */,
 				E16AE3701CE4E39C00E20F62 /* TodoItem.swift in Sources */,
@@ -368,8 +371,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -416,8 +421,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -438,6 +445,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -451,9 +459,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = PP64RT7P8Z;
-				FRAMEWORK_SEARCH_PATHS = ./Frameworks/;
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "TodoList-iOS/Configuration/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.swift.TodoList-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -470,9 +478,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = PP64RT7P8Z;
-				FRAMEWORK_SEARCH_PATHS = ./Frameworks/;
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "TodoList-iOS/Configuration/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.swift.TodoList-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -484,6 +492,7 @@
 		E3A8D41D1D1C497F00F6F206 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = PP64RT7P8Z;
 				INFOPLIST_FILE = "TodoList-iOSUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "IBM-Swift.TodoList-iOSUITests";
@@ -496,6 +505,7 @@
 		E3A8D41E1D1C497F00F6F206 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = PP64RT7P8Z;
 				INFOPLIST_FILE = "TodoList-iOSUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "IBM-Swift.TodoList-iOSUITests";

@@ -14,23 +14,18 @@
  * limitations under the License.
  **/
 
+import Foundation
 import UIKit
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class TodoNavigationController: UINavigationController {
 
-    var window: UIWindow?
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
-        // Set Themes and Styling
-        ThemeManager.setupStyling()
-        let theme = ThemeManager.currentTheme()
-        ThemeManager.applyTheme(theme: theme)
-        return true
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        
+        let currentTheme = ThemeManager.currentTheme()
+        switch currentTheme {
+        case .dark: return .lightContent
+        default:    return .default
+        }
     }
-
-
-    func applicationWillTerminate(_ application: UIApplication) {
-    }
-
+    
 }

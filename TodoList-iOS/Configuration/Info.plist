@@ -29,10 +29,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>FacebookAppID</key>
-	<string>758047601004706</string>
-	<key>FacebookDisplayName</key>
-	<string>Kitura TodoList</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

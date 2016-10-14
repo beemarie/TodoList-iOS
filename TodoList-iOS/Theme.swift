@@ -18,42 +18,43 @@ import Foundation
 import UIKit
 
 enum Theme: String {
-    case Light, Dark
+    
+    case light, dark
 
-    static let allValues = [Light, Dark]
+    static let allValues = [light, dark]
 
     var mainColor: UIColor {
         switch self {
-        case .Light: return UIColor.white
-        case .Dark : return UIColor(red: 47, green: 73, blue: 98, opacity: 1)
+        case .light: return UIColor.white
+        case .dark : return UIColor(red: 47, green: 73, blue: 98, opacity: 1)
         }
     }
 
     var secondaryColor: UIColor {
         switch self {
-        case .Light: return UIColor.white
-        case .Dark: return UIColor(red: 21, green: 35, blue: 51, opacity: 1)
+        case .light: return UIColor.white
+        case .dark: return UIColor(red: 21, green: 35, blue: 51, opacity: 1)
         }
     }
 
     var fontColor: UIColor {
         switch self {
-        case .Light: return UIColor.black
-        case .Dark : return UIColor.white
+        case .light: return UIColor.black
+        case .dark : return UIColor.white
         }
     }
 
     var navBarColor: UIColor {
         switch self {
-        case .Light: return UIColor(red: 247, green: 247, blue: 247, opacity: 0.82)
-        case .Dark : return UIColor(red: 18, green: 38, blue: 57, opacity: 1)
+        case .light: return UIColor(red: 247, green: 247, blue: 247, opacity: 0.82)
+        case .dark : return UIColor(red: 18, green: 38, blue: 57, opacity: 1)
         }
     }
 
     var navBarTitleColor: UIColor {
         switch self {
-        case .Light: return UIColor.black
-        case .Dark : return UIColor(red: 15, green: 155, blue: 228, opacity: 1)
+        case .light: return UIColor.black
+        case .dark : return UIColor(red: 15, green: 155, blue: 228, opacity: 1)
         }
     }
 }
@@ -70,12 +71,12 @@ struct ThemeManager {
         if let storedTheme = UserDefaults.standard.object(forKey: selectedTheme) as? String {
             return Theme(rawValue: storedTheme)!
         } else {
-            return .Dark
+            return .dark
         }
     }
 
     static func switchTheme() {
-        currentTheme().rawValue == "Dark" ? applyTheme(theme: .Light) : applyTheme(theme: .Dark)
+        currentTheme().rawValue == "dark" ? applyTheme(theme: .light) : applyTheme(theme: .dark)
     }
 
     static func setupStyling() {
@@ -84,6 +85,7 @@ struct ThemeManager {
         UITableViewCell.appearance().backgroundColor = UIColor.clear
         CustomButton.appearance().backgroundColor = accessoryColor
     }
+    
     static func applyTheme(theme: Theme) {
         UserDefaults.standard.set(theme.rawValue, forKey: selectedTheme)
         UserDefaults.standard.synchronize()

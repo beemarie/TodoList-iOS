@@ -18,6 +18,18 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var signinButton: CustomButton!
+    @IBOutlet weak var statusLabel: UILabel!
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        
+        let currentTheme = ThemeManager.currentTheme()
+        switch currentTheme {
+        case .dark: return .lightContent
+        default:    return .default
+        }
+    }
+    
     @IBAction func loginButton(sender: UIButton) {
         self.performSegue(withIdentifier: "todolist", sender: self)
     }
@@ -30,6 +42,20 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         ThemeManager.applyTheme(theme: ThemeManager.currentTheme())
         ThemeManager.replaceGradient(inView: self.view)
+        
+        TodoItemDataManager.sharedInstance.hasConnection {
+            hasConnection in
+            
+            DispatchQueue.main.async {
+            self.signinButton.isHidden = hasConnection ? false : true
+            self.statusLabel.isHidden = hasConnection ? true : false
+            
+            let serverURL = TodoItemDataManager.sharedInstance.getBaseRequestURL()
+            self.statusLabel.text = "Could not connect to \(serverURL)"
+            
+            }
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
