@@ -22,12 +22,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var statusLabel: UILabel!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        
-        let currentTheme = ThemeManager.currentTheme()
-        switch currentTheme {
-        case .dark: return .lightContent
-        default:    return .default
-        }
+        return .lightContent
     }
     
     @IBAction func loginButton(sender: UIButton) {
@@ -35,27 +30,35 @@ class LoginViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         ThemeManager.applyTheme(theme: ThemeManager.currentTheme())
         ThemeManager.replaceGradient(inView: self.view)
+        connectToServer()
         
+    }
+    
+    func connectToServer() {
         TodoItemDataManager.sharedInstance.hasConnection {
             hasConnection in
             
             DispatchQueue.main.async {
-            self.signinButton.isHidden = hasConnection ? false : true
-            self.statusLabel.isHidden = hasConnection ? true : false
-            
-            let serverURL = TodoItemDataManager.sharedInstance.getBaseRequestURL()
-            self.statusLabel.text = "Could not connect to \(serverURL)"
-            
+                if hasConnection == false {
+                    self.signinButton.setTitle("Try again", for: UIControlState.normal)
+                    let serverURL = TodoItemDataManager.sharedInstance.getBaseRequestURL()
+                    self.statusLabel.text = "Could not connect to \(serverURL)"
+                }
+                else {
+                    self.signinButton.setTitle("Sign in", for: UIControlState.normal)
+                    self.statusLabel.text = ""
+                }
+                
             }
         }
-        
     }
 
     override func didReceiveMemoryWarning() {

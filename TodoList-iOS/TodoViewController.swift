@@ -70,11 +70,11 @@ class TodoViewController: UIViewController, UITableViewDelegate,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         textField.delegate = self
         gesture.cancelsTouchesInView = false
         TodoItemDataManager.sharedInstance.delegate = self
-        
+        let editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(onEditClicked(sender:)))
+        self.navigationItem.rightBarButtonItem = editButton
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -92,6 +92,7 @@ class TodoViewController: UIViewController, UITableViewDelegate,
             NSAttributedString(string:"What Needs To Be Done?",
                                attributes:[NSForegroundColorAttributeName:
                                 UIColor(red: 189, green: 189, blue: 189, opacity: 0.5)])
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     // Setup Table Section Headers

@@ -20,12 +20,7 @@ import UIKit
 class TodoNavigationController: UINavigationController {
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        
-        let currentTheme = ThemeManager.currentTheme()
-        switch currentTheme {
-        case .dark: return .lightContent
-        default:    return .default
-        }
+        return .lightContent
     }
     
 }

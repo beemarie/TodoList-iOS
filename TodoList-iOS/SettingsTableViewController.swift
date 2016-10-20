@@ -21,9 +21,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet var tableView: UITableView!
 
     @IBAction func logOutButton(sender: UIButton) {
-        let add = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
-
-        self.present(add!, animated: true, completion: nil)
+        self.navigationController?.popToRootViewController(animated: true)
     }
 
     override func viewWillAppear(_ animated: Bool) {
