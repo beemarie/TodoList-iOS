@@ -2,6 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "spash.png",
       "scale" : "1x"
     },
     {

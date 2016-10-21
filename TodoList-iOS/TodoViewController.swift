@@ -39,10 +39,7 @@ class TodoViewController: UIViewController, UITableViewDelegate,
 
     @IBAction func handleTap(sender: AnyObject) {
         textField.resignFirstResponder()
-        isUpdatingTitle = nil
-        textField.attributedPlaceholder =
-            NSAttributedString(string:"What Needs To Be Done?",
-                               attributes:[NSForegroundColorAttributeName: UIColor.lightGray])
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 
     @IBAction func onAddItem(sender: UIButton?) {
@@ -51,7 +48,6 @@ class TodoViewController: UIViewController, UITableViewDelegate,
             return
         }
 
-        textField.resignFirstResponder()
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
         textField.text = nil
@@ -64,17 +60,18 @@ class TodoViewController: UIViewController, UITableViewDelegate,
         } else {
             TodoItemDataManager.sharedInstance.add(withTitle: title)
         }
-
+        textField.resignFirstResponder()
         tableView.reloadData()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         textField.delegate = self
         gesture.cancelsTouchesInView = false
         TodoItemDataManager.sharedInstance.delegate = self
-        
+        TodoItemDataManager.sharedInstance.get()
+        let editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(onEditClicked(sender:)))
+        self.navigationItem.rightBarButtonItem = editButton
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -92,6 +89,7 @@ class TodoViewController: UIViewController, UITableViewDelegate,
             NSAttributedString(string:"What Needs To Be Done?",
                                attributes:[NSForegroundColorAttributeName:
                                 UIColor(red: 189, green: 189, blue: 189, opacity: 0.5)])
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     // Setup Table Section Headers
@@ -152,7 +150,7 @@ class TodoViewController: UIViewController, UITableViewDelegate,
                                 attributes: textAttributes)
 
         if tableView.isEditing {
-            cell.imageView?.image = UIImage(named: "trash")
+            cell.imageView?.image = nil
 
         } else {
             if todos()[indexPath.section][indexPath.row].completed {
@@ -183,7 +181,7 @@ class TodoViewController: UIViewController, UITableViewDelegate,
                      editingStyleForRowAt indexPath: IndexPath)
         -> UITableViewCellEditingStyle {
 
-            return tableView.isEditing ? .none : .delete
+            return tableView.isEditing ? .delete : .delete
     }
 
     // Handle Pull Out Edit Bar
@@ -196,7 +194,7 @@ class TodoViewController: UIViewController, UITableViewDelegate,
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
 
-        let editAction = UITableViewRowAction(style: .normal,
+        let editAction = UITableViewRowAction(style: .default,
                                               title: "Edit",
                                             handler: onTodoEditHandler)
         let deleteAction = UITableViewRowAction(style: .default,
@@ -239,19 +237,18 @@ class TodoViewController: UIViewController, UITableViewDelegate,
             }
             return proposedDestinationIndexPath
     }
-
+    
     // Allows Trash and Completion Marking
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         if tableView.isEditing {
-            TodoItemDataManager.sharedInstance.delete(itemAt: indexPath)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-
+            //TodoItemDataManager.sharedInstance.delete(itemAt: indexPath)
+            //tableView.deleteRows(at: [indexPath], with: .fade)
+            updateTable(todoItems: TodoItemDataManager.sharedInstance.allTodos)
         } else {
             TodoItemDataManager.sharedInstance.update(indexPath: indexPath)
             updateTable(todoItems: TodoItemDataManager.sharedInstance.allTodos)
-
         }
     }
 
