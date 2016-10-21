@@ -14,7 +14,6 @@
 		E16AE3661CE4C0FB00E20F62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E16AE3641CE4C0FB00E20F62 /* LaunchScreen.storyboard */; };
 		E16AE3701CE4E39C00E20F62 /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16AE36F1CE4E39C00E20F62 /* TodoItem.swift */; };
 		E33F7F4C1D246A6800C27479 /* OptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F7F4B1D246A6800C27479 /* OptionCell.swift */; };
-		E34309A41D2C3BC80057CF5E /* ThemeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34309A31D2C3BC80057CF5E /* ThemeTableViewController.swift */; };
 		E3437B091D234A8900EEB295 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3437B081D234A8900EEB295 /* Theme.swift */; };
 		E343F85D1D274E350059187B /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E343F85C1D274E350059187B /* TodoViewController.swift */; };
 		E38E4C5F1DAE9C87005696F5 /* TodoNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38E4C5E1DAE9C87005696F5 /* TodoNavigationController.swift */; };
@@ -23,7 +22,6 @@
 		E3A4A4841D11EE43002F79E5 /* TodoItemDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A4A4821D11EE43002F79E5 /* TodoItemDataManager.swift */; };
 		E3A8D4181D1C497F00F6F206 /* TodoList_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A8D4171D1C497F00F6F206 /* TodoList_iOSUITests.swift */; };
 		E3A8EB9D1D1ACE19006C7034 /* BluemixConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A8EB9C1D1ACE19006C7034 /* BluemixConfiguration.swift */; };
-		E3D9D4921D2314B60047C098 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D9D4911D2314B60047C098 /* SettingsTableViewController.swift */; };
 		E3ED01C01D0F08C400E8D22D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ED01BF1D0F08C400E8D22D /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +46,6 @@
 		E16AE3651CE4C0FB00E20F62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E16AE36F1CE4E39C00E20F62 /* TodoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
 		E33F7F4B1D246A6800C27479 /* OptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionCell.swift; sourceTree = "<group>"; };
-		E34309A31D2C3BC80057CF5E /* ThemeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeTableViewController.swift; sourceTree = "<group>"; };
 		E3437B081D234A8900EEB295 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		E343F85C1D274E350059187B /* TodoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
 		E38E4C5E1DAE9C87005696F5 /* TodoNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoNavigationController.swift; sourceTree = "<group>"; };
@@ -59,7 +56,6 @@
 		E3A8D4171D1C497F00F6F206 /* TodoList_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoList_iOSUITests.swift; sourceTree = "<group>"; };
 		E3A8D4191D1C497F00F6F206 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E3A8EB9C1D1ACE19006C7034 /* BluemixConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluemixConfiguration.swift; sourceTree = "<group>"; };
-		E3D9D4911D2314B60047C098 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		E3ED01BF1D0F08C400E8D22D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -139,9 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				E3ED01BF1D0F08C400E8D22D /* LoginViewController.swift */,
-				E3D9D4911D2314B60047C098 /* SettingsTableViewController.swift */,
 				E343F85C1D274E350059187B /* TodoViewController.swift */,
-				E34309A31D2C3BC80057CF5E /* ThemeTableViewController.swift */,
 				E38E4C5E1DAE9C87005696F5 /* TodoNavigationController.swift */,
 			);
 			name = ViewControllers;
@@ -306,12 +300,10 @@
 				E3A4A4841D11EE43002F79E5 /* TodoItemDataManager.swift in Sources */,
 				E38E4C5F1DAE9C87005696F5 /* TodoNavigationController.swift in Sources */,
 				E343F85D1D274E350059187B /* TodoViewController.swift in Sources */,
-				E34309A41D2C3BC80057CF5E /* ThemeTableViewController.swift in Sources */,
 				E16AE3701CE4E39C00E20F62 /* TodoItem.swift in Sources */,
 				E3A454DA1D13108F002AAC74 /* User.swift in Sources */,
 				E3ED01C01D0F08C400E8D22D /* LoginViewController.swift in Sources */,
 				E3A4A4831D11EE43002F79E5 /* Router.swift in Sources */,
-				E3D9D4921D2314B60047C098 /* SettingsTableViewController.swift in Sources */,
 				E33F7F4C1D246A6800C27479 /* OptionCell.swift in Sources */,
 				E3A8EB9D1D1ACE19006C7034 /* BluemixConfiguration.swift in Sources */,
 				E3437B091D234A8900EEB295 /* Theme.swift in Sources */,

@@ -40,10 +40,6 @@ class TodoViewController: UIViewController, UITableViewDelegate,
     @IBAction func handleTap(sender: AnyObject) {
         textField.resignFirstResponder()
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-   //     isUpdatingTitle = nil
-  //      textField.attributedPlaceholder =
-  //          NSAttributedString(string:"What Needs To Be Done?",
-  //                             attributes:[NSForegroundColorAttributeName: UIColor.lightGray])
     }
 
     @IBAction func onAddItem(sender: UIButton?) {
@@ -52,7 +48,6 @@ class TodoViewController: UIViewController, UITableViewDelegate,
             return
         }
 
-        textField.resignFirstResponder()
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
         textField.text = nil
@@ -65,7 +60,7 @@ class TodoViewController: UIViewController, UITableViewDelegate,
         } else {
             TodoItemDataManager.sharedInstance.add(withTitle: title)
         }
-
+        textField.resignFirstResponder()
         tableView.reloadData()
     }
 

@@ -23,30 +23,24 @@
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="g9W-2J-eWp">
                                         <subviews>
-                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Peu-fF-jUG">
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="25" id="7rO-30-zrh"/>
-                                                </constraints>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Peu-fF-jUG">
+                                                <inset key="contentEdgeInsets" minX="-6" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <state key="normal" image="plus"/>
                                                 <connections>
-                                                    <action selector="onAddItemWithSender:" destination="yn9-Ws-94l" eventType="touchUpInside" id="Y7u-WT-ZQk"/>
+                                                    <action selector="onAddItemWithSender:" destination="yn9-Ws-94l" eventType="touchDown" id="QYC-Po-rBZ"/>
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="What Needs To Be Done?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oei-Na-Cdu">
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="320" id="db4-mG-pCu"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="oei-Na-Cdu" secondAttribute="trailing" constant="8" id="IIi-GE-lcE"/>
-                                            <constraint firstItem="oei-Na-Cdu" firstAttribute="leading" secondItem="Peu-fF-jUG" secondAttribute="trailing" id="In2-f2-a2v"/>
-                                            <constraint firstItem="Peu-fF-jUG" firstAttribute="top" secondItem="g9W-2J-eWp" secondAttribute="top" constant="20" id="L2x-8u-baN"/>
-                                            <constraint firstAttribute="bottom" secondItem="Peu-fF-jUG" secondAttribute="bottom" constant="8" id="WSO-rb-65Z"/>
-                                            <constraint firstItem="Peu-fF-jUG" firstAttribute="leading" secondItem="g9W-2J-eWp" secondAttribute="leading" constant="8" id="cq8-6M-oOJ"/>
-                                            <constraint firstItem="oei-Na-Cdu" firstAttribute="top" secondItem="g9W-2J-eWp" secondAttribute="top" constant="20" id="dQ8-Xm-PaC"/>
-                                            <constraint firstItem="oei-Na-Cdu" firstAttribute="leading" secondItem="Peu-fF-jUG" secondAttribute="trailing" id="gMj-DR-ulO"/>
-                                            <constraint firstAttribute="bottom" secondItem="oei-Na-Cdu" secondAttribute="bottom" constant="8" id="hn3-g1-Edi"/>
+                                            <constraint firstItem="oei-Na-Cdu" firstAttribute="top" secondItem="g9W-2J-eWp" secondAttribute="top" constant="20" id="gRf-vV-WL1"/>
                                         </constraints>
                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                     </stackView>
@@ -160,7 +154,7 @@
             <objects>
                 <navigationController id="6mC-1c-flH" customClass="TodoNavigationController" customModule="TodoList_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="Vnf-G1-FEm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Vnf-G1-FEm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
