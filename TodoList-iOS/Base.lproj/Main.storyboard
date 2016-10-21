@@ -194,6 +194,25 @@
                                     <action selector="loginButtonWithSender:" destination="8NE-Cq-Wxh" eventType="touchDown" id="oFD-kb-EbY"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="POWERED BY KITURA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jdK-0a-rTR">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="108" id="nEq-UB-TRW"/>
+                                    <constraint firstAttribute="height" constant="12" id="yQi-gU-pNp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="9"/>
+                                <color key="textColor" red="0.058823529409999999" green="0.60784313729999995" blue="0.89411764709999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="T   O   D   O" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dip-sJ-yT9">
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17.5"/>
+                                <color key="textColor" red="0.058823529411764705" green="0.60784313725490191" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This was text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwW-Jm-5Y8">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.99477767120854099" green="0.96716785110957648" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kitura_logo" translatesAutoresizingMaskIntoConstraints="NO" id="thn-Xa-WNP">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="nmg-Pp-ZSw"/>
@@ -212,57 +231,24 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="POWERED BY KITURA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jdK-0a-rTR">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="172.5" id="MAa-w4-MvA"/>
-                                    <constraint firstAttribute="height" constant="12.5" id="fSh-wY-E0F"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="9"/>
-                                <color key="textColor" red="0.058823529409999999" green="0.60784313729999995" blue="0.89411764709999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="MAa-w4-MvA"/>
-                                        <exclude reference="fSh-wY-E0F"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <mask key="constraints">
-                                        <exclude reference="MAa-w4-MvA"/>
-                                        <include reference="fSh-wY-E0F"/>
-                                    </mask>
-                                </variation>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="T   O   D   O" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dip-sJ-yT9">
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17.5"/>
-                                <color key="textColor" red="0.058823529411764705" green="0.60784313725490191" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwW-Jm-5Y8">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="343" id="ad0-nG-kzJ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.99477767120854099" green="0.96716785110957648" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.080456322997478" green="0.077616085661996348" blue="0.22390333322378309" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="IWx-yZ-7DP" firstAttribute="top" secondItem="jdK-0a-rTR" secondAttribute="bottom" constant="31" id="38G-P3-07H"/>
+                            <constraint firstItem="IWx-yZ-7DP" firstAttribute="top" secondItem="cwW-Jm-5Y8" secondAttribute="bottom" constant="-3" id="6Rl-ei-MUT"/>
+                            <constraint firstItem="cwW-Jm-5Y8" firstAttribute="leading" secondItem="mos-uw-wcL" secondAttribute="leadingMargin" id="Cj3-0w-XcV"/>
                             <constraint firstItem="Dip-sJ-yT9" firstAttribute="centerX" secondItem="mos-uw-wcL" secondAttribute="centerX" id="G4P-9r-etB"/>
                             <constraint firstItem="Dip-sJ-yT9" firstAttribute="top" secondItem="HOZ-EC-T2I" secondAttribute="bottom" constant="8" id="Oer-Ek-4gt"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cwW-Jm-5Y8" secondAttribute="trailing" id="PZc-YN-49g"/>
                             <constraint firstItem="HOZ-EC-T2I" firstAttribute="centerX" secondItem="mos-uw-wcL" secondAttribute="centerX" constant="11" id="PgR-WW-y0J"/>
-                            <constraint firstItem="jdK-0a-rTR" firstAttribute="centerX" secondItem="mos-uw-wcL" secondAttribute="centerX" id="Sgc-Dn-IkZ"/>
-                            <constraint firstItem="jdK-0a-rTR" firstAttribute="top" secondItem="thn-Xa-WNP" secondAttribute="bottom" constant="8" symbolic="YES" id="TrA-jN-7Fc"/>
-                            <constraint firstItem="cwW-Jm-5Y8" firstAttribute="leading" secondItem="mos-uw-wcL" secondAttribute="leadingMargin" constant="1" id="Zyp-l6-Q8k"/>
-                            <constraint firstItem="Psc-I1-BtO" firstAttribute="top" secondItem="cwW-Jm-5Y8" secondAttribute="bottom" constant="58" id="bwW-WK-TUv"/>
+                            <constraint firstItem="cwW-Jm-5Y8" firstAttribute="top" secondItem="jdK-0a-rTR" secondAttribute="bottom" constant="8" id="ViP-TI-9YM"/>
+                            <constraint firstAttribute="bottom" secondItem="jdK-0a-rTR" secondAttribute="bottom" constant="89" id="WUw-zN-fnO"/>
+                            <constraint firstItem="jdK-0a-rTR" firstAttribute="top" secondItem="thn-Xa-WNP" secondAttribute="bottom" constant="8" id="cAz-98-PuY"/>
                             <constraint firstAttribute="trailing" secondItem="IWx-yZ-7DP" secondAttribute="trailing" id="clT-Ge-9cx"/>
-                            <constraint firstItem="thn-Xa-WNP" firstAttribute="centerX" secondItem="mos-uw-wcL" secondAttribute="centerX" id="dsl-h4-DXb"/>
                             <constraint firstItem="IWx-yZ-7DP" firstAttribute="leading" secondItem="mos-uw-wcL" secondAttribute="leading" id="hBL-2C-7HF"/>
                             <constraint firstItem="HOZ-EC-T2I" firstAttribute="centerY" secondItem="mos-uw-wcL" secondAttribute="centerY" constant="-14.5" id="nzf-vF-Gw5"/>
+                            <constraint firstItem="thn-Xa-WNP" firstAttribute="centerX" secondItem="jdK-0a-rTR" secondAttribute="centerX" id="pBV-bk-jfI"/>
                             <constraint firstItem="Psc-I1-BtO" firstAttribute="top" secondItem="IWx-yZ-7DP" secondAttribute="bottom" id="qqE-Iz-1Xy"/>
-                            <constraint firstItem="cwW-Jm-5Y8" firstAttribute="top" secondItem="hwE-bp-arW" secondAttribute="bottom" constant="568" id="xOU-R5-Ece"/>
+                            <constraint firstItem="jdK-0a-rTR" firstAttribute="trailing" secondItem="HOZ-EC-T2I" secondAttribute="trailing" constant="6" id="zWJ-GO-nAi"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="TJ5-lO-E5f"/>
@@ -276,7 +262,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nJB-zZ-jVz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-148" y="407"/>
+            <point key="canvasLocation" x="-149.59999999999999" y="406.14692653673166"/>
         </scene>
     </scenes>
     <resources>
