@@ -39,10 +39,10 @@ class TodoViewController: UIViewController, UITableViewDelegate,
 
     @IBAction func handleTap(sender: AnyObject) {
         textField.resignFirstResponder()
-        isUpdatingTitle = nil
-        textField.attributedPlaceholder =
-            NSAttributedString(string:"What Needs To Be Done?",
-                               attributes:[NSForegroundColorAttributeName: UIColor.lightGray])
+   //     isUpdatingTitle = nil
+  //      textField.attributedPlaceholder =
+  //          NSAttributedString(string:"What Needs To Be Done?",
+  //                             attributes:[NSForegroundColorAttributeName: UIColor.lightGray])
     }
 
     @IBAction func onAddItem(sender: UIButton?) {
@@ -153,7 +153,7 @@ class TodoViewController: UIViewController, UITableViewDelegate,
                                 attributes: textAttributes)
 
         if tableView.isEditing {
-            cell.imageView?.image = UIImage(named: "trash")
+//            cell.imageView?.image = UIImage(named: "trash")
 
         } else {
             if todos()[indexPath.section][indexPath.row].completed {
@@ -197,7 +197,7 @@ class TodoViewController: UIViewController, UITableViewDelegate,
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
 
-        let editAction = UITableViewRowAction(style: .normal,
+        let editAction = UITableViewRowAction(style: .default,
                                               title: "Edit",
                                             handler: onTodoEditHandler)
         let deleteAction = UITableViewRowAction(style: .default,
@@ -240,19 +240,18 @@ class TodoViewController: UIViewController, UITableViewDelegate,
             }
             return proposedDestinationIndexPath
     }
-
+    
     // Allows Trash and Completion Marking
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         if tableView.isEditing {
-            TodoItemDataManager.sharedInstance.delete(itemAt: indexPath)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-
+            //TodoItemDataManager.sharedInstance.delete(itemAt: indexPath)
+            //tableView.deleteRows(at: [indexPath], with: .fade)
+            updateTable(todoItems: TodoItemDataManager.sharedInstance.allTodos)
         } else {
             TodoItemDataManager.sharedInstance.update(indexPath: indexPath)
             updateTable(todoItems: TodoItemDataManager.sharedInstance.allTodos)
-
         }
     }
 

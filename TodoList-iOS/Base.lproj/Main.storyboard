@@ -23,16 +23,16 @@
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="g9W-2J-eWp">
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Peu-fF-jUG">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Peu-fF-jUG">
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="25" id="7rO-30-zrh"/>
                                                 </constraints>
                                                 <state key="normal" image="plus"/>
                                                 <connections>
-                                                    <action selector="onAddItemWithSender:" destination="yn9-Ws-94l" eventType="touchDown" id="On7-cH-4oP"/>
+                                                    <action selector="onAddItemWithSender:" destination="yn9-Ws-94l" eventType="touchUpInside" id="Y7u-WT-ZQk"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="What Needs To Be Done?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oei-Na-Cdu">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="What Needs To Be Done?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oei-Na-Cdu">
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -149,7 +149,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M3R-IQ-2dS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="5lc-v0-EtX">
                     <connections>
-                        <action selector="handleTapWithSender:" destination="yn9-Ws-94l" id="qpC-Ky-pdc"/>
+                        <action selector="handleTapWithSender:" destination="yn9-Ws-94l" id="HVL-JM-Av0"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
