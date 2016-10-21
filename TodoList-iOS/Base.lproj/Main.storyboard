@@ -238,8 +238,7 @@
                                 <color key="textColor" red="0.058823529411764705" green="0.60784313725490191" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Could not connect to server" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwW-Jm-5Y8">
-                                <frame key="frameInset" minX="17" minY="588" width="343" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwW-Jm-5Y8">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="343" id="ad0-nG-kzJ"/>
                                 </constraints>
@@ -256,14 +255,14 @@
                             <constraint firstItem="HOZ-EC-T2I" firstAttribute="centerX" secondItem="mos-uw-wcL" secondAttribute="centerX" constant="11" id="PgR-WW-y0J"/>
                             <constraint firstItem="jdK-0a-rTR" firstAttribute="centerX" secondItem="mos-uw-wcL" secondAttribute="centerX" id="Sgc-Dn-IkZ"/>
                             <constraint firstItem="jdK-0a-rTR" firstAttribute="top" secondItem="thn-Xa-WNP" secondAttribute="bottom" constant="8" symbolic="YES" id="TrA-jN-7Fc"/>
-                            <constraint firstItem="cwW-Jm-5Y8" firstAttribute="leading" secondItem="mos-uw-wcL" secondAttribute="leadingMargin" constant="6" id="Zyp-l6-Q8k"/>
-                            <constraint firstItem="Psc-I1-BtO" firstAttribute="top" secondItem="cwW-Jm-5Y8" secondAttribute="bottom" constant="626" id="bwW-WK-TUv"/>
+                            <constraint firstItem="cwW-Jm-5Y8" firstAttribute="leading" secondItem="mos-uw-wcL" secondAttribute="leadingMargin" constant="1" id="Zyp-l6-Q8k"/>
+                            <constraint firstItem="Psc-I1-BtO" firstAttribute="top" secondItem="cwW-Jm-5Y8" secondAttribute="bottom" constant="58" id="bwW-WK-TUv"/>
                             <constraint firstAttribute="trailing" secondItem="IWx-yZ-7DP" secondAttribute="trailing" id="clT-Ge-9cx"/>
                             <constraint firstItem="thn-Xa-WNP" firstAttribute="centerX" secondItem="mos-uw-wcL" secondAttribute="centerX" id="dsl-h4-DXb"/>
                             <constraint firstItem="IWx-yZ-7DP" firstAttribute="leading" secondItem="mos-uw-wcL" secondAttribute="leading" id="hBL-2C-7HF"/>
                             <constraint firstItem="HOZ-EC-T2I" firstAttribute="centerY" secondItem="mos-uw-wcL" secondAttribute="centerY" constant="-14.5" id="nzf-vF-Gw5"/>
                             <constraint firstItem="Psc-I1-BtO" firstAttribute="top" secondItem="IWx-yZ-7DP" secondAttribute="bottom" id="qqE-Iz-1Xy"/>
-                            <constraint firstItem="cwW-Jm-5Y8" firstAttribute="top" secondItem="hwE-bp-arW" secondAttribute="bottom" id="xOU-R5-Ece"/>
+                            <constraint firstItem="cwW-Jm-5Y8" firstAttribute="top" secondItem="hwE-bp-arW" secondAttribute="bottom" constant="568" id="xOU-R5-Ece"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="TJ5-lO-E5f"/>

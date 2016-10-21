@@ -20,13 +20,19 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var signinButton: CustomButton!
     @IBOutlet weak var statusLabel: UILabel!
+    var connected: Bool?
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
     @IBAction func loginButton(sender: UIButton) {
-        self.performSegue(withIdentifier: "todolist", sender: self)
+        if self.connected == true {
+            self.performSegue(withIdentifier: "todolist", sender: self)
+        }
+        else {
+            connectToServer()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -51,10 +57,12 @@ class LoginViewController: UIViewController {
                     self.signinButton.setTitle("Try again", for: UIControlState.normal)
                     let serverURL = TodoItemDataManager.sharedInstance.getBaseRequestURL()
                     self.statusLabel.text = "Could not connect to \(serverURL)"
+                    self.connected = false
                 }
                 else {
                     self.signinButton.setTitle("Sign in", for: UIControlState.normal)
                     self.statusLabel.text = ""
+                    self.connected = true
                 }
                 
             }
