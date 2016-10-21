@@ -186,7 +186,7 @@ class TodoViewController: UIViewController, UITableViewDelegate,
                      editingStyleForRowAt indexPath: IndexPath)
         -> UITableViewCellEditingStyle {
 
-            return tableView.isEditing ? .none : .delete
+            return tableView.isEditing ? .delete : .delete
     }
 
     // Handle Pull Out Edit Bar
