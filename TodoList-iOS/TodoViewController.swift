@@ -73,6 +73,7 @@ class TodoViewController: UIViewController, UITableViewDelegate,
         textField.delegate = self
         gesture.cancelsTouchesInView = false
         TodoItemDataManager.sharedInstance.delegate = self
+        TodoItemDataManager.sharedInstance.get()
         let editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(onEditClicked(sender:)))
         self.navigationItem.rightBarButtonItem = editButton
     }
@@ -153,7 +154,7 @@ class TodoViewController: UIViewController, UITableViewDelegate,
                                 attributes: textAttributes)
 
         if tableView.isEditing {
-//            cell.imageView?.image = UIImage(named: "trash")
+            cell.imageView?.image = nil
 
         } else {
             if todos()[indexPath.section][indexPath.row].completed {
