@@ -49,6 +49,7 @@ class LoginViewController: UIViewController {
     }
     
     func connectToServer() {
+        self.signinButton.isEnabled = false
         TodoItemDataManager.sharedInstance.hasConnection {
             hasConnection in
             
@@ -64,7 +65,7 @@ class LoginViewController: UIViewController {
                     self.statusLabel.text = ""
                     self.connected = true
                 }
-                
+                self.signinButton.isEnabled = true
             }
         }
     }
