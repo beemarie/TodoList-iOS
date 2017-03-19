@@ -5,7 +5,7 @@
 	<key>isLocal</key>
 	<true/>
 	<key>appRouteLocal</key>
-	<string>http://localhost:8090</string>
+	<string>http://localhost:8080</string>
 	<key>appRouteRemote</key>
 	<string>http://todolist-couchdb.mybluemix.net</string>
 	<key>bluemixAppGUID</key>
